@@ -9,7 +9,7 @@ from table.pattern.Pattern import Pattern
 
 class PatternManager(object):
     
-    DEFAULT_PATTERN = Pattern("Default", "127")
+    DEFAULT_PATTERN = Pattern("Default", "127", "127", "127")
 
     def __init__(self, patternFileName):
         self.patternFileName = patternFileName

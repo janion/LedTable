@@ -9,6 +9,9 @@ class Adafruit_NeoPixel(object):
     def setPixelColor(self, position, colour):
         pass
 
+    def show(self):
+        pass
+
 
 class Color(object):
 

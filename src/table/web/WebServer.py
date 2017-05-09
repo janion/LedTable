@@ -109,6 +109,3 @@ class WebServer(object):
     def buildResponse(self, response):
         # BUILD DE HTTP RESPONSE HEADERS
         return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (len(response), response)
-     
-w = WebServer()
-w.start()
