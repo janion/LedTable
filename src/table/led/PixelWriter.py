@@ -3,7 +3,7 @@ Created on 6 May 2017
 
 @author: Janion
 '''
-from EquationParser.EquationParser import Equation
+from EquationParser import Equation
 
 
 class PixelWriter1D(object):
@@ -59,7 +59,7 @@ class PixelWriter2D(PixelWriter1D):
                                                                )
                 else:
                     for y in range(self.ledCountY - 1, -1, -1):
-                        index = (x * self.ledCountX) + (self.ledCountY - (1 + y)
+                        index = (x * self.ledCountX) + (self.ledCountY - (1 + y))
                         self.data[index] = (int(self.rFunc.evaluate(x, y, t)[0]),
                                             int(self.gFunc.evaluate(x, y, t)[0]),
                                             int(self.bFunc.evaluate(x, y, t)[0])
