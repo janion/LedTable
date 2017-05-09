@@ -15,6 +15,7 @@ class WebServerThread(Thread):
 
     def __init__(self, service):
         Thread.__init__(self, target=service.serverLoop)
+        self.setDaemon(True)
 
 
 class WebServer(object):
@@ -31,13 +32,13 @@ class WebServer(object):
             <form action="/addPattern">
                 Pattern name:<br>
                 <input type="text" name="name"><br>
-                <br>
                 Red function:<br>
                 <input type="text" name="red"><br>
                 Green function:<br>
                 <input type="text" name="green"><br>
                 Blue function:<br>
                 <input type="text" name="blue"><br>
+                <br>
                 <input type="submit" value="Add pattern">
             </form>
         </body>
@@ -81,7 +82,7 @@ class WebServer(object):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
                     
-            rows = [self.HTML_ROW_FORMAT % (p.getName(), p.getName(), p.getName(), p.getFunction()) for p in self.patterns.getPatterns()]
+            rows = [self.HTML_ROW_FORMAT % (p.getName(), p.getName(), p.getName(), p.getRedFunction(), p.getGreenFuction(), p.getBlueFunction()) for p in self.patterns.getPatterns()]
             response = self.HTML_FORMAT % (self.patterns.getCurrentPattern().getName(), '\n'.join(rows))
             cl.send(response)
         cl.close()
