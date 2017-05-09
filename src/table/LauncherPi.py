@@ -26,14 +26,14 @@ if __name__ == '__main__':
 #     writer.setBlueFunction("x")
     strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
-    
+
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
     updaterThread.start()
 
     try:
-        while(True):
+        while True:
             pass
-    except (KeyboardInterrupt):
+    except KeyboardInterrupt:
         updater.stop()
         updater.join()
