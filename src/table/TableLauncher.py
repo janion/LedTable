@@ -4,11 +4,12 @@ Created on 7 May 2017
 @author: Janion
 '''
 
-from PixelWriter import PixelWriter1D, PixelWriter2D
-from PixelUpdaterPi import PixelUpdater
-from WebService import WebService
+from led.PixelWriter import PixelWriter1D, PixelWriter2D
+
 # from neopixel import Adafruit_NeoPixel as NeoPixel
-from MockNeoPixel import Adafruit_NeoPixel as NeoPixel
+from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
+from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
+from table.web.WebServer import WebServer, WebServerThread
 
 # LED strip configuration:
 LED_SIDE_COUNT = 10
@@ -30,10 +31,15 @@ if __name__ == '__main__':
 #     writer.setBlueFunction("x")
     strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
+
     updater = PixelUpdater(writer, strip)
-    updater.start()
-    service = WebService()
-    service.start()
+    updaterThread = PixelUpdaterThread(updater)
+
+    server = WebServer()
+    serverThread = WebServerThread(server)
+
+    updaterThread.start()
+    serverThread.start()
 
     try:
         while True:

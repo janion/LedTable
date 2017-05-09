@@ -4,9 +4,11 @@ Created on 7 May 2017
 @author: Janion
 '''
 
-from PixelWriter import PixelWriter1D
-from PixelUpdaterPi import PixelUpdater
-from neopixel import Adafruit_NeoPixel as NeoPixel
+from led.PixelWriter import PixelWriter1D
+# from neopixel import Adafruit_NeoPixel as NeoPixel
+from led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
+
+from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 
 # LED strip configuration:
 LED_COUNT      = 60      # Number of LED pixels.
@@ -25,7 +27,8 @@ if __name__ == '__main__':
     strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
     updater = PixelUpdater(writer, strip)
-    updater.start()
+    updaterThread = PixelUpdaterThread(updater)
+    updaterThread.start()
 
     try:
         while(True):

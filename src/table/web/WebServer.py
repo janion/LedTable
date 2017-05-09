@@ -1,7 +1,8 @@
-import socket
 import re
-from threading import Lock, Thread
-from PatternManager import PatternManager
+import socket
+from threading import Thread
+
+from table.pattern.PatternManager import PatternManager
 
 '''
 TODO:
@@ -9,7 +10,14 @@ patterns must consist of redPattern, bluePattern and greenPattern
 Table must reflect this
 '''
 
-class WebService(Thread):
+
+class WebServerThread(Thread):
+
+    def __init__(self, service):
+        Thread.__init__(self, target=service.serverLoop)
+
+
+class WebServer(object):
 
     PATTERN_FILE_NAME = "Patterns.txt"
     HTML_FORMAT = """<!DOCTYPE html>
@@ -17,27 +25,32 @@ class WebService(Thread):
         <head> <title>Table-top patterns</title> </head>
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
-            <table border="1"> <tr><th></th><th></th><th>Name</th><th>Function</th></tr> %s </table>
+            <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
             <br>
             <br>
             <form action="/addPattern">
                 Pattern name:<br>
                 <input type="text" name="name"><br>
                 <br>
-                Pattern function:<br>
-                <input type="text" name="fn"><br>
+                Red function:<br>
+                <input type="text" name="red"><br>
+                Green function:<br>
+                <input type="text" name="green"><br>
+                Blue function:<br>
+                <input type="text" name="blue"><br>
                 <input type="submit" value="Add pattern">
             </form>
         </body>
     </html>
     """
-    HTML_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td><a href="/removePattern?name=%s">Remove</a></td><td>%s</td><td>%s</td></tr>'
+    HTML_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
+                      '<a href="/removePattern?name=%s">Remove</a></td>' \
+                      '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
 
     def __init__(self):
-        Thread.__init__(self, target=self.loop)
         self.patterns = PatternManager(self.PATTERN_FILE_NAME)
 
-    def loop(self):
+    def serverLoop(self):
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
         s = socket.socket()
         s.bind(addr)
@@ -60,8 +73,10 @@ class WebService(Thread):
                     self.setPattern(name)
                 elif path.startswith("/addPattern"):
                     name = parameters.get("name", None)
-                    function = parameters.get("fn", None)
-                    self.patterns.addPattern(name, function)
+                    red = parameters.get("red", None)
+                    green = parameters.get("green", None)
+                    blue = parameters.get("blue", None)
+                    self.patterns.addPattern(name, red, green, blue)
                 elif path.startswith("/removePattern"):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
@@ -95,5 +110,5 @@ class WebService(Thread):
         # BUILD DE HTTP RESPONSE HEADERS
         return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (len(response), response)
      
-w = WebService()
+w = WebServer()
 w.start()

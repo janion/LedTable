@@ -6,12 +6,23 @@ Created on 7 May 2017
 
 from threading import Lock, Thread
 from time import time, sleep
-from neopixel import Color
+from table.led.MockNeoPixel import Color
+# from neopixel import Color
 
-class PixelUpdater(Thread):
+
+class PixelUpdaterThread(Thread):
+
+    def __init__(self, updater):
+        Thread.__init__(self, target=updater.updateLoop)
+        self.updater = updater
+
+    def stop(self):
+        self.updater.stop()
+
+
+class PixelUpdater(object):
     
     def __init__(self, writer, strip):
-        Thread.__init__(self, target=self.updateLoop)
         self.writer = writer
         self.strip = strip
         self.writerLock = Lock()
@@ -20,13 +31,13 @@ class PixelUpdater(Thread):
     def setPixelWriter(self, writer):
         with self.writerLock:
             self.writer = writer
-    
+
     def stop(self):
         self.stopped = True
 
     def updateLoop(self):
         startTime = time()
-        while(not self.stopped):
+        while not self.stopped:
             with self.writerLock:
                 data = self.writer.getPixelData(time() - startTime)
                 

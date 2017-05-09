@@ -4,7 +4,8 @@ Created on 7 May 2017
 @author: Janion
 '''
 
-from Pattern import Pattern
+from table.pattern.Pattern import Pattern
+
 
 class PatternManager(object):
     
@@ -14,9 +15,9 @@ class PatternManager(object):
         self.patternFileName = patternFileName
         # TODO read from file
         self.patterns = []
-        self.addPattern("one", "x")
-        self.addPattern("two", "2 * x")
-        self.addPattern("three", "3 * x")
+        self.addPattern("one", "x", "x", "x")
+        self.addPattern("two", "2 * x", "2 * x", "2 * x")
+        self.addPattern("three", "3 * x", "3 * x", "3 * x")
     
     def getCurrentPattern(self):
         return self.currentPattern
@@ -30,8 +31,8 @@ class PatternManager(object):
                 self.currentPattern = pattern
                 break
 
-    def addPattern(self, name, function):
-        pattern = Pattern(name, function)
+    def addPattern(self, name, redFunction, greenFunction, blueFunction):
+        pattern = Pattern(name, redFunction, greenFunction, blueFunction)
         if len(self.patterns) == 0:
             self.currentPattern = pattern
         self.patterns.append(pattern)
@@ -49,4 +50,3 @@ class PatternManager(object):
                         self.setPattern(self.DEFAULT_PATTERN)
                 # TODO write to file
                 break
-        

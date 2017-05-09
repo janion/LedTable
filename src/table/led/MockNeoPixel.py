@@ -5,3 +5,12 @@ class Adafruit_NeoPixel(object):
 
     def begin(self):
         pass
+
+    def setPixelColor(self, position, colour):
+        pass
+
+
+class Color(object):
+
+    def __init__(self, red, green, blue):
+        pass
