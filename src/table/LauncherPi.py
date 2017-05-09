@@ -22,8 +22,6 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 if __name__ == '__main__':
     writer = PixelWriter1D(LED_COUNT)
     writer.setPattern(Pattern("127 * (sin(t + (x / 50)) + 1)", "0", "0"))
-#     writer.setGreenFunction("t")
-#     writer.setBlueFunction("x")
     strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
 
