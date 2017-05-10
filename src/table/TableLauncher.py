@@ -6,7 +6,7 @@ Created on 7 May 2017
 
 from time import sleep
 
-from led.PixelWriter import PixelWriter1D, PixelWriter2D
+from table.led.PixelWriter import PixelWriter1D, PixelWriter2D
 # from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
@@ -25,8 +25,8 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 
 
 if __name__ == '__main__':
-    # writer = PixelWriter1D(LED_COUNT)
-    writer = PixelWriter2D(LED_SIDE_COUNT, LED_SIDE_COUNT, PixelWriter2D.ZIG_ZAG)
+    writer = PixelWriter1D(LED_COUNT)
+    # writer = PixelWriter2D(LED_SIDE_COUNT, LED_SIDE_COUNT, PixelWriter2D.ZIG_ZAG)
     strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
 

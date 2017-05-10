@@ -82,7 +82,7 @@ class WebServer(object):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
                     
-            rows = [self.HTML_ROW_FORMAT % (p.getName(), p.getName(), p.getName(), p.getRedFunction(), p.getGreenFuction(), p.getBlueFunction()) for p in self.patterns.getPatterns()]
+            rows = [self.HTML_ROW_FORMAT % (p.getName(), p.getName(), p.getName(), p.getRedFunction(), p.getGreenFunction(), p.getBlueFunction()) for p in self.patterns.getPatterns()]
             response = self.HTML_FORMAT % (self.patterns.getCurrentPattern().getName(), '\n'.join(rows))
             cl.send(response)
         cl.close()
