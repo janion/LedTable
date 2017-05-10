@@ -19,8 +19,8 @@ class PatternReader(object):
 class PatternWriter(object):
 
     def writePatterns(self, fileName, patterns):
-        with open(fileName) as csvFile:
-            writer = csv.reader(csvFile, delimiter=",")
+        with open(fileName, 'wb') as csvFile:
+            writer = csv.writer(csvFile, delimiter=",")
             for pattern in patterns:
                 writer.writerow([pattern.getName(), pattern.getRedFunctionString(),
                                  pattern.getGreenFunctionString(), pattern.getBlueFunctionString()

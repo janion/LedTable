@@ -66,7 +66,7 @@ class WebServer(object):
             if not obj:
                 cl.send(self.buildResponse("INVALID REQUEST"))
             else:
-                path, parameters = self.urlParser.parseURL(obj.group(1).replace('%28', '(').replace('%29', ')'))
+                path, parameters = self.urlParser.parseURL(obj.group(1))
                 if path.startswith("/setPattern"):
                     name = parameters.get("name", None)
                     self.setPattern(name)

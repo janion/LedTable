@@ -17,10 +17,7 @@ class Pattern(object):
         self.greenFunction = self._createEquationAndValidate(greenFunction)
         self.blueFunction = self._createEquationAndValidate(blueFunction)
 
-        self.isValid = None in [self.redFunction, self.greenFunction, self.blueFunction]
-        
-    def isValid(self):
-        return self.isValid
+        self.isValid = None not in [self.redFunction, self.greenFunction, self.blueFunction]
 
     def getName(self):
         return self.name

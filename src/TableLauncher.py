@@ -44,5 +44,5 @@ if __name__ == '__main__':
             sleep(0.01)
     except KeyboardInterrupt:
         print "Stopping"
-        updater.stop()
-        updater.join()
+        updaterThread.stop()
+        updaterThread.join()

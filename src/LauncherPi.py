@@ -33,5 +33,5 @@ if __name__ == '__main__':
         while True:
             pass
     except KeyboardInterrupt:
-        updater.stop()
-        updater.join()
+        updaterThread.stop()
+        updaterThread.join()
