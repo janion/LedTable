@@ -22,6 +22,6 @@ class PatternWriter(object):
         with open(fileName) as csvFile:
             writer = csv.reader(csvFile, delimiter=",")
             for pattern in patterns:
-                writer.writerow([pattern.getName(), pattern.getRedFunction(),
-                                 pattern.getGreenFunction(), pattern.getBlueFunction()
+                writer.writerow([pattern.getName(), pattern.getRedFunctionString(),
+                                 pattern.getGreenFunctionString(), pattern.getBlueFunctionString()
                                  ])

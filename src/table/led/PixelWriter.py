@@ -18,9 +18,9 @@ class PixelWriter1D(object):
         self.bFunc = self.NULL_FUNCTION
 
     def setPattern(self, pattern):
-        self.rFunc = Equation(pattern.getRedFunction())
-        self.gFunc = Equation(pattern.getGreenFunction())
-        self.bFunc = Equation(pattern.getBlueFunction())
+        self.rFunc = pattern.getRedFunction()
+        self.gFunc = pattern.getGreenFunction()
+        self.bFunc = pattern.getBlueFunction()
 
     def getPixelData(self, t):
         for x in range(self.ledCount):

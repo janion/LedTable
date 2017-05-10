@@ -37,10 +37,11 @@ class PatternManager(object):
 
     def addPattern(self, name, redFunction, greenFunction, blueFunction):
         pattern = Pattern(name, redFunction, greenFunction, blueFunction)
-        if len(self.patterns) == 0:
-            self.currentPattern = pattern
-        self.patterns.append(pattern)
-        self.writer.writePatterns(self.patternFileName, self.patterns)
+        if pattern.isValid():
+            if len(self.patterns) == 0:
+                self.currentPattern = pattern
+            self.patterns.append(pattern)
+            self.writer.writePatterns(self.patternFileName, self.patterns)
 
     def removePattern(self, name):
         for i in range(len(self.patterns)):

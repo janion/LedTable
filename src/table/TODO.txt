@@ -1,1 +1,2 @@
 - When pattern is set the PatternManager needs to inform the PixelUpdater
+- Tell user if invalid
