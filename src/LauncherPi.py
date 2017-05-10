@@ -5,7 +5,7 @@ Created on 7 May 2017
 '''
 
 # from neopixel import Adafruit_NeoPixel as NeoPixel
-from led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
+from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelWriter import PixelWriter1D
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.pattern.Pattern import Pattern
