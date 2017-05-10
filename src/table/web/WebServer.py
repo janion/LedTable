@@ -20,7 +20,7 @@ class WebServerThread(Thread):
 
 class WebServer(object):
 
-    PATTERN_FILE_NAME = "Patterns.txt"
+    PATTERN_FILE_NAME = "patterns.csv"
     HTML_FORMAT = """<!DOCTYPE html>
     <html>
         <head> <title>Table-top patterns</title> </head>

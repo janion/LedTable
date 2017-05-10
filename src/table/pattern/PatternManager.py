@@ -5,6 +5,7 @@ Created on 7 May 2017
 '''
 
 from table.pattern.Pattern import Pattern
+from table.pattern.FileIO import PatternReader, PatternWriter
 
 
 class PatternManager(object):
@@ -13,11 +14,14 @@ class PatternManager(object):
 
     def __init__(self, patternFileName):
         self.patternFileName = patternFileName
-        # TODO read from file
-        self.patterns = []
-        self.addPattern("one", "x", "x", "x")
-        self.addPattern("two", "2 * x", "2 * x", "2 * x")
-        self.addPattern("three", "3 * x", "3 * x", "3 * x")
+        self.reader = PatternReader()
+        self.writer = PatternWriter()
+        self.patterns = self.reader.readPatterns(patternFileName)
+
+        if len(self.patterns) > 0:
+            self.currentPattern = self.patterns[0]
+        else:
+            self.currentPattern = self.DEFAULT_PATTERN
     
     def getCurrentPattern(self):
         return self.currentPattern
@@ -36,6 +40,7 @@ class PatternManager(object):
         if len(self.patterns) == 0:
             self.currentPattern = pattern
         self.patterns.append(pattern)
+        self.writer.writePatterns(self.patternFileName, self.patterns)
 
     def removePattern(self, name):
         for i in range(len(self.patterns)):
@@ -48,5 +53,6 @@ class PatternManager(object):
                         self.setPattern(self.patterns[0])
                     else:
                         self.setPattern(self.DEFAULT_PATTERN)
-                # TODO write to file
+                        
+                self.writer.writePatterns(self.patternFileName, self.patterns)
                 break
