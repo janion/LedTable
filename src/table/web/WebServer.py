@@ -1,14 +1,9 @@
-import re
+import re as regex
 import socket
 from threading import Thread
 
 from table.pattern.PatternManager import PatternManager
-
-'''
-TODO:
-patterns must consist of redPattern, bluePattern and greenPattern
-Table must reflect this
-'''
+from table.web.UrlParser import UrlParser
 
 
 class WebServerThread(Thread):
@@ -48,8 +43,11 @@ class WebServer(object):
                       '<a href="/removePattern?name=%s">Remove</a></td>' \
                       '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
 
-    def __init__(self):
+    def __init__(self, pixelUpdater, writerFactory):
+        self.updater = pixelUpdater
+        self.writerFactory = writerFactory
         self.patterns = PatternManager(self.PATTERN_FILE_NAME)
+        self.urlParser = UrlParser()
 
     def serverLoop(self):
         addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
@@ -63,12 +61,12 @@ class WebServer(object):
             request = str(cl.recv(1024))
 
             # Check is http get request
-            obj = re.search("GET (.*?) HTTP\/1\.1", request)
+            obj = regex.search("GET (.*?) HTTP\/1\.1", request)
             
             if not obj:
                 cl.send(self.buildResponse("INVALID REQUEST"))
             else:
-                path, parameters = self.parseURL(obj.group(1).replace('%28', '(').replace('%29', ')'))
+                path, parameters = self.urlParser.parseURL(obj.group(1).replace('%28', '(').replace('%29', ')'))
                 if path.startswith("/setPattern"):
                     name = parameters.get("name", None)
                     self.setPattern(name)
@@ -81,32 +79,24 @@ class WebServer(object):
                 elif path.startswith("/removePattern"):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
-                    
-            rows = [self.HTML_ROW_FORMAT % (p.getName(), p.getName(), p.getName(), p.getRedFunctionString(), p.getGreenFunctionString(), p.getBlueFunctionString()) for p in self.patterns.getPatterns()]
+
+            rows = []
+            for p in self.patterns.getPatterns():
+                rows.append(self.HTML_ROW_FORMAT % (
+                    p.getName(), p.getName(), p.getName(),
+                    p.getRedFunctionString(), p.getGreenFunctionString(),
+                    p.getBlueFunctionString()
+                ))
             response = self.HTML_FORMAT % (self.patterns.getCurrentPattern().getName(), '\n'.join(rows))
             cl.send(response)
         cl.close()
 
     def setPattern(self, name):
         self.patterns.setPattern(name)
-        # TODO send to table
-  
-    def parseURL(self, url):
-        # PARSE THE URL AND RETURN THE PATH AND GET PARAMETERS
-        parameters = {}
-      
-        path = re.search("(.*?)(\?|$)", url) 
-      
-        while True:
-            varrs = re.search("(([a-z0-9]+)=([a-z0-8.()]*))&?", url)
-            if varrs:
-                parameters[varrs.group(2)] = varrs.group(3)
-                url = url.replace(varrs.group(0), '')
-            else:
-                break
-
-        return path.group(1), parameters
+        writer = self.writerFactory.createPixelWriter(self.patterns.getCurrentPattern())
+        self.updater.setPixelWriter(writer)
 
     def buildResponse(self, response):
-        # BUILD DE HTTP RESPONSE HEADERS
-        return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (len(response), response)
+        # BUILD HTTP RESPONSE HEADERS
+        return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (
+            len(response), response)

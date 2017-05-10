@@ -3,21 +3,13 @@ Created on 6 May 2017
 
 @author: Janion
 '''
-from EquationParser import Equation
 
 
 class PixelWriter1D(object):
 
-    NULL_FUNCTION = Equation("0")
-
-    def __init__(self, ledCount):
+    def __init__(self, ledCount, pattern):
         self.data = [(0, 0, 0) for x in range(ledCount)]
         self.ledCount = ledCount
-        self.rFunc = self.NULL_FUNCTION
-        self.gFunc = self.NULL_FUNCTION
-        self.bFunc = self.NULL_FUNCTION
-
-    def setPattern(self, pattern):
         self.rFunc = pattern.getRedFunction()
         self.gFunc = pattern.getGreenFunction()
         self.bFunc = pattern.getBlueFunction()
@@ -35,8 +27,8 @@ class PixelWriter2D(PixelWriter1D):
     RASTER = 0
     ZIG_ZAG = 1
 
-    def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter2D, self).__init__(ledCountX * ledCountY)
+    def __init__(self, ledCountX, ledCountY, pattern, mode):
+        super(PixelWriter2D, self).__init__(ledCountX * ledCountY, pattern)
         self.ledCountX = ledCountX
         self.ledCountY = ledCountY
         self.mode = mode

@@ -31,6 +31,7 @@ class PixelUpdater(object):
     def setPixelWriter(self, writer):
         with self.writerLock:
             self.writer = writer
+        print "Pixel writer set"
 
     def stop(self):
         self.stopped = True
