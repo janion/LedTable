@@ -1,2 +1,2 @@
-- When pattern is set the PatternManager needs to inform the PixelUpdater
-- Tell user if invalid
+- Tell user if invalid pattern
+- Suppound WebServer code in try/except/finally and report any errors
