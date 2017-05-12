@@ -1,2 +1,4 @@
 - Tell user if invalid pattern
-- Suppound WebServer code in try/except/finally and report any errors
+- Surround WebServer code in try/except/finally and report any errors
+- Add built in patterns which aren't based off maths eg scrolling text or snakes etc.
+    + User can et them but not remove them
