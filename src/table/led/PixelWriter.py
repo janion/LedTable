@@ -36,25 +36,27 @@ class PixelWriter2D(PixelWriter1D):
     def getPixelData(self, t):
         if self.mode == self.RASTER:
             for x in range(self.ledCountX):
-                for y in range(self.ledCountY):
-                    self.data[(x * self.ledCountX) + y] = (int(self.rFunc.evaluate(x, y, t)[0]),
-                                                           int(self.gFunc.evaluate(x, y, t)[0]),
-                                                           int(self.bFunc.evaluate(x, y, t)[0])
-                                                           )
+                self._makeColumnForwards(x, t)
         elif self.mode == self.ZIG_ZAG:
             for x in range(self.ledCountX):
                 if (x % 2) == 0:
-                    for y in range(self.ledCountY):
-                        self.data[(x * self.ledCountX) + y] = (int(self.rFunc.evaluate(x, y, t)[0]),
-                                                               int(self.gFunc.evaluate(x, y, t)[0]),
-                                                               int(self.bFunc.evaluate(x, y, t)[0])
-                                                               )
+                    self._makeColumnForwards(x, t)
                 else:
-                    for y in range(self.ledCountY - 1, -1, -1):
-                        index = (x * self.ledCountX) + (self.ledCountY - (1 + y))
-                        self.data[index] = (int(self.rFunc.evaluate(x, y, t)[0]),
-                                            int(self.gFunc.evaluate(x, y, t)[0]),
-                                            int(self.bFunc.evaluate(x, y, t)[0])
-                                            )
+                    self._makeColumnBackwards(x, t)
 
         return self.data
+
+    def _makeColumnForwards(self, x, t):
+        for y in range(self.ledCountY):
+            self.data[(x * self.ledCountX) + y] = self._evaluateCell(x, y, t)
+
+    def _makeColumnBackwards(self, x, t):
+        for y in range(self.ledCountY - 1, -1, -1):
+            index = (x * self.ledCountX) + (self.ledCountY - (1 + y))
+            self.data[index] = self._evaluateCell(x, y, t)
+
+    def _evaluateCell(self, x, y, t):
+        return (int(self.rFunc.evaluate(x, y, t)[0]),
+                int(self.gFunc.evaluate(x, y, t)[0]),
+                int(self.bFunc.evaluate(x, y, t)[0])
+                )
