@@ -36,6 +36,7 @@ class PixelWriter2D(PixelWriter1D):
         self.mode = mode
 
     def getPixelData(self, t):
+        self._tick(t)
         if self.mode == self.RASTER:
             for x in range(self.ledCountX):
                 self._makeColumnForwards(x, t)
@@ -63,3 +64,6 @@ class PixelWriter2D(PixelWriter1D):
                 int(self.gFunc.evaluate(x, y, t)[0]),
                 int(self.bFunc.evaluate(x, y, t)[0])
                 )
+
+    def _tick(self, t):
+        pass
