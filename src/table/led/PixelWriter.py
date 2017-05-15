@@ -55,7 +55,7 @@ class PixelWriter2D(PixelWriter1D):
 
     def _makeColumnBackwards(self, x, t):
         for y in range(self.ledCountY - 1, -1, -1):
-            index = (x * self.ledCountY) + y
+            index = (x * self.ledCountY) + (self.ledCountY - (y + 1))
             self.data[index] = self._evaluateCell(x, y, t)
 
     def _evaluateCell(self, x, y, t):
