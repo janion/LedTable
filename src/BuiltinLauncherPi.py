@@ -6,7 +6,6 @@ Created on 7 May 2017
 
 # from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
-from table.led.PixelWriterFactory import PixelWriter1DFactory
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 
 from table.led.builtin.swipe.RainbowSwipePixelWriter import PixelWriter

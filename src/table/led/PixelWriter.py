@@ -10,9 +10,10 @@ class PixelWriter1D(object):
     def __init__(self, ledCount, pattern):
         self.data = [(0, 0, 0) for x in range(ledCount)]
         self.ledCount = ledCount
-        self.rFunc = pattern.getRedFunction()
-        self.gFunc = pattern.getGreenFunction()
-        self.bFunc = pattern.getBlueFunction()
+        if pattern is not None:
+            self.rFunc = pattern.getRedFunction()
+            self.gFunc = pattern.getGreenFunction()
+            self.bFunc = pattern.getBlueFunction()
 
     def getPixelData(self, t):
         for x in range(self.ledCount):
@@ -21,6 +22,7 @@ class PixelWriter1D(object):
                             int(self.bFunc.evaluate(x, 0, t)[0])
                             )
         return self.data
+
 
 class PixelWriter2D(PixelWriter1D):
 
@@ -48,11 +50,12 @@ class PixelWriter2D(PixelWriter1D):
 
     def _makeColumnForwards(self, x, t):
         for y in range(self.ledCountY):
-            self.data[(x * self.ledCountX) + y] = self._evaluateCell(x, y, t)
+            index = (x * self.ledCountY) + y
+            self.data[index] = self._evaluateCell(x, y, t)
 
     def _makeColumnBackwards(self, x, t):
         for y in range(self.ledCountY - 1, -1, -1):
-            index = (x * self.ledCountX) + (self.ledCountY - (1 + y))
+            index = (x * self.ledCountY) + y
             self.data[index] = self._evaluateCell(x, y, t)
 
     def _evaluateCell(self, x, y, t):

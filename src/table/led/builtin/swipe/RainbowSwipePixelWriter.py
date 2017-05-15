@@ -9,7 +9,7 @@ class PixelWriter(PixelWriter2D):
     MAX_INTENSITY = 255
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter2D, self).__init__(ledCountX * ledCountY, None)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
         self.colourWheel = ColourWheel()
         self.angle = 0
         self.lastFrontIndex = 0
