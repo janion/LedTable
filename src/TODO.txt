@@ -2,3 +2,8 @@
 - Surround WebServer code in try/except/finally and report any errors
 - Add built in patterns which aren't based off maths eg scrolling text or snakes etc.
     + User can set them but not remove them
+
+    + PixelWriters will exist in a list of "builtinPatterns" with names
+    + Created by a factory so only one place needs updating
+    + the list can be iterated over to find all the names and add them to another table
+    + User can set them just like the mathematical patterns
