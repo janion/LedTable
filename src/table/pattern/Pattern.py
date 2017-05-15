@@ -31,14 +31,14 @@ class Pattern(object):
     def getBlueFunctionString(self):
         return self.blueFunctionString
 
+    def getRedFunction(self):
+        return self.redFunction
+
     def getGreenFunction(self):
         return self.greenFunction
 
     def getBlueFunction(self):
         return self.blueFunction
-    
-    def getRedFunction(self):
-        return self.redFunction
 
     def _createEquationAndValidate(self, functionString):
         try:
