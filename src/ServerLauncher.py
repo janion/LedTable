@@ -8,7 +8,7 @@ from time import sleep
 from table.web.WebServer import WebServer, WebServerThread
 
 if __name__ == '__main__':
-    WebServerThread(WebServer()).start()
+    WebServerThread(WebServer(None, None)).start()
 
     try:
         while True:

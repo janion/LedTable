@@ -22,9 +22,11 @@ class WebServer(object):
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
             <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
+            <table border="1"> <tr><th></th><th>Name</th></tr> %s </table>
             <br>
             <br>
             <form action="/addPattern">
+                <b><u>Add Pattern</u></b><br>
                 Pattern name:<br>
                 <input type="text" name="name"><br>
                 Red function:<br>
@@ -39,14 +41,14 @@ class WebServer(object):
         </body>
     </html>
     """
-    HTML_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
-                      '<a href="/removePattern?name=%s">Remove</a></td>' \
-                      '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
+    CUSTOM_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
+                                '<a href="/removePattern?name=%s">Remove</a></td>' \
+                                '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
+    BUILTIN_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>%s</td></tr>'
 
     def __init__(self, pixelUpdater, writerFactory):
         self.updater = pixelUpdater
-        self.writerFactory = writerFactory
-        self.patterns = PatternManager(self.PATTERN_FILE_NAME)
+        self.patterns = PatternManager(self.PATTERN_FILE_NAME, writerFactory)
         self.urlParser = UrlParser()
 
     def serverLoop(self):
@@ -80,20 +82,24 @@ class WebServer(object):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
 
-            rows = []
+            customRows = []
             for p in self.patterns.getPatterns():
-                rows.append(self.HTML_ROW_FORMAT % (
+                customRows.append(self.CUSTOM_PATTERN_ROW_FORMAT % (
                     p.getName(), p.getName(), p.getName(),
                     p.getRedFunctionString(), p.getGreenFunctionString(),
                     p.getBlueFunctionString()
                 ))
-            response = self.HTML_FORMAT % (self.patterns.getCurrentPattern().getName(), '\n'.join(rows))
+            builtinRows = []
+            for name in self.patterns.getBuiltinPatternsManager().getPatternNames():
+                builtinRows.append(self.BUILTIN_PATTERN_ROW_FORMAT % (name, name))
+
+            response = self.HTML_FORMAT % (self.patterns.getCurrentPatternName(), '\n'.join(customRows), '\n'.join(builtinRows))
             cl.send(response)
         cl.close()
 
     def setPattern(self, name):
         self.patterns.setPattern(name)
-        writer = self.writerFactory.createPixelWriter(self.patterns.getCurrentPattern())
+        writer = self.patterns.getWriter()
         self.updater.setPixelWriter(writer)
 
     def buildResponse(self, response):
