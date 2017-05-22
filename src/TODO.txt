@@ -2,4 +2,3 @@
 - Surround WebServer code in try/except/finally and report any errors
 - Add more builtin patterns
 - Allow brightness to be set from web interface
-- Make rainbow swipe smoother

@@ -18,7 +18,6 @@ class WebServer(object):
     <html>
         <head>
             <title>Table-top patterns</title>
-            %s
         </head>
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
@@ -43,10 +42,15 @@ class WebServer(object):
         </body>
     </html>
     """
-    REDIRECT = """<script type="text/javascript">
-                    window.location.href = "/"
-                </script>"""
-    NO_REDIRECT = ""
+    REDIRECT = """"<!DOCTYPE html>
+    <html>
+        <head>
+            <script type="text/javascript">
+                window.location.href = "/"
+            </script>
+        </head>
+    </html>
+    """
     CUSTOM_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
                                 '<a href="/removePattern?name=%s">Remove</a></td>' \
                                 '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
@@ -106,11 +110,9 @@ class WebServer(object):
                 builtinRows.append(self.BUILTIN_PATTERN_ROW_FORMAT % (name, name))
 
             if redirect:
-                response = self.HTML_FORMAT % (self.REDIRECT, self.patterns.getCurrentPatternName(),
-                                               '\n'.join(customRows), '\n'.join(builtinRows)
-                                               )
+                response = self.REDIRECT
             else:
-                response = self.HTML_FORMAT % (self.NO_REDIRECT, self.patterns.getCurrentPatternName(),
+                response = self.HTML_FORMAT % (self.patterns.getCurrentPatternName(),
                                                '\n'.join(customRows), '\n'.join(builtinRows)
                                                )
             cl.send(response)
