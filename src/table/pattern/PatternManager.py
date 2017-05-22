@@ -21,21 +21,19 @@ class PatternManager(object):
             self.patternFileName = self.DEFAULT_PATTERN_FILE_NAME
 
         self.writerFactory = writerFactory
-        self.reader = PatternReader()
-        self.writer = PatternWriter()
-        self.patterns = self.reader.readPatterns(self.patternFileName)
+        self.fileReader = PatternReader()
+        self.fileWriter = PatternWriter()
+        self.patterns = self.fileReader.readPatterns(self.patternFileName)
         self.builtins = BuiltinFunctionManager()
 
         if len(self.patterns) > 0:
-            self.currentPattern = self.patterns[0]
+            self.setPattern(self.patterns[0].getName())
         else:
-            self.currentPattern = self.DEFAULT_PATTERN
+            self.currentPatternName = self.DEFAULT_PATTERN.getName()
+            self.currentWriter = self.writerFactory.createPixelWriter(self.DEFAULT_PATTERN)
 
     def getCurrentPatternName(self):
-        return self.currentPattern.getName()
-    
-    def getCurrentPattern(self):
-        return self.currentPattern
+        return self.currentPatternName
     
     def getPatterns(self):
         return self.patterns
@@ -44,19 +42,27 @@ class PatternManager(object):
         return self.builtins
 
     def setPattern(self, name):
-        # TODO: Check if pattern name in custon or builtins
+        self.currentPatternName = name
+
+        # Check builtins
+        for builtinName in self.builtins.getPatternNames():
+            if builtinName == name:
+                self.currentWriter = self.builtins.getWriter(name)
+                return
+
+        # Check custom patterns
         for pattern in self.patterns:
             if pattern.getName() == name:
-                self.currentPattern = pattern
+                self.currentWriter = self.writerFactory.createPixelWriter(pattern.getName())
                 break
 
     def addPattern(self, name, redFunction, greenFunction, blueFunction):
         pattern = Pattern(name, redFunction, greenFunction, blueFunction)
         if pattern.isValid:
-            if len(self.patterns) == 0:
-                self.currentPattern = pattern
             self.patterns.append(pattern)
-            self.writer.writePatterns(self.patternFileName, self.patterns)
+            self.fileWriter.writePatterns(self.patternFileName, self.patterns)
+            if len(self.patterns) == 1:
+                self.setPattern(name)
 
     def removePattern(self, name):
         for i in range(len(self.patterns)):
@@ -70,9 +76,8 @@ class PatternManager(object):
                     else:
                         self.setPattern(self.DEFAULT_PATTERN)
                         
-                self.writer.writePatterns(self.patternFileName, self.patterns)
+                self.fileWriter.writePatterns(self.patternFileName, self.patterns)
                 break
 
     def getWriter(self):
-        # TODO: Get builtin pattern writer if set
-        return self.writerFactory.createPixelWriter(self.currentPattern)
+        return self.currentWriter

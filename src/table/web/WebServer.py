@@ -20,6 +20,7 @@ class WebServer(object):
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
             <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
+            <br>
             <table border="1"> <tr><th></th><th>Name</th></tr> %s </table>
             <br>
             <br>
