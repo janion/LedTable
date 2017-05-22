@@ -2,7 +2,6 @@ import re as regex
 import socket
 from threading import Thread
 
-from table.pattern.PatternManager import PatternManager
 from table.web.UrlParser import UrlParser
 
 
@@ -15,7 +14,6 @@ class WebServerThread(Thread):
 
 class WebServer(object):
 
-    PATTERN_FILE_NAME = "patterns.csv"
     HTML_FORMAT = """<!DOCTYPE html>
     <html>
         <head> <title>Table-top patterns</title> </head>
@@ -43,10 +41,10 @@ class WebServer(object):
                       '<a href="/removePattern?name=%s">Remove</a></td>' \
                       '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
 
-    def __init__(self, pixelUpdater, writerFactory):
+    def __init__(self, pixelUpdater, writerFactory, patternManager):
         self.updater = pixelUpdater
         self.writerFactory = writerFactory
-        self.patterns = PatternManager(self.PATTERN_FILE_NAME)
+        self.patterns = patternManager
         self.urlParser = UrlParser()
 
     def serverLoop(self):
@@ -64,12 +62,12 @@ class WebServer(object):
             obj = regex.search("GET (.*?) HTTP\/1\.1", request)
             
             if not obj:
-                cl.send(self.buildResponse("INVALID REQUEST"))
+                cl.send(self._buildResponse("INVALID REQUEST"))
             else:
                 path, parameters = self.urlParser.parseURL(obj.group(1))
                 if path.startswith("/setPattern"):
                     name = parameters.get("name", None)
-                    self.setPattern(name)
+                    self._setPattern(name)
                 elif path.startswith("/addPattern"):
                     name = parameters.get("name", None)
                     red = parameters.get("red", None)
@@ -91,12 +89,12 @@ class WebServer(object):
             cl.send(response)
         cl.close()
 
-    def setPattern(self, name):
+    def _setPattern(self, name):
         self.patterns.setPattern(name)
         writer = self.writerFactory.createPixelWriter(self.patterns.getCurrentPattern())
         self.updater.setPixelWriter(writer)
 
-    def buildResponse(self, response):
+    def _buildResponse(self, response):
         # BUILD HTTP RESPONSE HEADERS
         return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (
             len(response), response)

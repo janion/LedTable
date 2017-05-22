@@ -47,5 +47,3 @@ class PixelUpdater(object):
                 self.strip.setPixelColor(x, Color(datum[0], datum[1], datum[2]))
 
             self.strip.show()
-                
-        

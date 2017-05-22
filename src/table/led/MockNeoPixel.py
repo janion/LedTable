@@ -20,4 +20,15 @@ class Adafruit_NeoPixel(object):
 class Color(object):
 
     def __init__(self, red, green, blue):
-        pass
+        self.red = red
+        self.green = green
+        self.blue = blue
+
+    def getRed(self):
+        return self.red
+
+    def getGreen(self):
+        return self.green
+
+    def getBlue(self):
+        return self.blue

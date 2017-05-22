@@ -11,12 +11,17 @@ from table.pattern.FileIO import PatternReader, PatternWriter
 class PatternManager(object):
     
     DEFAULT_PATTERN = Pattern("Default", "127", "127", "127")
+    DEFAULT_PATTERN_FILE_NAME = "patterns.csv"
 
-    def __init__(self, patternFileName):
-        self.patternFileName = patternFileName
+    def __init__(self, patternFileName=None):
+        if patternFileName is not None:
+            self.patternFileName = patternFileName
+        else:
+            self.patternFileName = self.DEFAULT_PATTERN_FILE_NAME
+
         self.reader = PatternReader()
         self.writer = PatternWriter()
-        self.patterns = self.reader.readPatterns(patternFileName)
+        self.patterns = self.reader.readPatterns(self.patternFileName)
 
         if len(self.patterns) > 0:
             self.currentPattern = self.patterns[0]
