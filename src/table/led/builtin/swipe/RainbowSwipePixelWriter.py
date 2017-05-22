@@ -15,7 +15,7 @@ class PixelWriter(PixelWriter2D):
         self.lastFrontIndex = 0
 
     def _evaluateCell(self, x, y, t):
-        frontIndex = int((self.ledCountX * t) % self.SECONDS_TO_SWIPE)
+        frontIndex = int(self.ledCountX * (t % self.SECONDS_TO_SWIPE))
         diffFromFront = ((frontIndex - x) + self.ledCountX) % self.ledCountX
 
         if frontIndex < self.lastFrontIndex:

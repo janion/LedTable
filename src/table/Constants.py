@@ -1,6 +1,6 @@
 LED_COUNT_X = 10
 LED_COUNT_Y = 10
-PIXEL_MODE_2D = "RASTER"
+PIXEL_MODE_2D = "ZIG_ZAG"
 
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
