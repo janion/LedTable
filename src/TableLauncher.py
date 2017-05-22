@@ -13,22 +13,13 @@ from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.web.WebServer import WebServer, WebServerThread
 from table.pattern.Pattern import Pattern
 from table.pattern.PatternManager import PatternManager
-
-# LED strip configuration:
-LED_SIDE_COUNT = 10
-# LED_COUNT      = LED_SIDE_COUNT * LED_SIDE_COUNT      # Number of LED pixels.
-LED_COUNT      = 60      # Number of LED pixels.
-LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+from table.Constants import *
 
 
 if __name__ == '__main__':
-    writerFactory = PixelWriter1DFactory(LED_COUNT)
+    writerFactory = PixelWriter1DFactory(LED_COUNT_X * LED_COUNT_Y)
     writer = writerFactory.createPixelWriter(Pattern("NAME", "50", "50", "50"))
-    strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+    strip = NeoPixel(LED_COUNT_X * LED_COUNT_Y, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
 
     updater = PixelUpdater(writer, strip)

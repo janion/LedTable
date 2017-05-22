@@ -20,7 +20,6 @@ class PatternManager(object):
         else:
             self.patternFileName = self.DEFAULT_PATTERN_FILE_NAME
 
-        self.patternFileName = patternFileName
         self.writerFactory = writerFactory
         self.reader = PatternReader()
         self.writer = PatternWriter()

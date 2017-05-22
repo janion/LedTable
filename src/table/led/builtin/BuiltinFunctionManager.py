@@ -3,17 +3,18 @@ from table.led.builtin.rainbow.RasterDotRainbowPixelWriter import PixelWriter as
 from table.led.builtin.rainbow.RollingRainbowPixelWriter import PixelWriter as RollWriter
 from table.led.builtin.rainbow.SolidRainbowPixelWriter import PixelWriter as SolidWriter
 from table.led.builtin.swipe.RainbowSwipePixelWriter import PixelWriter as SwipeWriter
+from table.Constants import LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D
 
 
 class BuiltinFunctionManager(object):
 
     def __init__(self):
         # TODO: Better names
-        self.writers = {"Dot raster fade" : DotFadeWriter(),
-                        "Dot raster": DotWriter(),
-                        "Rainbow roll": RollWriter(),
-                        "Solid rainbow fade": SolidWriter(),
-                        "Rainbow swipe": SwipeWriter()
+        self.writers = {"Dot raster fade" : DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        "Dot raster": DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        "Rainbow roll": RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        "Solid rainbow fade": SolidWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        "Rainbow swipe": SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
                         }
 
     def getPatternNames(self):

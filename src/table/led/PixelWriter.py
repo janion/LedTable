@@ -26,8 +26,8 @@ class PixelWriter1D(object):
 
 class PixelWriter2D(PixelWriter1D):
 
-    RASTER = 0
-    ZIG_ZAG = 1
+    RASTER = "RASTER"
+    ZIG_ZAG = "ZIG_ZAG"
 
     def __init__(self, ledCountX, ledCountY, pattern, mode):
         super(PixelWriter2D, self).__init__(ledCountX * ledCountY, pattern)

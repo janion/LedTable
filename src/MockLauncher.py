@@ -14,31 +14,22 @@ from table.pattern.PatternManager import PatternManager
 from table.led.PixelWriter import PixelWriter2D
 # from table.web.WebServer import WebServer, WebServerThread
 from table.web.MockWebServer import WebServer, WebServerThread
-
-# LED strip configuration:
-LED_COUNT      = 60      # Number of LED pixels.
-LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-
-SIZE = 10
+from table.Constants import *
 
 if __name__ == '__main__':
-    writerFactory = PixelWriter2DFactory(SIZE, SIZE, PixelWriter2D.ZIG_ZAG)
+    writerFactory = PixelWriter2DFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     writer = writerFactory.createPixelWriter(Pattern("NAME", "127 * (sin(t + (x / 5) + (y / 5)) + 1)",
                                                      "127 * (cos(t + (x / 5) + (y / 5)) + 1)",
                                                      "127 * (sin(t + (x / 5) + (6.243 / 1.5) + (y / 5)) + 1)"
                                                      ))
-    strip = NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+    strip = NeoPixel(LED_COUNT_X * LED_COUNT_Y, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
 
-    patterns = PatternManager()
+    patterns = PatternManager(writerFactory)
 
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
-    server = WebServer(updater, writerFactory, patterns)
+    # server = WebServer(updater, writerFactory, patterns)
     # serverThread = WebServerThread(server)
 
     updaterThread.start()
