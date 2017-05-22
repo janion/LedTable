@@ -16,7 +16,10 @@ class WebServer(object):
 
     HTML_FORMAT = """<!DOCTYPE html>
     <html>
-        <head> <title>Table-top patterns</title> </head>
+        <head>
+            <title>Table-top patterns</title>
+            %s
+        </head>
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
             <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
@@ -40,6 +43,10 @@ class WebServer(object):
         </body>
     </html>
     """
+    REDIRECT = """<script type="text/javascript">
+                    window.location.href = "/"
+                </script>"""
+    NO_REDIRECT = ""
     CUSTOM_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
                                 '<a href="/removePattern?name=%s">Remove</a></td>' \
                                 '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
@@ -64,7 +71,9 @@ class WebServer(object):
 
             # Check is http get request
             obj = regex.search("GET (.*?) HTTP\/1\.1", request)
-            
+
+            redirect = False
+
             if not obj:
                 cl.send(self._buildResponse("INVALID REQUEST"))
             else:
@@ -72,15 +81,18 @@ class WebServer(object):
                 if path.startswith("/setPattern"):
                     name = parameters.get("name", None)
                     self._setPattern(name)
+                    redirect = True
                 elif path.startswith("/addPattern"):
                     name = parameters.get("name", None)
                     red = parameters.get("red", None)
                     green = parameters.get("green", None)
                     blue = parameters.get("blue", None)
                     self.patterns.addPattern(name, red, green, blue)
+                    redirect = True
                 elif path.startswith("/removePattern"):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
+                    redirect = True
 
             customRows = []
             for p in self.patterns.getPatterns():
@@ -93,7 +105,14 @@ class WebServer(object):
             for name in self.patterns.getBuiltinPatternsManager().getPatternNames():
                 builtinRows.append(self.BUILTIN_PATTERN_ROW_FORMAT % (name, name))
 
-            response = self.HTML_FORMAT % (self.patterns.getCurrentPatternName(), '\n'.join(customRows), '\n'.join(builtinRows))
+            if redirect:
+                response = self.HTML_FORMAT % (self.REDIRECT, self.patterns.getCurrentPatternName(),
+                                               '\n'.join(customRows), '\n'.join(builtinRows)
+                                               )
+            else:
+                response = self.HTML_FORMAT % (self.NO_REDIRECT, self.patterns.getCurrentPatternName(),
+                                               '\n'.join(customRows), '\n'.join(builtinRows)
+                                               )
             cl.send(response)
         cl.close()
 

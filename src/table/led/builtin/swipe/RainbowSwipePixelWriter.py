@@ -1,5 +1,6 @@
 from table.led.PixelWriter import PixelWriter2D
 from table.led.ColourWheel import ColourWheel
+from math import pow
 
 
 class PixelWriter(PixelWriter2D):
@@ -14,15 +15,17 @@ class PixelWriter(PixelWriter2D):
         self.angle = 0
         self.lastFrontIndex = 0
 
+    def _tick(self, t):
+        self.angle = (self.angle + 60) % 360
+
     def _evaluateCell(self, x, y, t):
-        frontIndex = int(self.ledCountX * (t % self.SECONDS_TO_SWIPE))
-        diffFromFront = ((frontIndex - x) + self.ledCountX) % self.ledCountX
+        front = self.ledCountX * ((t % self.SECONDS_TO_SWIPE) / self.SECONDS_TO_SWIPE)
+        frontIndex = int(front)
+        diffFromFront = ((front - x) + self.ledCountX) % self.ledCountX
 
         if frontIndex < self.lastFrontIndex:
             self.angle += 60
 
-        intensity = self.MAX_INTENSITY
-        for x in range(diffFromFront):
-            intensity *= self.DECAY_FACTOR
+        intensity = self.MAX_INTENSITY * pow(self.DECAY_FACTOR, diffFromFront)
 
         return self.colourWheel.getColour(intensity, self.angle)
