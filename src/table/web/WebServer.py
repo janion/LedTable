@@ -8,7 +8,7 @@ from table.web.UrlParser import UrlParser
 class WebServerThread(Thread):
 
     def __init__(self, service):
-        Thread.__init__(self, target=service.serverLoop)
+        Thread.__init__(self, target=service.serverLoop, name="WebServerThread")
         self.setDaemon(True)
 
 

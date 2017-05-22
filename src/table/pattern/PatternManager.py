@@ -53,7 +53,7 @@ class PatternManager(object):
         # Check custom patterns
         for pattern in self.patterns:
             if pattern.getName() == name:
-                self.currentWriter = self.writerFactory.createPixelWriter(pattern.getName())
+                self.currentWriter = self.writerFactory.createPixelWriter(pattern)
                 break
 
     def addPattern(self, name, redFunction, greenFunction, blueFunction):

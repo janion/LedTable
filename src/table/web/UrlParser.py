@@ -8,11 +8,11 @@ class UrlParser(object):
         parameters = {}
 
         # Adjust for characters converted for the url
-        url = url.replace('%28', '(').replace('%29', ')').replace('+', ' ').replace('%2B', '+').replace('%2F', '-')
+        url = url.replace('%28', '(').replace('%29', ')').replace('+', ' ').replace('%2B', '+').replace('%2F', '-').replace('%20', ' ')
         path = regex.search("(.*?)(\?|$)", url)
 
         while True:
-            varrs = regex.search("(([a-z0-9]+)=([ a-z0-8.()\-\+\*\/]*))&?", url)
+            varrs = regex.search("(([a-zA-Z0-9]+)=([ a-zA-Z0-8.()\-\+\*\/]*))&?", url)
             if varrs:
                 parameters[varrs.group(2)] = varrs.group(3)
                 url = url.replace(varrs.group(0), '')

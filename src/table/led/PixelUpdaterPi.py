@@ -13,7 +13,7 @@ from table.led.MockNeoPixel import Color
 class PixelUpdaterThread(Thread):
 
     def __init__(self, updater):
-        Thread.__init__(self, target=updater.updateLoop)
+        Thread.__init__(self, target=updater.updateLoop, name="PixelUpdaterThread")
         self.updater = updater
 
     def stop(self):

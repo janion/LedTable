@@ -21,6 +21,6 @@ class PixelWriter(PixelWriter2D):
 
     def _tick(self, t):
         time = int((t * self.SPEED) % self.ledCount)
-        if time == 0 and time < self.lasttime:
+        if time == 0 and time < self.lastTime:
             return self.colourWheel.getColour(255, t * 10)
         self.lastTime = time
