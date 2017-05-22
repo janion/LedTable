@@ -11,7 +11,7 @@ from table.pattern.PatternManager import PatternManager
 if __name__ == '__main__':
     patterns = PatternManager()
     # TODO this doesn't work
-    WebServerThread(WebServer(patterns)).start()
+    WebServerThread(WebServer(None, None, patterns)).start()
 
     try:
         while True:

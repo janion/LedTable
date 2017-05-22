@@ -7,3 +7,5 @@
     + Created by a factory so only one place needs updating
     + the list can be iterated over to find all the names and add them to another table
     + User can set them just like the mathematical patterns
+
+* Builtin patterns added but can't be set properly and can't get the writer
