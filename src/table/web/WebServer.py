@@ -47,7 +47,7 @@ class WebServer(object):
     def __init__(self, pixelUpdater, writerFactory, patternManager):
         self.updater = pixelUpdater
         self.writerFactory = writerFactory
-        self.patterns = PatternManager(writerFactory)
+        self.patterns = patternManager
         self.urlParser = UrlParser()
 
     def serverLoop(self):

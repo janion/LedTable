@@ -25,7 +25,7 @@ if __name__ == '__main__':
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
 
-    patterns = PatternManager()
+    patterns = PatternManager(writerFactory)
     server = WebServer(updater, writerFactory, patterns)
     serverThread = WebServerThread(server)
 
