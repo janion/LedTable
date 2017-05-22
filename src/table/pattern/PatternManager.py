@@ -70,11 +70,12 @@ class PatternManager(object):
             if pattern.getName() == name:
                 self.patterns.remove(pattern)
 
-                if pattern == self.currentPattern:
+                if name == self.currentPatternName:
                     if len(self.patterns) > 0:
                         self.setPattern(self.patterns[0])
                     else:
-                        self.setPattern(self.DEFAULT_PATTERN)
+                        self.currentPatternName = self.DEFAULT_PATTERN.getName()
+                        self.currentWriter = self.writerFactory.createPixelWriter(self.DEFAULT_PATTERN)
                         
                 self.fileWriter.writePatterns(self.patternFileName, self.patterns)
                 break
