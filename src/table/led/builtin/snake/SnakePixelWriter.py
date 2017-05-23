@@ -33,7 +33,8 @@ class PixelWriter(PixelWriter2D):
             tail = self.snake.move(self.directions.pop(0))
             if self.snake.headIsAt(self.food):
                 self.snake.extendTail(tail)
-                self.food = (randint(0, self.ledCountX - 1), randint(0, self.ledCountY - 1))
+                while self.snake.positionIsOnBody(self.food) or self.snake.headIsAt(self.food):
+                    self.food = (randint(0, self.ledCountX - 1), randint(0, self.ledCountY - 1))
                 self.directions = self.snakeCalculator.findPath(self.food, self.snake)
                 self.timeTick -= self.TIME_DECREASE
 
