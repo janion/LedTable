@@ -56,7 +56,7 @@ class SnakeCalculator(object):
         self.gridSizeX = gridSizeX
         self.gridSizeY = gridSizeY
 
-    def findPath(self, destination, snake=None, direction=None):
+    def findPath(self, destination, snake, direction=None):
         snake = Snake(snake)
         if direction is not None:
             snake.move(direction)

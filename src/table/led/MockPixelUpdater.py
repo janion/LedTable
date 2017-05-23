@@ -51,8 +51,8 @@ class PixelUpdater(object):
                 datum = data[x]
                 wx.CallAfter(self.window.setPixelColor, x, Color(datum[0], datum[1], datum[2]))
 
-            wx.CallAfter(self.window.Refresh)
-            sleep(0.01)
+            # wx.CallAfter(self.window.Refresh)
+            sleep(0.02)
 
 
 class Window(wx.Frame):
@@ -113,4 +113,4 @@ class Window(wx.Frame):
 
     def setPixelColor(self, position, colour):
         self.btns[position].SetBackgroundColour((colour.getRed(), colour.getGreen(), colour.getBlue()))
-        # self.btns[position].Refresh()
+        self.btns[position].Refresh()
