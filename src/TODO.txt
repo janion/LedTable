@@ -3,4 +3,5 @@
 - Add more builtin patterns
 - Allow brightness to be set from web interface
 - When snake loses flash before restarting
+- Fix speeding up of snake
 - Make Game of life with random start conditions

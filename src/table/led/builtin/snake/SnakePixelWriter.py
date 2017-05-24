@@ -29,8 +29,6 @@ class PixelWriter(PixelWriter2D):
         self.panicCalculator = SnakePanicCalculator(ledCountX, ledCountY)
         self.directions = self.snakeCalculator.findPath(self.food, self.snake)
 
-        self.isPanic = False
-
     def _tick(self, t):
         if self.startTime is None:
             self.startTime = t

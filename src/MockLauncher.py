@@ -15,6 +15,7 @@ from table.led.PixelWriter import PixelWriter2D
 # from table.web.WebServer import WebServer, WebServerThread
 from table.web.MockWebServer import WebServer, WebServerThread
 from table.led.builtin.snake.SnakePixelWriter import PixelWriter as SnakeWriter
+from table.led.builtin.gameoflife.GameOfLifePixelWriter import PixelWriter as GolWriter
 from table.Constants import *
 
 if __name__ == '__main__':
@@ -28,14 +29,12 @@ if __name__ == '__main__':
 
     patterns = PatternManager(writerFactory)
 
-    writer = SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    # writer = SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
-    # server = WebServer(updater, writerFactory, patterns)
-    # serverThread = WebServerThread(server)
 
     updaterThread.start()
-    # serverThread.start()
 
     try:
         while True:
