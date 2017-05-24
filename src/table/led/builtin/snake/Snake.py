@@ -5,6 +5,7 @@ UP = "UP"
 DOWN = "DOWN"
 RIGHT = "RIGHT"
 LEFT = "LEFT"
+DIRECTIONS = [UP, DOWN, RIGHT, LEFT]
 
 
 class Snake(object):
@@ -49,8 +50,12 @@ class Snake(object):
         head = self.position[0]
         return not ((0 <= head[0] < gridSizeX) and (0 <= head[1] < gridSizeY))
 
+    def distanceTo(self, position):
+        head = self.position[0]
+        return abs(head[0] - position[0]) + abs(head[1] - position[1])
 
-class SnakeCalculator(object):
+
+class SnakeRandomCalculator(object):
 
     def __init__(self, gridSizeX, gridSizeY):
         self.gridSizeX = gridSizeX
@@ -75,6 +80,102 @@ class SnakeCalculator(object):
                     return result
 
             return None
+
+
+class SnakeDirectionCalculator(object):
+
+    def orderDirections(self, snake, destination):
+        distances = []
+        for direction in DIRECTIONS:
+            tmpSnake = Snake(snake)
+            tmpSnake.move(direction)
+            distance = tmpSnake.distanceTo(destination)
+            isPlaced = False
+            for x in range(len(distances)):
+                if distance < distances[x][0]:
+                    distances.insert(x, (distance, direction))
+                    isPlaced = True
+                    break
+            if not isPlaced:
+                distances.append((distance, direction))
+
+        return [entry[1] for entry in distances]
+
+
+class SnakeInformedCalculator(object):
+
+    def __init__(self, gridSizeX, gridSizeY):
+        self.gridSizeX = gridSizeX
+        self.gridSizeY = gridSizeY
+        self.directionCalculator = SnakeDirectionCalculator()
+
+    def findPath(self, destination, snake, direction=None):
+        snake = Snake(snake)
+        if direction is not None:
+            snake.move(direction)
+            if snake.hasCrashed() or snake.hasLeftGrid(self.gridSizeX, self.gridSizeY):
+                return None
+
+        if snake.headIsAt(destination):
+            return []
+        else:
+            for direction in self.directionCalculator.orderDirections(snake, destination):
+                result = self.findPath(destination, snake, direction)
+                if result is not None:
+                    result.insert(0, direction)
+                    return result
+
+            return None
+
+
+class SnakePanicCalculator(object):
+
+    def __init__(self, gridSizeX, gridSizeY):
+        self.gridSizeX = gridSizeX
+        self.gridSizeY = gridSizeY
+        self.directionCalculator = SnakeDirectionCalculator()
+
+    def findPath(self, snake, direction=None, directions=None, best=None):
+        isTop = direction is None
+        if direction is None:
+            best = []
+        if directions is None:
+            directions = []
+
+        snake = Snake(snake)
+        if direction is not None:
+            snake.move(direction)
+            if snake.hasCrashed() or snake.hasLeftGrid(self.gridSizeX, self.gridSizeY):
+                return
+            elif len(directions) >= len(best):
+                while len(best) > 0:
+                    best.pop()
+                for eachDirection in directions:
+                    best.append(eachDirection)
+
+        for newDirection in DIRECTIONS:
+            newDirections = [entry for entry in directions]
+            newDirections.append(newDirection)
+            self.findPath(snake, newDirection, newDirections, best)
+
+        if not isTop:
+            return
+        else:
+            return best
+
+
+if __name__ == "__main__":
+    position = [(3, 2), (3, 3), (2, 3), (2, 2), (2, 1), (1, 1), (1, 0), (0, 0), (0, 1), (0, 2), (0, 3)]
+    calc = SnakePanicCalculator(4, 4)
+    snake = Snake(position=position)
+    result = calc.findPath(snake)
+    print result
+
+    position = [(2, 0), (2, 1), (2, 2), (1, 2), (1, 1), (1, 0), (0, 0)]
+    calc = SnakePanicCalculator(3, 3)
+    snake = Snake(position=position)
+    result = calc.findPath(snake)
+    print result
 
 
 # if __name__ == "__main__":

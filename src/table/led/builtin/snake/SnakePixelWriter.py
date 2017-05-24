@@ -1,5 +1,5 @@
 from table.led.PixelWriter import PixelWriter2D
-from table.led.builtin.snake.Snake import Snake, SnakeCalculator
+from table.led.builtin.snake.Snake import Snake, SnakeInformedCalculator, SnakePanicCalculator
 from random import randint
 
 
@@ -18,10 +18,15 @@ class PixelWriter(PixelWriter2D):
         self.lastIncrement = None
         self.timeTick = self.START_TIME
 
-        self.food = (randint(0, ledCountX - 1), randint(0, ledCountY - 1))
         self.snake = Snake()
-        self.snakeCalculator = SnakeCalculator(ledCountX, ledCountY)
+        self.food = (0, 0)
+        self.newFood()
+        # self.snakeCalculator = SnakeRandomCalculator(ledCountX, ledCountY)
+        self.snakeCalculator = SnakeInformedCalculator(ledCountX, ledCountY)
+        self.panicCalculator = SnakePanicCalculator(ledCountX, ledCountY)
         self.directions = self.snakeCalculator.findPath(self.food, self.snake)
+
+        self.isPanic = False
 
     def _tick(self, t):
         if self.startTime is None:
@@ -33,10 +38,23 @@ class PixelWriter(PixelWriter2D):
             tail = self.snake.move(self.directions.pop(0))
             if self.snake.headIsAt(self.food):
                 self.snake.extendTail(tail)
-                while self.snake.positionIsOnBody(self.food) or self.snake.headIsAt(self.food):
-                    self.food = (randint(0, self.ledCountX - 1), randint(0, self.ledCountY - 1))
-                self.directions = self.snakeCalculator.findPath(self.food, self.snake)
+                self.newFood()
                 self.timeTick -= self.TIME_DECREASE
+                self.directions = self.snakeCalculator.findPath(self.food, self.snake)
+
+                if self.directions is None:
+                    self.directions = self.panicCalculator.findPath(self.snake)
+            if len(self.directions) == 0:
+                self.hasLost()
+
+    def newFood(self):
+        while self.snake.positionIsOnBody(self.food) or self.snake.headIsAt(self.food):
+            self.food = (randint(0, self.ledCountX - 1), randint(0, self.ledCountY - 1))
+
+    def hasLost(self):
+        self.timeTick = self.START_TIME
+        self.snake = Snake()
+        self.directions = self.snakeCalculator.findPath(self.food, self.snake)
 
     def _evaluateCell(self, x, y, t):
         position = (x, y)

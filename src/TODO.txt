@@ -2,5 +2,5 @@
 - Surround WebServer code in try/except/finally and report any errors
 - Add more builtin patterns
 - Allow brightness to be set from web interface
-- Allow snake to lose and reset
-- Make SnakeCalculator implement A* algorithm because it is currently terrible
+- When snake loses flash before restarting
+- Make snake colour fade along the body to give a sense of direction
