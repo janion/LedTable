@@ -2,6 +2,9 @@
 
 class ColourWheel(object):
 
+    RED = 0
+    GREEN = 120
+    BLUE = 240
     CONVERSION = 1.0 / 120
 
     def getColour(self, intensity, angle):

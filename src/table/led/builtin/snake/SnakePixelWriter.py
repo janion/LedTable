@@ -1,5 +1,6 @@
 from table.led.PixelWriter import PixelWriter2D
 from table.led.builtin.snake.Snake import Snake, SnakeInformedCalculator, SnakePanicCalculator
+from table.led.ColourWheel import ColourWheel
 from random import randint
 
 
@@ -7,6 +8,7 @@ class PixelWriter(PixelWriter2D):
 
     START_TIME = 0.6
     TIME_DECREASE = 0.02
+    COLOUR_ANGLE_CHANGE = 2
     HEAD_COLOUR = (255, 0, 0)
     BODY_COLOUR = (0, 255, 0)
     FOOD_COLOUR = (127, 127, 0)
@@ -14,6 +16,7 @@ class PixelWriter(PixelWriter2D):
 
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        self.colourWheel = ColourWheel()
         self.startTime = None
         self.lastIncrement = None
         self.timeTick = self.START_TIME
@@ -59,7 +62,10 @@ class PixelWriter(PixelWriter2D):
     def _evaluateCell(self, x, y, t):
         position = (x, y)
         if self.snake.positionIsOnBody(position):
-            return self.BODY_COLOUR
+            # return self.BODY_COLOUR
+            return self.colourWheel.getColour(
+                255, ColourWheel.GREEN + (self.snake.position.index(position) * self.COLOUR_ANGLE_CHANGE)
+                )
         elif self.snake.headIsAt(position):
             return self.HEAD_COLOUR
         elif self.food == position:
