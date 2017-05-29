@@ -10,7 +10,7 @@ class BuiltinFunctionManager(object):
 
     def __init__(self):
         # TODO: Better names
-        self.writers = {"Dot raster fade" : DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+        self.writers = {"Dot raster fade": DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Dot raster": DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Rainbow roll": RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Solid rainbow fade": SolidWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),

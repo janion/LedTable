@@ -4,19 +4,18 @@ Created on 7 May 2017
 @author: Janion
 '''
 
+from table.Constants import *
 # from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
-from table.led.PixelWriterFactory import PixelWriter2DFactory
 from table.led.MockPixelUpdater import PixelUpdater, PixelUpdaterThread
+from table.led.PixelWriterFactory import PixelWriter2DFactory
+# from table.web.WebServer import WebServer, WebServerThread
+from table.led.builtin.snake.SnakePixelWriter import PixelWriter as SnakeWriter
+from table.led.builtin.automata.gameoflife.GameOfLifePixelWriter import PixelWriter as GolWriter
+from table.led.builtin.automata.wolfram.WolframRulePixelWriter import PixelWriter as WolframWriter
 # from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.pattern.Pattern import Pattern
 from table.pattern.PatternManager import PatternManager
-from table.led.PixelWriter import PixelWriter2D
-# from table.web.WebServer import WebServer, WebServerThread
-from table.web.MockWebServer import WebServer, WebServerThread
-from table.led.builtin.snake.SnakePixelWriter import PixelWriter as SnakeWriter
-from table.led.builtin.gameoflife.GameOfLifePixelWriter import PixelWriter as GolWriter
-from table.Constants import *
 
 if __name__ == '__main__':
     writerFactory = PixelWriter2DFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
@@ -30,7 +29,8 @@ if __name__ == '__main__':
     patterns = PatternManager(writerFactory)
 
     # writer = SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-    writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    # writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 90)
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
 
