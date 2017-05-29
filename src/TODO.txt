@@ -1,4 +1,3 @@
-- Tell user if invalid pattern
 - Surround WebServer code in try/except/finally and report any errors
 - Add more builtin patterns
 - When snake loses flash before restarting

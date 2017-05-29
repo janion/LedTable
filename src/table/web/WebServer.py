@@ -46,6 +46,7 @@ class WebServer(object):
         </body>
     </html>
     """
+
     REDIRECT = """"<!DOCTYPE html>
     <html>
         <head>
@@ -55,9 +56,28 @@ class WebServer(object):
         </head>
     </html>
     """
+
+    INVALID_PATTERN_REDIRECT = """"<!DOCTYPE html>
+    <html>
+        <head>
+            <script type="text/javascript">
+                setTimeout("location.href = '/';",5000);
+            </script>
+        </head>
+        <body>
+            <h1>Invalid pattern:</h1><br>
+            Red = %s<br>
+            Green = %s<br>
+            Blue = %s<br>
+            You will be redirected in 5 seconds.
+        </body>
+    </html>
+    """
+
     CUSTOM_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>' \
                                 '<a href="/removePattern?name=%s">Remove</a></td>' \
                                 '<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
+
     BUILTIN_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>%s</td></tr>'
 
     def __init__(self, pixelUpdater, writerFactory, patternManager):
@@ -81,6 +101,7 @@ class WebServer(object):
             obj = regex.search("GET (.*?) HTTP\/1\.1", request)
 
             redirect = False
+            invalidPattern = False
 
             if not obj:
                 cl.send(self._buildResponse("INVALID REQUEST"))
@@ -95,8 +116,10 @@ class WebServer(object):
                     red = parameters.get("red", None)
                     green = parameters.get("green", None)
                     blue = parameters.get("blue", None)
-                    self.patterns.addPattern(name, red, green, blue)
-                    redirect = True
+                    if self.patterns.addPattern(name, red, green, blue):
+                        redirect = True
+                    else:
+                        invalidPattern = True
                 elif path.startswith("/removePattern"):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
@@ -118,6 +141,8 @@ class WebServer(object):
 
             if redirect:
                 response = self.REDIRECT
+            elif invalidPattern:
+                response = self.INVALID_PATTERN_REDIRECT %(red, green, blue)
             else:
                 response = self.HTML_FORMAT % (self.patterns.getCurrentPatternName(),
                                                '\n'.join(customRows), '\n'.join(builtinRows)

@@ -63,6 +63,8 @@ class PatternManager(object):
             self.fileWriter.writePatterns(self.patternFileName, self.patterns)
             if len(self.patterns) == 1:
                 self.setPattern(name)
+            return True
+        return False
 
     def removePattern(self, name):
         for i in range(len(self.patterns)):
