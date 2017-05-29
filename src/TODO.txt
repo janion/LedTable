@@ -1,6 +1,5 @@
 - Tell user if invalid pattern
 - Surround WebServer code in try/except/finally and report any errors
 - Add more builtin patterns
-- Allow brightness to be set from web interface
 - When snake loses flash before restarting
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state

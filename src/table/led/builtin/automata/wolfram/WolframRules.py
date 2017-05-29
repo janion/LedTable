@@ -48,17 +48,3 @@ class Rule(object):
         for x in range(-1, 2):
             val += lastTick[index + x] << (1 - x)
         return val
-
-# if __name__ == "__main__":
-#     for ruleNumber in range((1 << 8) - 1):
-#         rule = Rule(10, 10, ruleNumber)
-#         rule.setStartCondition(DEFAULT_START)
-#         for x in range(100):
-#             rule.tick()
-#         bad1 = [1 if (x % 2) == 0 else 0 for x in range(10)]
-#         bad2 = [1 if (x % 2) == 1 else 0 for x in range(10)]
-#         result = [1 if rule.isPopulated(x, 9) == 1 else 0 for x in range(10)]
-#         looksGood = result != bad1 and result != bad2
-#         rule.tick()
-#         if looksGood and result != bad1 and result != bad2:
-#             print ruleNumber

@@ -21,6 +21,10 @@ class WebServer(object):
         </head>
         <body> <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
+            <form action="/setBrightness">
+                <input type="number" name="brightness" min="0" max="255"> <input type="submit" value="Set Brightness (0-255)">
+            </form>
+            <br>
             <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
             <br>
             <table border="1"> <tr><th></th><th>Name</th></tr> %s </table>
@@ -97,6 +101,9 @@ class WebServer(object):
                     name = parameters.get("name", None)
                     self.patterns.removePattern(name)
                     redirect = True
+                elif path.startswith("/setBrightness"):
+                    val = int(parameters.get("brightness", 255))
+                    self.updater.setBrightness(val)
 
             customRows = []
             for p in self.patterns.getPatterns():

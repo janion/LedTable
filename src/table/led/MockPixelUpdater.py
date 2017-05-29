@@ -35,6 +35,9 @@ class PixelUpdater(object):
             self.writer = writer
         print "Pixel writer set"
 
+    def setBrightness(self, val):
+        print "Brightness set"
+
     def stop(self):
         self.stopped = True
 
