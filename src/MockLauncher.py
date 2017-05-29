@@ -29,8 +29,8 @@ if __name__ == '__main__':
     patterns = PatternManager(writerFactory)
 
     # writer = SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-    # writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-    writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 90)
+    writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    # writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 90)
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
 

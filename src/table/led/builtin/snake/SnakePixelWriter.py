@@ -6,8 +6,8 @@ from random import randint
 
 class PixelWriter(PixelWriter2D):
 
-    START_TIME = 0.6
-    TIME_DECREASE = 0.02
+    START_TIME = 0.5
+    TIME_MULTIPLIER = 0.95
     COLOUR_ANGLE_CHANGE = 2
     HEAD_COLOUR = (255, 0, 0)
     BODY_COLOUR = (0, 255, 0)
@@ -40,7 +40,7 @@ class PixelWriter(PixelWriter2D):
             if self.snake.headIsAt(self.food):
                 self.snake.extendTail(tail)
                 self.newFood()
-                self.timeTick -= self.TIME_DECREASE
+                self.timeTick *= self.TIME_MULTIPLIER
                 self.directions = self.snakeCalculator.findPath(self.food, self.snake)
 
                 if self.directions is None:

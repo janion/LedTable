@@ -3,5 +3,4 @@
 - Add more builtin patterns
 - Allow brightness to be set from web interface
 - When snake loses flash before restarting
-- Fix speeding up of snake
-- Make Game of life with random start conditions
+- Make Game of life restart when reaches a 1, 2 or 3 period steady state

@@ -15,7 +15,8 @@ class PixelWriter(PixelWriter2D):
         self.lastIncrement = None
         self.timeTick = self.STEP_DURATION
         self.gameOfLife = GameOfLife(ledCountX, ledCountY)
-        self.gameOfLife.setStartCondition(R_PENTOMINO)
+        # self.gameOfLife.setStartCondition(R_PENTOMINO)
+        self.gameOfLife.setRandomStartCondition()
 
     def _tick(self, t):
         if self.lastIncrement is None:

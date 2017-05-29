@@ -1,5 +1,4 @@
 from random import randint
-from time import time
 
 UP = "UP"
 DOWN = "DOWN"
@@ -162,51 +161,3 @@ class SnakePanicCalculator(object):
             return
         else:
             return best
-
-
-if __name__ == "__main__":
-    position = [(3, 2), (3, 3), (2, 3), (2, 2), (2, 1), (1, 1), (1, 0), (0, 0), (0, 1), (0, 2), (0, 3)]
-    calc = SnakePanicCalculator(4, 4)
-    snake = Snake(position=position)
-    result = calc.findPath(snake)
-    print result
-
-    position = [(2, 0), (2, 1), (2, 2), (1, 2), (1, 1), (1, 0), (0, 0)]
-    calc = SnakePanicCalculator(3, 3)
-    snake = Snake(position=position)
-    result = calc.findPath(snake)
-    print result
-
-
-# if __name__ == "__main__":
-#     position = [(5, 5), (5, 4), (5, 3), (5, 2), (4, 2), (3, 2), (3, 3),
-#                 (2, 3), (1, 3), (1, 4), (1, 5), (2, 5), (3, 5)
-#                 ]
-#     calc = SnakeCalculator(7, 7)
-#     result = calc.findPath((2, 2), Snake(position=position))
-#     print result
-#
-#
-#     position = [(2, 0), (2, 1), (1, 1), (0, 1), (0, 2), (1, 2)]
-#     calc = SnakeCalculator(3, 3)
-#     result = calc.findPath((2, 2), Snake(position=position))
-#     print result
-#
-#
-#     position = [(1, 0), (2, 0), (2, 1), (1, 1), (0, 1), (0, 2), (1, 2)]
-#     calc = SnakeCalculator(3, 3)
-#     result = calc.findPath((2, 2), Snake(position=position))
-#     print result
-#
-#
-#     #Speed test
-#     position = [(5, 5), (5, 4), (5, 3), (5, 2), (4, 2), (3, 2), (3, 3),
-#                 (2, 3), (1, 3), (1, 4), (1, 5), (2, 5), (3, 5)
-#                 ]
-#     calc = SnakeCalculator(10, 10)
-#     runs = 1000
-#     start = time()
-#     for x in range(runs):
-#         calc.findPath((2, 2), Snake(position=position))
-#     end = time()
-#     print (end - start) / runs

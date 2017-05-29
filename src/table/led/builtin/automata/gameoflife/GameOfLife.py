@@ -1,3 +1,5 @@
+from random import randint
+
 TUMBLER = [(1, 4), (1, 3), (1, 2), (2, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (2, 7), (2, 6),
            (7, 4), (7, 3), (7, 2), (6, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (6, 7), (6, 6)
            ]
@@ -18,6 +20,10 @@ class GameOfLife(object):
     def setStartCondition(self, positions):
         for pos in positions:
             self.data[pos[0]][pos[1]] = 1
+
+    def setRandomStartCondition(self):
+        for x in range((self.gridSizeX * self.gridSizeY) / 2):
+            self.data[randint(0, self.gridSizeX - 1)][randint(0, self.gridSizeY - 1)] = 1
 
     def isPopulated(self, x, y):
         return self.data[x][y] == 1
