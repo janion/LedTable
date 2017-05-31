@@ -1,9 +1,9 @@
+from table.Constants import LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D
+from table.led.builtin.rainbow.RainbowSwipePixelWriter import PixelWriter as SwipeWriter
 from table.led.builtin.rainbow.RasterDotRainbowFadePixelWriter import PixelWriter as DotFadeWriter
 from table.led.builtin.rainbow.RasterDotRainbowPixelWriter import PixelWriter as DotWriter
 from table.led.builtin.rainbow.RollingRainbowPixelWriter import PixelWriter as RollWriter
 from table.led.builtin.rainbow.SolidRainbowPixelWriter import PixelWriter as SolidWriter
-from table.led.builtin.swipe.RainbowSwipePixelWriter import PixelWriter as SwipeWriter
-from table.Constants import LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D
 
 
 class BuiltinFunctionManager(object):

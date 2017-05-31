@@ -2,3 +2,6 @@
 - Add more builtin patterns
 - When snake loses flash before restarting
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state
+
+
+- Stars appearing and fading Has some bug where it freaks out after ~20s
