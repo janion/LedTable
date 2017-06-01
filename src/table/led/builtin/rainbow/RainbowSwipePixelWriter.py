@@ -16,7 +16,7 @@ class PixelWriter(PixelWriter2D):
         self.lastFrontIndex = 0
 
     def _tick(self, t):
-        self.angle = (self.angle + 60) % 360
+        self.angle = self.angle % 360
 
     def _evaluateCell(self, x, y, t):
         front = self.ledCountX * ((t % self.SECONDS_TO_SWIPE) / self.SECONDS_TO_SWIPE)

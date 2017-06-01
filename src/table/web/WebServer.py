@@ -47,7 +47,7 @@ class WebServer(object):
     </html>
     """
 
-    REDIRECT = """"<!DOCTYPE html>
+    REDIRECT = """<!DOCTYPE html>
     <html>
         <head>
             <script type="text/javascript">
@@ -57,7 +57,7 @@ class WebServer(object):
     </html>
     """
 
-    INVALID_PATTERN_REDIRECT = """"<!DOCTYPE html>
+    INVALID_PATTERN_REDIRECT = """<!DOCTYPE html>
     <html>
         <head>
             <script type="text/javascript">
@@ -127,6 +127,7 @@ class WebServer(object):
                 elif path.startswith("/setBrightness"):
                     val = int(parameters.get("brightness", 255))
                     self.updater.setBrightness(val)
+                    redirect = True
 
             customRows = []
             for p in self.patterns.getPatterns():

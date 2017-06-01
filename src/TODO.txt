@@ -2,6 +2,8 @@
 - Add more builtin patterns
 - When snake loses flash before restarting
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state
-
+- Reset updater when set so that GOL or snake can start afresh
+- Reformat builtin patterns into 2 rows and/or scrolled table
+- Better builtin pattern names
 
 - Stars appearing and fading Has some bug where it freaks out after ~20s
