@@ -10,7 +10,7 @@ from table.led.PixelWriterFactory import PixelWriter2DFactory
 from neopixel import Adafruit_NeoPixel as NeoPixel
 # from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
-from table.web.WebServer import WebServer, WebServerThread
+from table.web.esp8266.pi.WebServerBackend import WebServerBackend, WebServerThread
 from table.pattern.Pattern import Pattern
 from table.pattern.PatternManager import PatternManager
 from table.Constants import *
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     updaterThread = PixelUpdaterThread(updater)
 
     patterns = PatternManager(writerFactory)
-    server = WebServer(updater, writerFactory, patterns)
+    server = WebServerBackend(updater, writerFactory, patterns)
     serverThread = WebServerThread(server)
 
     updaterThread.start()
