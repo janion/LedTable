@@ -10,30 +10,23 @@ class PixelWriter(PixelWriter2D):
     TIME_MULTIPLIER = 0.95
     COLOUR_ANGLE_CHANGE = 2
     HEAD_COLOUR = (255, 0, 0)
-    BODY_COLOUR = (0, 255, 0)
     FOOD_COLOUR = (127, 127, 0)
     BACKGROUND_COLOUR = (0, 0, 0)
 
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
         self.colourWheel = ColourWheel()
-        self.startTime = None
-        self.lastIncrement = None
+        self.lastIncrement = 0
         self.timeTick = self.START_TIME
 
         self.snake = Snake()
         self.food = (0, 0)
         self.newFood()
-        # self.snakeCalculator = SnakeRandomCalculator(ledCountX, ledCountY)
         self.snakeCalculator = SnakeInformedCalculator(ledCountX, ledCountY)
         self.panicCalculator = SnakePanicCalculator(ledCountX, ledCountY)
         self.directions = self.snakeCalculator.findPath(self.food, self.snake)
 
     def _tick(self, t):
-        if self.startTime is None:
-            self.startTime = t
-            self.lastIncrement = t
-
         if (t - self.lastIncrement) >= self.timeTick:
             self.lastIncrement = t
             tail = self.snake.move(self.directions.pop(0))
@@ -48,6 +41,13 @@ class PixelWriter(PixelWriter2D):
             if len(self.directions) == 0:
                 self.hasLost()
 
+    def reset(self, t):
+        super(PixelWriter, self).reset(t)
+        self.snake = Snake()
+        self.newFood()
+        self.directions = self.snakeCalculator.findPath(self.food, self.snake)
+        self.lastIncrement = t
+
     def newFood(self):
         while self.snake.positionIsOnBody(self.food) or self.snake.headIsAt(self.food):
             self.food = (randint(0, self.ledCountX - 1), randint(0, self.ledCountY - 1))
@@ -60,7 +60,6 @@ class PixelWriter(PixelWriter2D):
     def _evaluateCell(self, x, y, t):
         position = (x, y)
         if self.snake.positionIsOnBody(position):
-            # return self.BODY_COLOUR
             return self.colourWheel.getColour(
                 255, ColourWheel.GREEN + (self.snake.position.index(position) * self.COLOUR_ANGLE_CHANGE)
                 )

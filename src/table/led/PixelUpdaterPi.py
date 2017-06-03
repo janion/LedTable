@@ -27,10 +27,13 @@ class PixelUpdater(object):
         self.strip = strip
         self.writerLock = Lock()
         self.stopped = False
+        self.startTime = time()
     
     def setPixelWriter(self, writer):
         with self.writerLock:
             self.writer = writer
+            self.startTime = time()
+            self.writer.reset(time() - self.startTime)
         print "Pixel writer set"
 
     def setBrightness(self, val):
@@ -41,10 +44,9 @@ class PixelUpdater(object):
         self.stopped = True
 
     def updateLoop(self):
-        startTime = time()
         while not self.stopped:
             with self.writerLock:
-                data = self.writer.getPixelData(time() - startTime)
+                data = self.writer.getPixelData(time() - self.startTime)
                 
             for x in range(len(data)):
                 datum = data[x]

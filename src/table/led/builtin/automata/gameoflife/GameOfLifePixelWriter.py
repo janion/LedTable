@@ -11,7 +11,6 @@ class PixelWriter(PixelWriter2D):
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
         self.colourWheel = ColourWheel()
-        self.startTime = None
         self.lastIncrement = None
         self.timeTick = self.STEP_DURATION
         self.gameOfLife = GameOfLife(ledCountX, ledCountY)
@@ -30,3 +29,7 @@ class PixelWriter(PixelWriter2D):
             return 255, 255, 0
         else:
             return 0, 0, 0
+
+    def reset(self, t):
+        self.lastIncrement = t
+        self.gameOfLife.setRandomStartCondition()

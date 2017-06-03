@@ -2,8 +2,15 @@
 - Add more builtin patterns
 - When snake loses flash before restarting
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state
-- Reset updater when set so that GOL or snake can start afresh
 - Reformat builtin patterns into 2 rows and/or scrolled table
 - Better builtin pattern names
+- Fix leds on pi to know that data is recieved by the strip in GRB
+- Create wifi connector object to run before starting the web server
+    + Display the ip address on the table
+    + Warn the use if network not found
+    + Since auto connecting to the wifi is complex on a pi this could be shipped
+      out to an esp8266 running micropython which would parse the web requests,
+      send the responses and then send the pi serial messages to change patterns
 
-- Stars appearing and fading Has some bug where it freaks out after ~20s
+- Extend patterns such that when they are clicked the user is send to a
+    new page with any configurations to be made

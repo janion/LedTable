@@ -10,6 +10,7 @@ class PixelWriter1D(object):
     def __init__(self, ledCount, pattern):
         self.data = [(0, 0, 0) for x in range(ledCount)]
         self.ledCount = ledCount
+        self.startTime = 0
         if pattern is not None:
             self.rFunc = pattern.getRedFunction()
             self.gFunc = pattern.getGreenFunction()
@@ -22,6 +23,12 @@ class PixelWriter1D(object):
                             int(self.bFunc.evaluate(x, 0, t)[0])
                             )
         return self.data
+
+    def _tick(self, t):
+        pass
+
+    def reset(self, t):
+        self.startTime = t
 
 
 class PixelWriter2D(PixelWriter1D):
@@ -64,6 +71,3 @@ class PixelWriter2D(PixelWriter1D):
                 int(self.gFunc.evaluate(x, y, t)[0]),
                 int(self.bFunc.evaluate(x, y, t)[0])
                 )
-
-    def _tick(self, t):
-        pass

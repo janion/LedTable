@@ -15,13 +15,15 @@ class GameOfLife(object):
     def __init__(self, gridSizeX, gridSizeY):
         self.gridSizeX = gridSizeX
         self.gridSizeY = gridSizeY
-        self.data = [[0 for y in range(gridSizeY)] for x in range(gridSizeX)]
+        self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
 
     def setStartCondition(self, positions):
+        self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
         for pos in positions:
             self.data[pos[0]][pos[1]] = 1
 
     def setRandomStartCondition(self):
+        self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
         for x in range((self.gridSizeX * self.gridSizeY) / 2):
             self.data[randint(0, self.gridSizeX - 1)][randint(0, self.gridSizeY - 1)] = 1
 

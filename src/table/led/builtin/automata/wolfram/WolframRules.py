@@ -15,6 +15,7 @@ class Rule(object):
         self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
 
     def setStartCondition(self, positions):
+        self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
         for pos in positions:
             self.data[pos][self.gridSizeY - 1] = 1
 

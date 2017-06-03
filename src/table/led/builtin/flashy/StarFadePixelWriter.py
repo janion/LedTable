@@ -30,16 +30,11 @@ class PixelWriter(PixelWriter2D):
 
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
-        self.startTime = None
-        self.lastIncrement = None
+        self.lastIncrement = 0
         self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.colourWheel = ColourWheel()
 
     def _tick(self, t):
-        if self.startTime is None:
-            self.startTime = t
-            self.lastIncrement = t
-
         for x in range(self.ledCountX):
             for y in range(self.ledCountY):
                 if self.cells[x][y] is not None:
