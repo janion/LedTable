@@ -1,7 +1,8 @@
 import ure as regex
 import socket
 
-from table.web.UrlParser import UrlParser
+from table.web.esp8266.microcontroller.UrlParser import UrlParser
+from table.web.esp8266.microcontroller.SerialConnection import SerialConnection
 
 
 class WebServer(object):
@@ -73,7 +74,7 @@ class WebServer(object):
     BUILTIN_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>%s</td></tr>'
 
     def __init__(self):
-        self.serial = None
+        self.serial = SerialConnection()
         self.urlParser = UrlParser()
 
     def serverLoop(self):
