@@ -14,6 +14,9 @@
       out to an esp8266 running micropython which would parse the web requests,
       send the responses and then send the pi serial messages to change patterns
 - This have been implemented but needs testing
+- The pi side works fine but the esp8266 side didn't seem to do anything much.
+  It kinda connected(after the browser timed out) but no response and no serial requests.
+  I wander whether the serial messages just aren't getting to the usb
 
 - Extend patterns such that when they are clicked the user is send to a
     new page with any configurations to be made
