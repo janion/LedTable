@@ -18,6 +18,7 @@ class WebServerBackend(object):
     SET = "SET"
     GET_PATTERNS = "GET"
     GET_BUILTINS = "BLT"
+    GET_CURRENT = "CUR"
     DEL = "DEL"
     VALID = "VAL"
     INVALID = "INV"
@@ -25,29 +26,35 @@ class WebServerBackend(object):
     SEPARATOR = ","
     END = "\n"
 
-    def __init__(self, pixelUpdater, writerFactory, patternManager):
+    def __init__(self, pixelUpdater, writerFactory, patternManager, connection=None):
         self.updater = pixelUpdater
         self.writerFactory = writerFactory
         self.patterns = patternManager
-        self.connection = Serial(self.PORT, self.BAUD)
+        if connection is not None:
+            self.connection = connection
+        else:
+            self.connection = Serial(self.PORT, self.BAUD)
 
     def serverLoop(self):
-        line = self._readLine()
-        start = line[ : 3]
+        while True:
+            line = self._readLine()
+            start = line[ : 3]
 
-        if start == self.ADD:
-            pattern = line[3 : ].replace(self.END, "").split(self.SEPARATOR)
-            self._addPattern(pattern[0], pattern[1], pattern[2], pattern[3])
-        elif start == self.SET:
-            name = line[3 : ].replace(self.END, "")
-            self._setPattern(name)
-        elif start == self.DEL:
-            name = line[3 : ].replace(self.END, "")
-            self._removePattern(name)
-        elif start == self.GET_PATTERNS:
-            self._sendPatterns()
-        elif start == self.GET_BUILTINS:
-            self._sendBuiltinPatterns()
+            if start == self.ADD:
+                pattern = line[3 : ].replace(self.END, "").split(self.SEPARATOR)
+                self._addPattern(pattern[0], pattern[1], pattern[2], pattern[3])
+            elif start == self.SET:
+                name = line[3 : ].replace(self.END, "")
+                self._setPattern(name)
+            elif start == self.DEL:
+                name = line[3 : ].replace(self.END, "")
+                self._removePattern(name)
+            elif start == self.GET_PATTERNS:
+                self._sendPatterns()
+            elif start == self.GET_BUILTINS:
+                self._sendBuiltinPatterns()
+            elif start == self.GET_CURRENT:
+                self._sendCurrentPattern()
 
     def _readLine(self):
         line = ""
@@ -85,6 +92,11 @@ class WebServerBackend(object):
             self.connection.write(p.getBlueFunctionString())
             self.connection.write(self.END)
         self.connection.write(self.PATTERN_END)
+        self.connection.write(self.END)
+
+    def _sendCurrentPattern(self):
+        self.connection.write(self.patterns.getCurrentPatternName())
+        self.connection.write(self.END)
 
     def _sendBuiltinPatterns(self) :
         names = self.patterns.getBuiltinPatternsManager().getPatternNames()
