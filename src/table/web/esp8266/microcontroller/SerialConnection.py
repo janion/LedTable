@@ -2,7 +2,7 @@ from time import sleep
 
 from machine import UART as Serial
 
-from table.web.esp8266.microcontroller.Function import Function
+from Function import Function
 
 
 class SerialConnection(object):
@@ -12,6 +12,7 @@ class SerialConnection(object):
     SET = "SET"
     GET_PATTERNS = "GET"
     GET_BUILTINS = "BLT"
+    GET_CURRENT = "CUR"
     DEL = "DEL"
     VALID = "VAL"
     PATTERN_END = "#"
@@ -70,3 +71,12 @@ class SerialConnection(object):
             sleep(0.001)
 
         return self.connection.readline().split(self.SEPARATOR)
+
+    def getCurrentPatternName(self):
+        self.connection.write(self.GET_CURRENT)
+        self.connection.write(self.END)
+
+        while not self.connection.any():
+            sleep(0.001)
+
+        return self.connection.readline()

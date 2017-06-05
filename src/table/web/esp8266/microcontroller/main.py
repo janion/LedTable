@@ -1,8 +1,8 @@
-from table.web.esp8266.microcontroller.WifiConnector import WifiConnector
-from table.web.esp8266.microcontroller.WebServer import WebServer
+#from WifiConnector import WifiConnector
+from WebServer import WebServer
 
 
-WifiConnector().connect()
+#WifiConnector().connect()
 
 server = WebServer()
 while True:

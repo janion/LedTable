@@ -1,8 +1,8 @@
 import ure as regex
 import socket
 
-from table.web.esp8266.microcontroller.UrlParser import UrlParser
-from table.web.esp8266.microcontroller.SerialConnection import SerialConnection
+from UrlParser import UrlParser
+from SerialConnection import SerialConnection
 
 
 class WebServer(object):
