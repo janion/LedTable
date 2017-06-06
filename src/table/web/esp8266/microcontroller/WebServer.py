@@ -85,7 +85,6 @@ class WebServer(object):
 
         while True:
             cl, addr = s.accept()
-            print('client connected from', addr)
             request = str(cl.recv(1024))
 
             # Check is http get request
@@ -139,6 +138,7 @@ class WebServer(object):
                                                '\n'.join(customRows), '\n'.join(builtinRows)
                                                )
             cl.send(response)
+            cl.send(self.LAST)
         cl.close()
 
     def _setPattern(self, name):
