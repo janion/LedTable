@@ -4,8 +4,17 @@
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state
 - Reformat builtin patterns into 2 rows and/or scrolled table
 - Better builtin pattern names
-- Fix leds on pi to know that data is recieved by the strip in GRB
 - Snake can get caught in infinite loop
+
+- Extend patterns such that when they are clicked the user is send to a
+  new page with any configurations to be made
+    + Will require a new branch for development
+
+
+
+###################################
+## Probably never to be finished ##
+###################################
 
 - Create wifi connector object to run before starting the web server
     + Display the ip address on the table
@@ -17,6 +26,3 @@
 - The pi side works fine but the esp8266 side didn't seem to do anything much.
   It kinda connected(after the browser timed out) but no response and no serial requests.
   I wander whether the serial messages just aren't getting to the usb
-
-- Extend patterns such that when they are clicked the user is send to a
-    new page with any configurations to be made

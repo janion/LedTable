@@ -29,17 +29,18 @@ class PixelWriter(PixelWriter2D):
     def _tick(self, t):
         if (t - self.lastIncrement) >= self.timeTick:
             self.lastIncrement = t
-            tail = self.snake.move(self.directions.pop(0))
-            if self.snake.headIsAt(self.food):
-                self.snake.extendTail(tail)
-                self.newFood()
-                self.timeTick *= self.TIME_MULTIPLIER
-                self.directions = self.snakeCalculator.findPath(self.food, self.snake)
-
-                if self.directions is None:
-                    self.directions = self.panicCalculator.findPath(self.snake)
             if len(self.directions) == 0:
                 self.hasLost()
+            else:
+                tail = self.snake.move(self.directions.pop(0))
+                if self.snake.headIsAt(self.food):
+                    self.snake.extendTail(tail)
+                    self.newFood()
+                    self.timeTick *= self.TIME_MULTIPLIER
+                    self.directions = self.snakeCalculator.findPath(self.food, self.snake)
+
+                    if self.directions is None:
+                        self.directions = self.panicCalculator.findPath(self.snake)
 
     def reset(self, t):
         super(PixelWriter, self).reset(t)

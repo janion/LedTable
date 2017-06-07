@@ -5,9 +5,11 @@ Created on 7 May 2017
 '''
 
 from threading import Lock, Thread
-from time import time, sleep
-from table.led.MockNeoPixel import Color
-# from neopixel import Color
+from time import time
+
+
+def _correctColour(colour):
+    return colour[1], colour[0], colour[2]
 
 
 class PixelUpdaterThread(Thread):
@@ -49,7 +51,7 @@ class PixelUpdater(object):
                 data = self.writer.getPixelData(time() - self.startTime)
                 
             for x in range(len(data)):
-                datum = data[x]
-                self.strip.setPixelColor(x, Color(datum[0], datum[1], datum[2]))
+                datum = _correctColour(data[x])
+                self.strip.setPixelColorRGB(x, datum[0], datum[1], datum[2])
 
             self.strip.show()

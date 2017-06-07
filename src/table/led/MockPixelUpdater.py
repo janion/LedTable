@@ -1,6 +1,5 @@
 from threading import Lock, Thread
 from time import time, sleep
-from table.led.MockNeoPixel import Color
 import wx
 
 
@@ -52,9 +51,8 @@ class PixelUpdater(object):
 
             for x in range(len(data)):
                 datum = data[x]
-                wx.CallAfter(self.window.setPixelColor, x, Color(datum[0], datum[1], datum[2]))
+                wx.CallAfter(self.window.setPixelColor, x, datum)
 
-            # wx.CallAfter(self.window.Refresh)
             sleep(0.02)
 
 
@@ -115,5 +113,5 @@ class Window(wx.Frame):
         return btn
 
     def setPixelColor(self, position, colour):
-        self.btns[position].SetBackgroundColour((colour.getRed(), colour.getGreen(), colour.getBlue()))
+        self.btns[position].SetBackgroundColour((colour[0], colour[1], colour[2]))
         self.btns[position].Refresh()
