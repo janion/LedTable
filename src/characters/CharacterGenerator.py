@@ -11,21 +11,22 @@ CHARACTERS = [
     ".", ",", "!", "?", "/","+", "-", "=", "*", ":", ";", "'", "#", "(", ")"
 ]
 SPECIAL = {
-    "." : "dot",
-    "," : "comma",
-    "!" : "exclamation",
-    "?" : "question",
-    "/" : "fSlash",
-    "+" : "plus",
-    "-" : "minus",
-    "=" : "equals",
-    "*" : "asterisk",
-    ":" : "colon",
-    ";" : "semicolon",
-    "'" : "apostrophe",
-    "#" : "hash",
-    "(" : "openBracket",
-    ")" : "closeBracket"
+    " ": "space",
+    ".": "dot",
+    ",": "comma",
+    "!": "exclamation",
+    "?": "question",
+    "/": "fSlash",
+    "+": "plus",
+    "-": "minus",
+    "=": "equals",
+    "*": "asterisk",
+    ":": "colon",
+    ";": "semicolon",
+    "'": "apostrophe",
+    "#": "hash",
+    "(": "openBracket",
+    ")": "closeBracket"
 }
 FILE_TYPE = ".png"
 SEPARATOR = "\n"
