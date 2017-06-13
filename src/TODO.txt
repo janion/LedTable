@@ -22,7 +22,8 @@
     + Since auto connecting to the wifi is complex on a pi this could be shipped
       out to an esp8266 running micropython which would parse the web requests,
       send the responses and then send the pi serial messages to change patterns
-- This have been implemented but needs testing
-- The pi side works fine but the esp8266 side didn't seem to do anything much.
-  It kinda connected(after the browser timed out) but no response and no serial requests.
-  I wander whether the serial messages just aren't getting to the usb
+- This has has been made where the esp8266 simply redirects the get requests to the pi via serial then
+  the pi parses, acts then sends the html response back to the esp8266 via serial
+- Both sides seem to work independently but combining them has been fruitless so far
+- MockWebLauncher can be used to show the pi end responding to a get request
+- Putty can be used to show the esp8266 sending a get request then forwarding on the returned html

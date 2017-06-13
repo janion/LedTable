@@ -13,15 +13,18 @@ class Cell(object):
         self.startTime = t
         self.colour = colour
         self.factor = 1
+        self.endTime = self.startTime + self.FADE_TIME
 
     def tick(self, t):
-        self.factor = 1 + ((self.startTime - t) / self.FADE_TIME)
+        numerator = (t - self.endTime) * ( t - self.endTime)
+        denominator = self.FADE_TIME * self.FADE_TIME
+        self.factor = numerator / denominator
 
     def getColour(self):
         return int(self.colour[0] * self.factor), int(self.colour[1] * self.factor), int(self.colour[2] * self.factor)
 
     def isExpired(self, t):
-        return self.factor <= 0
+        return t >= self.endTime
 
 
 class PixelWriter(PixelWriter2D):
@@ -57,3 +60,6 @@ class PixelWriter(PixelWriter2D):
             return cell.getColour()
         else:
             return 0, 0, 0
+
+    def reset(self, t):
+        self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
