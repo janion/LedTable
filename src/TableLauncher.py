@@ -17,7 +17,7 @@ from table.Constants import *
 
 
 if __name__ == '__main__':
-    writerFactory = PixelWriter2DFactory(LED_COUNT_X * LED_COUNT_Y)
+    writerFactory = PixelWriter2DFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     writer = PixelWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, getIpAddress())
     strip = NeoPixel(LED_COUNT_X * LED_COUNT_Y, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
     strip.begin()
