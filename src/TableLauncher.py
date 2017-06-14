@@ -18,9 +18,6 @@ from table.Constants import *
 
 
 if __name__ == '__main__':
-    # # Get SSID and password from file (usb stick or microSD reader)
-    # ssid = ""
-    # password = ""
     # WifiConnectionSetup().connect(ssid, password)
 
     writerFactory = PixelWriter2DFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
