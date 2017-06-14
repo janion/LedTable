@@ -5,6 +5,8 @@
 - Reformat builtin patterns into 2 rows and/or scrolled table
 - Better builtin pattern names
 - Snake can get caught in infinite loop
+- Need to make it such that only unique names can be added
+- Create script that creates an automatic connection to wifi
 
 - Extend patterns such that when they are clicked the user is send to a
   new page with any configurations to be made
