@@ -6,12 +6,17 @@
 - Better builtin pattern names
 - Snake can get caught in infinite loop
 - Need to make it such that only unique names can be added
-- Create script that creates an automatic connection to wifi
+- Test script that creates an automatic connection to wifi
+- Commit better demo mathematical patterns
+- Commit bootLauncher.sh
+- Test IpAddressGetter when not connected to wifi
+- Make rest of alphanumeric characters
 
 - Extend patterns such that when they are clicked the user is send to a
   new page with any configurations to be made
     + Will require a new branch for development
 
+- Maybe some update mechanism by polling github version file?
 
 
 ###################################
