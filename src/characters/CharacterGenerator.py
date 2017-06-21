@@ -26,9 +26,36 @@ SPECIAL = {
     "'": "apostrophe",
     "#": "hash",
     "(": "openBracket",
-    ")": "closeBracket"
+    ")": "closeBracket",
+    "A": "aa",
+    "B": "bb",
+    "C": "cc",
+    "D": "dd",
+    "E": "ee",
+    "F": "ff",
+    "G": "gg",
+    "H": "hh",
+    "I": "ii",
+    "J": "jj",
+    "K": "kk",
+    "L": "ll",
+    "M": "mm",
+    "N": "nn",
+    "O": "oo",
+    "P": "pp",
+    "Q": "qq",
+    "R": "rr",
+    "S": "ss",
+    "T": "tt",
+    "U": "uu",
+    "V": "vv",
+    "W": "ww",
+    "X": "xx",
+    "Y": "yy",
+    "Z": "zz"
 }
 FILE_TYPE = ".png"
+FILE_FORMAT = "imgs/%s.png"
 SEPARATOR = "\n"
 OUTPUT_FILE_NAME = "characters.py"
 
@@ -47,10 +74,11 @@ if __name__ == "__main__":
     outputFileString = "%s" % FILE_CONTENT
     for char in CHARACTERS:
         fileName = SPECIAL.get(char, char)
+        path = FILE_FORMAT % fileName
         try:
-            im = Image.open(fileName + FILE_TYPE)
+            im = Image.open(path)
         except IOError:
-            print "File not found: %s" %fileName + FILE_TYPE
+            print "File not found: %s" %path
             continue
         data = fromimage(im)
 
