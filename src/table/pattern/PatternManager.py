@@ -82,5 +82,16 @@ class PatternManager(object):
                 self.fileWriter.writePatterns(self.patternFileName, self.patterns)
                 break
 
-    def getWriter(self):
+    def getCurrentWriter(self):
         return self.currentWriter
+
+    def getWriter(self, name):
+        # Check builtins
+        for builtinName in self.builtins.getPatternNames():
+            if builtinName == name:
+                return self.builtins.getWriter(name)
+
+        # Check custom patterns
+        for pattern in self.patterns:
+            if pattern.getName() == name:
+                return self.writerFactory.createPixelWriter(pattern)

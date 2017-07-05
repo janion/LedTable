@@ -9,10 +9,8 @@ class Text(object):
         self.text = text
         self.position = 0
 
-        self.columns = [0] * gridX
-        for char in text:
-            self.columns += CHARACTERS.get(char)
-            self.columns += [0]
+        self.columns = [0]
+        self.setTextContent(text)
 
     def isOnChar(self, x, y):
         column = (x + self.position) % len(self.columns)
@@ -24,15 +22,9 @@ class Text(object):
     def reset(self):
         self.position = 0
 
-# if __name__ == "__main__":
-#     import sys
-#     t = Text(10, 10, "1")
-#     for x in range(10):
-#         t.move()
-#     for y in range(10):
-#         for x in range(10):
-#             if t.isOnChar(x, y):
-#                 sys.stdout.write("@")
-#             else:
-#                 sys.stdout.write(".")
-#         sys.stdout.write("\n")
+    def setTextContent(self, text):
+        self.columns = [0] * self.gridX
+        for char in text:
+            self.columns += CHARACTERS.get(char)
+            self.columns += [0]
+        self.reset()

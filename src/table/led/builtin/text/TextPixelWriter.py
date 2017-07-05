@@ -1,6 +1,7 @@
 from table.led.PixelWriter import PixelWriter2D
 from table.led.builtin.text.Text import Text
 from table.led.ColourWheel import ColourWheel
+from table.led.builtin.text.TextConfigurer import TextConfigurer
 
 
 class PixelWriter(PixelWriter2D):
@@ -9,8 +10,8 @@ class PixelWriter(PixelWriter2D):
     COLOUR_ANGLE_CHANGE = 12
     BACKGROUND_COLOUR = (0, 0, 0)
 
-    def __init__(self, ledCountX, ledCountY, mode, text):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+    def __init__(self, ledCountX, ledCountY, mode, text="Hi!"):
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode, TextConfigurer("Text"))
         self.text = Text(ledCountX, ledCountY, text)
         self.lastIncrement = 0
         self.colourWheel = ColourWheel()
@@ -32,3 +33,6 @@ class PixelWriter(PixelWriter2D):
             return self.colour
         else:
             return self.BACKGROUND_COLOUR
+
+    def getText(self):
+        return self.text

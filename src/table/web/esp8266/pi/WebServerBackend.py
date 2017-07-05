@@ -75,7 +75,7 @@ class WebServerBackend(object):
 
     def _setPattern(self, name):
         self.patterns.setPattern(name)
-        writer = self.patterns.getWriter()
+        writer = self.patterns.getCurrentWriter()
         self.updater.setPixelWriter(writer)
 
     def _removePattern(self, name) :

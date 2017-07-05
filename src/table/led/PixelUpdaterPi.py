@@ -35,7 +35,7 @@ class PixelUpdater(object):
         with self.writerLock:
             self.writer = writer
             self.startTime = time()
-            self.writer.reset(self.startTime)
+            self.writer.reset(0)
         print "Pixel writer set"
 
     def setBrightness(self, val):
