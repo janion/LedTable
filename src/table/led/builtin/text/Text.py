@@ -23,8 +23,12 @@ class Text(object):
         self.position = 0
 
     def setTextContent(self, text):
+        self.text = text
         self.columns = [0] * self.gridX
         for char in text:
             self.columns += CHARACTERS.get(char)
             self.columns += [0]
         self.reset()
+
+    def getTextContent(self):
+        return self.text

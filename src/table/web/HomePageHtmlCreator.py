@@ -40,7 +40,7 @@ class HomePageHtmlCreator(object):
 
     BUILTIN_PATTERN_ROW_FORMAT = '<tr><td><a href="/setPattern?name=%s">Set</a></td><td>%s</td><td>%s</td></tr>'
 
-    LINK_FORMAT = '<td><a href="/configure?name=%s">Configure</a>'
+    LINK_FORMAT = '<a href="/configure?name=%s">Configure</a>'
 
 
     def buildHomePage(self, patternManager):

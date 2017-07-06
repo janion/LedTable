@@ -38,5 +38,11 @@ class PixelWriter(PixelWriter2D):
     def setTextContent(self, text):
         self.text.setTextContent(text)
 
+    def getTextContent(self):
+        return self.text.getTextContent()
+
     def setSecondsPerColumn(self, time):
-        self.setSecondsPerColumn(time)
+        self.secondsPerColumn = time
+
+    def getSecondsPerColumn(self):
+        return self.secondsPerColumn
