@@ -6,7 +6,7 @@ from table.led.builtin.text.TextConfigurer import TextConfigurer
 
 class PixelWriter(PixelWriter2D):
 
-    SCROLL_TIME = 0.25
+    DEFAULT_SCROLL_TIME = 0.25
     COLOUR_ANGLE_CHANGE = 12
     BACKGROUND_COLOUR = (0, 0, 0)
 
@@ -16,10 +16,11 @@ class PixelWriter(PixelWriter2D):
         self.lastIncrement = 0
         self.colourWheel = ColourWheel()
         self.colour = self.colourWheel.getColour(255, 0)
+        self.secondsPerColumn = self.DEFAULT_SCROLL_TIME
 
     def _tick(self, t):
         self.colour = self.colourWheel.getColour(255, (t - self.startTime) * self.COLOUR_ANGLE_CHANGE)
-        if (t - self.lastIncrement) >= self.SCROLL_TIME:
+        if (t - self.lastIncrement) >= self.secondsPerColumn:
             self.lastIncrement = t
             self.text.move()
 
@@ -34,5 +35,8 @@ class PixelWriter(PixelWriter2D):
         else:
             return self.BACKGROUND_COLOUR
 
-    def getText(self):
-        return self.text
+    def setTextContent(self, text):
+        self.text.setTextContent(text)
+
+    def setSecondsPerColumn(self, time):
+        self.setSecondsPerColumn(time)

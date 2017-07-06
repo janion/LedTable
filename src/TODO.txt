@@ -10,6 +10,7 @@
 - Commit better demo mathematical patterns
 - Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
+- Get correct pattern on startup
 
 - Extend patterns such that when they are clicked the user is send to a
   new page with any configurations to be made
