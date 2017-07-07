@@ -19,17 +19,17 @@ class NumberItem(Item):
         return super(NumberItem, self).createFormEntry() % self.extras
 
 if __name__ == "__main__":
-    numberItem = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12, 144)
-    print numberItem.createFormEntry()
+    item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12, 144)
+    print item.createFormEntry()
     print
 
-    numberItem = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, max=144)
-    print numberItem.createFormEntry()
+    item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, max=144)
+    print item.createFormEntry()
     print
 
-    numberItem = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12)
-    print numberItem.createFormEntry()
+    item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12)
+    print item.createFormEntry()
     print
 
-    numberItem = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140)
-    print numberItem.createFormEntry()
+    item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140)
+    print item.createFormEntry()

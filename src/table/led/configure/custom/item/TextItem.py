@@ -12,5 +12,5 @@ class TextItem(Item):
         return super(TextItem, self).createFormEntry() % self.EMPTY
 
 if __name__ == "__main__":
-    textItem = TextItem("Pick some text", "text_content", lambda val: None, lambda: "CurrentValue")
-    print textItem.createFormEntry()
+    item = TextItem("Pick some text", "text_content", lambda val: None, lambda: "CurrentValue")
+    print item.createFormEntry()

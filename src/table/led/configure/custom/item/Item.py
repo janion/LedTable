@@ -4,7 +4,7 @@ class Item(object):
 
     EMPTY = ""
     EMPTY_FORMAT = "%s"
-    FORM_FORMAT = "%s<br>\n<input type=\"%s\" name=\"%s\" value=\"%s\"%s>"
+    FORM_FORMAT = "%s<br>\n<input type=\"%s\" name=\"%s\" value=\"%s\"%s><br>"
     EXTRA_FORMAT = " %s=\"%s\""
 
     def __init__(self, type, title, name, setValueAction, getValueAction):

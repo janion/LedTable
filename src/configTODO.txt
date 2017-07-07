@@ -1,7 +1,9 @@
-select      https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select
 colour      https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_color
-reset       https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_reset
-radio       https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_radio
 checkbox    https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_checkbox
+
+select      https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_select
+radio       https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_radio
+
+reset       https://www.w3schools.com/html/tryit.asp?filename=tryhtml_input_reset
 
 attributes  https://www.w3schools.com/html/html_form_attributes.asp
