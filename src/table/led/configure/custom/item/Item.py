@@ -16,3 +16,9 @@ class Item(object):
 
     def createFormEntry(self):
         return self.FORM_FORMAT % (self.title, self.type, self.name, str(self.getValueAction()), self.EMPTY_FORMAT)
+
+    def getKey(self):
+        return self.name
+
+    def setValue(self, value):
+        self.setValueAction(value)

@@ -23,7 +23,7 @@ class BuiltinFunctionManager(object):
                         "Rule 30": WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30),
                         "Game of life": GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Snake": SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Text": TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+                        TextWriter.NAME: TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
                         }
 
     def getPatternNames(self):

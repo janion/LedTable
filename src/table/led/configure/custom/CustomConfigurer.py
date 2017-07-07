@@ -33,11 +33,11 @@ class CustomConfigurer(BasicConfigurer):
         if setRedirect:
             return self.SET_REDIRECT % self.patternName
         else:
-            formContent = "\n".join([item.createFormEntry()])
+            formContent = "\n".join([item.createFormEntry() for item in self.configurationItems])
             return self.HTML_FORMAT % (self.patternName, self.patternName, self.patternName, formContent)
 
     def configureItem(self, item, parameters):
-        value = parameters.get(self.item.getKey())
+        value = parameters.get(item.getKey())
         if value is not None:
             item.setValue(value)
 
