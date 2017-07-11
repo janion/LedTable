@@ -1,7 +1,6 @@
 from table.led.PixelWriter import PixelWriter2D
 from table.led.builtin.text.Text import Text
 from table.led.ColourWheel import ColourWheel
-from table.led.builtin.text.TextConfigurer import TextConfigurer
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.TextItem import TextItem
 from table.led.configure.custom.item.NumberItem import NumberItem
@@ -20,14 +19,19 @@ class PixelWriter(PixelWriter2D):
     SPEED_TITLE = "Text speed (Columns per second):"
 
     def __init__(self, ledCountX, ledCountY, mode, text="Hi!"):
-        textItem = TextItem(self.TEXT_TITLE, self.TEXT_KEY, self.setTextContent, self.getTextContent)
-        speedItem = NumberItem(self.SPEED_TITLE, self.SPEED_KEY, self.setSecondsPerColumn, self.getSecondsPerColumn)
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode, CustomConfigurer(self.NAME, [textItem, speedItem]))
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        self._createConfiguration()
+
         self.text = Text(ledCountX, ledCountY, text)
         self.lastIncrement = 0
         self.colourWheel = ColourWheel()
         self.colour = self.colourWheel.getColour(255, 0)
         self.secondsPerColumn = self.DEFAULT_SCROLL_TIME
+
+    def _createConfiguration(self):
+        textItem = TextItem(self.TEXT_TITLE, self.TEXT_KEY, self.setTextContent, self.getTextContent)
+        speedItem = NumberItem(self.SPEED_TITLE, self.SPEED_KEY, self.setColumnPerSeconds, self.getColumnPerSeconds)
+        self.configurer = CustomConfigurer(self, self.NAME, [textItem, speedItem])
 
     def _tick(self, t):
         self.colour = self.colourWheel.getColour(255, (t - self.startTime) * self.COLOUR_ANGLE_CHANGE)
@@ -52,8 +56,8 @@ class PixelWriter(PixelWriter2D):
     def getTextContent(self):
         return self.text.getTextContent()
 
-    def setSecondsPerColumn(self, secondsPerColumn):
-        self.secondsPerColumn = 1.0 / float(secondsPerColumn)
+    def setColumnPerSeconds(self, columnPerSeconds):
+        self.secondsPerColumn = 1.0 / float(columnPerSeconds)
 
-    def getSecondsPerColumn(self):
+    def getColumnPerSeconds(self):
         return 1.0 / self.secondsPerColumn

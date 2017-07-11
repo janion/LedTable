@@ -33,8 +33,8 @@ if __name__ == '__main__':
     # writer = SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer = GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 90)
-    # writer = StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-    writer = TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, "192.168.1.101")
+    writer = StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    # writer = TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, "192.168.1.101")
     updater = PixelUpdater(writer, strip)
     updaterThread = PixelUpdaterThread(updater)
 

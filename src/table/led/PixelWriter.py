@@ -9,14 +9,11 @@ from table.led.configure.BasicConfigurer import BasicConfigurer
 
 class PixelWriter1D(object):
 
-    def __init__(self, ledCount, pattern, configurer=BasicConfigurer("")):
+    def __init__(self, ledCount, pattern):
         self.data = [(0, 0, 0) for x in range(ledCount)]
         self.ledCount = ledCount
         self.startTime = 0
-        self.configurer = configurer
-
-        if configurer is not None:
-            configurer.setWriter(self)
+        self.configurer = BasicConfigurer()
 
         if pattern is not None:
             self.rFunc = pattern.getRedFunction()
@@ -46,8 +43,8 @@ class PixelWriter2D(PixelWriter1D):
     RASTER = "RASTER"
     ZIG_ZAG = "ZIG_ZAG"
 
-    def __init__(self, ledCountX, ledCountY, pattern, mode, configurer=BasicConfigurer("")):
-        super(PixelWriter2D, self).__init__(ledCountX * ledCountY, pattern, configurer)
+    def __init__(self, ledCountX, ledCountY, pattern, mode):
+        super(PixelWriter2D, self).__init__(ledCountX * ledCountY, pattern)
         self.ledCountX = ledCountX
         self.ledCountY = ledCountY
         self.mode = mode

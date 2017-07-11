@@ -12,10 +12,6 @@
 - Test IpAddressGetter when not connected to wifi
 - Get correct pattern on startup
 
-- Some of the methods in TextPixelWriter don't really represent what they're doing.
-    - Needs revisiting.
-    - Also need removing TextConfigurer
-
 - Maybe some update mechanism by polling github version file?
 
 

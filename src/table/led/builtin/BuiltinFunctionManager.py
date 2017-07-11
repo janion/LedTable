@@ -19,7 +19,7 @@ class BuiltinFunctionManager(object):
                         "Rainbow roll": RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Solid rainbow fade": SolidWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Rainbow swipe": SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Star": StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        StarWriter.NAME: StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Rule 30": WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30),
                         "Game of life": GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Snake": SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
