@@ -1,20 +1,30 @@
+from table.web.HtmlFormatter import HtmlFormatter
+from table.web.HeadCreator import HeadCreator
+
 
 class HomePageHtmlCreator(object):
 
     HTML_FORMAT = """<!DOCTYPE html>
     <html>
-        <head>
-            <title>Table-top patterns</title>
-        </head>
-        <body> <h1>Table-top patterns</h1>
+        %s
+        <body>
+            <h1>Table-top patterns</h1>
             <b>Current pattern:</b> %s<br>
             <form action="/setBrightness">
                 <input type="number" name="brightness" min="0" max="255"> <input type="submit" value="Set Brightness (0-255)">
             </form>
             <br>
-            <table border="1"> <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s </table>
+            <div style="overflow-x:auto;">
+                <table border="1">
+                    <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s
+                </table>
+            </div>
             <br>
-            <table border="1"> <tr><th></th><th>Name</th><th></th></tr> %s </table>
+            <div style="overflow-x:auto;">
+                <table border="1">
+                    <tr><th></th><th>Name</th><th></th></tr> %s
+                </table>
+            </div>
             <br>
             <br>
             <form action="/addPattern">
@@ -46,10 +56,10 @@ class HomePageHtmlCreator(object):
     def buildHomePage(self, patternManager):
         customRows = self._buildCustomPatternHtmlTable(patternManager)
         builtinRows = self._buildBuiltinPatternHtmlTable(patternManager)
-        response = self.HTML_FORMAT % (patternManager.getCurrentPatternName(),
+        response = self.HTML_FORMAT % (HeadCreator().createHead(), patternManager.getCurrentPatternName(),
                                        '\n'.join(customRows), '\n'.join(builtinRows)
                                        )
-        return response
+        return HtmlFormatter().formatHtml(response)
 
     def _buildCustomPatternHtmlTable(self, patternManager):
         customRows = []

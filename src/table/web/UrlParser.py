@@ -14,7 +14,7 @@ class UrlParser(object):
         path = regex.search("(.*?)(\?|$)", url)
 
         while True:
-            varrs = regex.search("(([a-zA-Z0-9]+)=([a-zA-Z0-9.+%]*))&?", url)
+            varrs = regex.search("(([a-zA-Z0-9]+)=([a-zA-Z0-9.+%\-]*))&?", url)
             if varrs:
                 parameters[varrs.group(2)] = self.corrector.correctUrl(varrs.group(3))
                 url = url.replace(varrs.group(0), '')
