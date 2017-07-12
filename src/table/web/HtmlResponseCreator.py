@@ -1,5 +1,6 @@
 import re as regex
 
+from table.web.HtmlFormatter import HtmlFormatter
 from table.web.HomePageHtmlCreator import HomePageHtmlCreator
 from table.web.UrlParser import UrlParser
 
@@ -10,28 +11,29 @@ class HtmlResponseCreator(object):
     <html>
         <head>
             <script type="text/javascript">
-                window.location.href = "/"
-            </script>
-        </head>
-    </html>
-    """
-
-    INVALID_PATTERN_REDIRECT = """<!DOCTYPE html>
-    <html>
-        <head>
-            <script type="text/javascript">
-                setTimeout("location.href = '/';",5000);
+                setTimeout("location.href = '/';",%d);
             </script>
         </head>
         <body>
-            <h1>Invalid pattern:</h1><br>
+            %s
+        </body>
+    </html>
+    """
+
+    EMPTY_REDIRECT = REDIRECT % (0, "")
+
+    INVALID_PATTERN_REDIRECT = REDIRECT % (5000, """
+            <h1>Invalid pattern functions:</h1><br>
             Red = %s<br>
             Green = %s<br>
             Blue = %s<br>
             You will be redirected in 5 seconds.
-        </body>
-    </html>
-    """
+    """)
+
+    INVALID_NAME_REDIRECT = REDIRECT % (5000, """
+            <h1>Invalid pattern name: %s</h1><br>
+            You will be redirected in 5 seconds.
+    """)
 
     def __init__(self, pixelUpdater, writerFactory, patternManager):
         self.updater = pixelUpdater
@@ -51,24 +53,31 @@ class HtmlResponseCreator(object):
         if path.startswith("/setPattern"):
             name = parameters.get("name", None)
             self._setPattern(name)
-            return self._buildResponse(self.REDIRECT)
+            return self._buildResponse(self.EMPTY_REDIRECT)
+
         elif path.startswith("/addPattern"):
             name = parameters.get("name", None)
-            red = parameters.get("red", None)
-            green = parameters.get("green", None)
-            blue = parameters.get("blue", None)
-            if self.patterns.addPattern(name, red, green, blue):
-                return self._buildResponse(self.REDIRECT)
+            if self.patterns.isUniqueName(name):
+                red = parameters.get("red", None)
+                green = parameters.get("green", None)
+                blue = parameters.get("blue", None)
+                if self.patterns.addPattern(name, red, green, blue):
+                    return self._buildResponse(self.EMPTY_REDIRECT)
+                else:
+                    return self._buildResponse(self.INVALID_PATTERN_REDIRECT %(red, green, blue))
             else:
-                return self._buildResponse(self.INVALID_PATTERN_REDIRECT %(red, green, blue))
+                return self._buildResponse(self.INVALID_NAME_REDIRECT % name)
+
         elif path.startswith("/removePattern"):
             name = parameters.get("name", None)
             self.patterns.removePattern(name)
-            return self._buildResponse(self.REDIRECT)
+            return self._buildResponse(self.EMPTY_REDIRECT)
+
         elif path.startswith("/setBrightness"):
             val = int(parameters.get("brightness", 255))
             self.updater.setBrightness(val)
-            return self._buildResponse(self.REDIRECT)
+            return self._buildResponse(self.EMPTY_REDIRECT)
+
         elif path.startswith("/configure"):
             return self._buildResponse(self._configurePattern(parameters))
 
@@ -80,9 +89,10 @@ class HtmlResponseCreator(object):
         self.updater.setPixelWriter(writer)
 
     def _buildResponse(self, response):
+        formattedResponse = HtmlFormatter().formatHtml(response)
         # BUILD HTTP RESPONSE HEADERS
         return '''HTTP/1.0 200 OK\r\nContent-type: text/html\r\nContent-length: %d\r\n\r\n%s''' % (
-            len(response), response)
+            len(formattedResponse), formattedResponse)
 
     def _configurePattern(self, parameters):
         name = parameters.get("name", None)

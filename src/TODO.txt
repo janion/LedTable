@@ -1,19 +1,17 @@
 - Surround WebServer code in try/except/finally and report any errors
 - Add more builtin patterns
+    + Add configuration to existing patterns
 - When snake loses flash before restarting
 - Make Game of life restart when reaches a 1, 2 or 3 period steady state
 - Reformat builtin patterns into 2 rows and/or scrolled table
 - Better builtin pattern names
 - Snake can get caught in infinite loop
-- Need to make it such that only unique names can be added
 - Test script that creates an automatic connection to wifi
     + Use subprocess.popen() not os.popen()
 - Commit better demo mathematical patterns
 - Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
 - Get correct pattern on startup
-
-- Test changes to styling and formatting then commit
 
 - Maybe some update mechanism by polling github version file?
 

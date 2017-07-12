@@ -95,3 +95,22 @@ class PatternManager(object):
         for pattern in self.patterns:
             if pattern.getName() == name:
                 return self.writerFactory.createPixelWriter(pattern)
+
+    def isUniqueName(self, name):
+        # Check builtins
+        for builtinName in self.builtins.getPatternNames():
+            if builtinName == name:
+                return False
+
+        # Check custom patterns
+        for pattern in self.patterns:
+            if pattern.getName() == name:
+                return False
+
+        return True
+
+    def getAllPatternNames(self):
+        patternNames = [pattern.getName() for pattern in self.patterns]
+        builtinNames = [name for name in self.builtins.getPatternNames()]
+
+        return patternNames + builtinNames

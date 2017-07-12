@@ -1,4 +1,3 @@
-from table.web.HtmlFormatter import HtmlFormatter
 from table.web.HeadCreator import HeadCreator
 
 
@@ -27,7 +26,7 @@ class HomePageHtmlCreator(object):
             </div>
             <br>
             <br>
-            <form action="/addPattern">
+            <form name="addPattern" action="/addPattern" onsubmit="return validateName()">
                 <b><u>Add Pattern</u></b><br>
                 Pattern name:<br>
                 <input type="text" name="name"><br>
@@ -56,10 +55,10 @@ class HomePageHtmlCreator(object):
     def buildHomePage(self, patternManager):
         customRows = self._buildCustomPatternHtmlTable(patternManager)
         builtinRows = self._buildBuiltinPatternHtmlTable(patternManager)
-        response = self.HTML_FORMAT % (HeadCreator().createHead(), patternManager.getCurrentPatternName(),
+        response = self.HTML_FORMAT % (HeadCreator().createHead(patternManager), patternManager.getCurrentPatternName(),
                                        '\n'.join(customRows), '\n'.join(builtinRows)
                                        )
-        return HtmlFormatter().formatHtml(response)
+        return response
 
     def _buildCustomPatternHtmlTable(self, patternManager):
         customRows = []
