@@ -3,6 +3,9 @@ from table.led.ColourWheel import ColourWheel
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
 from table.led.configure.custom.validation.ValidationScriptCreator import ValidationScriptCreator
+from table.led.configure.custom.item.ColourConverter import ColourConverter
+from table.led.configure.custom.item.ColourItem import ColourItem
+from table.led.configure.custom.item.CheckboxItem import CheckboxItem
 from random import randint
 
 
@@ -33,12 +36,19 @@ class PixelWriter(PixelWriter2D):
 
     NAME = "Stars"
 
+    COLOUR_CONVERTER = ColourConverter()
+    DEFAULT_COLOUR_CODE = "#ffffff"
+
     TIME_BETWEEN_STARS = 0.25
     FADE_TIME = 4.0
     FREQUENCY_KEY = "frequency"
     FREQUENCY_TITLE = "Stars per second:"
     FADE_TIME_KEY = "fadeTime"
     FADE_TIME_TITLE = "Fade time:"
+    COLOUR_KEY = "colour"
+    COLOUR_TITLE = "Cell colour"
+    RANDOM_COLOUR_KEY = "randomColour"
+    RANDOM_COLOUR_TITLE = "Use random colour for every cell"
 
     FIELD_MAP = {"x": FADE_TIME_KEY, "y": FREQUENCY_KEY}
     ERROR_CONDITION = "x * y > %d"
@@ -60,7 +70,11 @@ class PixelWriter(PixelWriter2D):
     def _createConfiguration(self):
         frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setStarsPerSecond, self.getStarsPerSecond)
         fadeTimeItem = NumberItem(self.FADE_TIME_TITLE, self.FADE_TIME_KEY, self.setFadeTime, self.getFadeTime)
-        self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fadeTimeItem])
+        colourItem = ColourItem(self.COLOUR_TITLE, self.COLOUR_KEY, self.setColour, self.getColour)
+
+        randomColourItem = CheckboxItem(self.RANDOM_COLOUR_TITLE, self.RANDOM_COLOUR_KEY, self.setUseRandomColour,
+                                        "TRUE", "configure", self.COLOUR_KEY, False, self.colourIsRandom)
+        self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fadeTimeItem, colourItem, randomColourItem])
 
         maxVal = self.ledCountX * self.ledCountY
         creator = ValidationScriptCreator(self.ERROR_MSG %maxVal, self.FIELD_MAP, self.ERROR_CONDITION %maxVal)
@@ -111,3 +125,18 @@ class PixelWriter(PixelWriter2D):
 
     def getFadeTime(self):
         return self.fadeTime
+
+    def getColour(self):
+        if self.colour is not None:
+            return self.COLOUR_CONVERTER.convertFromColourToHtml(self.colour)
+        else:
+            return self.DEFAULT_COLOUR_CODE
+
+    def setColour(self, colour):
+        self.colour = self.COLOUR_CONVERTER.convertFromHtmlToColour(colour)
+
+    def setUseRandomColour(self, __):
+        self.colour = None
+
+    def colourIsRandom(self):
+        return self.colour is None
