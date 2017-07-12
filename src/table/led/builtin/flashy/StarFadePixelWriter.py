@@ -21,7 +21,7 @@ class Cell(object):
         self.endTime = self.startTime + self.fadeTime
 
     def tick(self, t):
-        numerator = (t - self.endTime) * ( t - self.endTime)
+        numerator = (t - self.endTime) * (t - self.endTime)
         denominator = self.fadeTime * self.fadeTime
         self.factor = numerator / denominator
 
