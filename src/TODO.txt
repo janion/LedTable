@@ -14,6 +14,7 @@
 - Get correct pattern on startup
 - Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
 - Make red green blue name fields all required
+- Add and test Thunderstorm pattern
 
 - Maybe some update mechanism by polling github version file?
 
