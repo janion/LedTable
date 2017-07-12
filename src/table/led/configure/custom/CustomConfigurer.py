@@ -15,6 +15,7 @@ class CustomConfigurer(BasicConfigurer):
                 %s
                 <input type="submit" name="action" value="Submit">
                 <input type="submit" name="action" value="Submit and Set">
+                <input type="submit" name="action" value="Cancel">
             </form>
         </body>
     </html>
@@ -45,10 +46,13 @@ class CustomConfigurer(BasicConfigurer):
         self.validationAction = validationCreator.createValidatingFormAction()
 
     def configure(self, parameters):
+        action = parameters.get("action")
+        if action == "Cancel":
+            return self.REDIRECT
+
         for item in self.configurationItems:
             self.configureItem(item, parameters)
 
-        action = parameters.get("action")
         if action is not None:
             if action == "Submit and Set":
                 return self.SET_REDIRECT % self.patternName

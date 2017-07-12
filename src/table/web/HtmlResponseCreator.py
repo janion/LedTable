@@ -32,6 +32,7 @@ class HtmlResponseCreator(object):
 
     INVALID_NAME_REDIRECT = REDIRECT % (5000, """
             <h1>Invalid pattern name: %s</h1><br>
+            This pattern name is already in use.
             You will be redirected in 5 seconds.
     """)
 
