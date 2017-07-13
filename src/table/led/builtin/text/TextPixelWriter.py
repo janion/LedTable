@@ -39,9 +39,9 @@ class PixelWriter(PixelWriter2D):
             self.lastIncrement = t
             self.text.move()
 
-    def reset(self, t):
-        super(PixelWriter, self).reset(t)
-        self.lastIncrement = t
+    def reset(self):
+        super(PixelWriter, self).reset()
+        self.lastIncrement = 0
         self.text.reset()
 
     def _evaluateCell(self, x, y, t):

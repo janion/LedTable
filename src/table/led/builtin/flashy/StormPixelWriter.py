@@ -26,8 +26,8 @@ class Lightning(object):
         denominator = self.fadeTime * self.fadeTime
         self.factor = min(numerator / denominator, 1)
 
-    def reset(self, t):
-        self.lastCheck = t
+    def reset(self):
+        self.lastCheck = 0
 
     def getBrightness(self):
         return self.MAX_BRIGHTNESS * (1 - self.factor)
@@ -128,11 +128,11 @@ class PixelWriter(PixelWriter2D):
         flash = self.lightning.getBrightness()
         return int(max(flash, colour[0])), int(max(flash, colour[1])), int(max(flash, colour[2]))
 
-    def reset(self, t):
-        super(PixelWriter, self).reset(t)
-        self.lastIncrement = t
+    def reset(self):
+        super(PixelWriter, self).reset()
+        self.lastIncrement = 0
         self.rainDrops = []
-        self.lightning.reset(t)
+        self.lightning.reset()
 
     def setDropsPerSecond(self, dropsPerSecond):
         self.dropsPerSecond = float(dropsPerSecond)

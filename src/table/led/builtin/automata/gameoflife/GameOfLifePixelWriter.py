@@ -30,6 +30,6 @@ class PixelWriter(PixelWriter2D):
         else:
             return 0, 0, 0
 
-    def reset(self, t):
-        self.lastIncrement = t
+    def reset(self):
+        self.lastIncrement = 0
         self.gameOfLife.setRandomStartCondition()

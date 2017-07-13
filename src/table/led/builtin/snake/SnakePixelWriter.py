@@ -42,12 +42,12 @@ class PixelWriter(PixelWriter2D):
                     if self.directions is None:
                         self.directions = self.panicCalculator.findPath(self.snake)
 
-    def reset(self, t):
-        super(PixelWriter, self).reset(t)
+    def reset(self):
+        super(PixelWriter, self).reset()
         self.snake = Snake()
         self.newFood()
         self.directions = self.snakeCalculator.findPath(self.food, self.snake)
-        self.lastIncrement = t
+        self.lastIncrement = 0
 
     def newFood(self):
         while self.snake.positionIsOnBody(self.food) or self.snake.headIsAt(self.food):

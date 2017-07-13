@@ -31,8 +31,8 @@ class PixelWriter1D(object):
     def _tick(self, t):
         pass
 
-    def reset(self, t):
-        self.startTime = t
+    def reset(self):
+        self.startTime = 0
 
     def getConfigurer(self):
         return self.configurer

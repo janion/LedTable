@@ -108,11 +108,11 @@ class PixelWriter(PixelWriter2D):
         else:
             return 0, 0, 0
 
-    def reset(self, t):
-        super(PixelWriter, self).reset(t)
+    def reset(self):
+        super(PixelWriter, self).reset()
         self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.allowedSpaces = [(x, y) for y in range(self.ledCountY) for x in range(self.ledCountX)]
-        self.lastIncrement = t
+        self.lastIncrement = 0
 
     def setStarsPerSecond(self, starsPerSecond):
         self.timeBetweenStars = 1 / float(starsPerSecond)
