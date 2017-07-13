@@ -14,7 +14,8 @@
 - Get correct pattern on startup
 - Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
 - Make red green blue name fields all required
-- Add and test Thunderstorm pattern
+- I think reset sets time to zero so everything should act accordingly and not pass t through
+- Configure lightning on storm pattern
 
 - Maybe some update mechanism by polling github version file?
 

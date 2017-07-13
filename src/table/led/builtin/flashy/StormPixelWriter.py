@@ -7,6 +7,7 @@ from random import randint, uniform
 class Lightning(object):
 
     MAX_BRIGHTNESS = 180
+    FLASH_CHECK_TIME = 0.05
 
     def __init__(self, probability, fadeTime):
         self.startTime = -fadeTime
@@ -14,14 +15,19 @@ class Lightning(object):
         self.fadeTime = fadeTime
         self.endTime = self.startTime + self.fadeTime
         self.factor = 0
+        self.lastCheck = 0
 
     def tick(self, t):
-        if uniform(0, 1) < self.probability:
+        if t > self.lastCheck + self.FLASH_CHECK_TIME and uniform(0, 1) < self.probability:
             self.startTime = t - self.fadeTime
             self.endTime = self.startTime + self.fadeTime
+            self.lastCheck = t
         numerator = (t - self.endTime) * (t - self.endTime)
         denominator = self.fadeTime * self.fadeTime
         self.factor = min(numerator / denominator, 1)
+
+    def reset(self, t):
+        self.lastCheck = t
 
     def getBrightness(self):
         return self.MAX_BRIGHTNESS * (1 - self.factor)
@@ -66,9 +72,9 @@ class RainDrop(object):
 
 class PixelWriter(PixelWriter2D):
 
-    NAME = "STORM"
+    NAME = "Storm"
 
-    TIME_BETWEEN_DROPS = 0.0
+    DROPS_PER_SECOND = 25.0
     FALL_SPEED = 25.0
     FREQUENCY_KEY = "frequency"
     FREQUENCY_TITLE = "Rain drops per second:"
@@ -85,14 +91,14 @@ class PixelWriter(PixelWriter2D):
 
         self.lastIncrement = 0
         self.rainDrops = []
-        self.timeBetweenDrops = self.TIME_BETWEEN_DROPS
+        self.dropsPerSecond = self.DROPS_PER_SECOND
         self.fallSpeed = self.FALL_SPEED
         self.cells = [[(0, 0, 0) for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.lightning = Lightning(self.LIGHTNING_PROBABILITY, self.LIGHTNING_FADE_TIME)
 
     def _createConfiguration(self):
-        frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setDropsPerSecond, self.getDropsPerSecond)
-        fallSpeedItem = NumberItem(self.FALL_SPEED_TITLE, self.FALL_SPEED_KEY, self.setFallSpeed, self.getFallSpeed)
+        frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setDropsPerSecond, self.getDropsPerSecond, min=1)
+        fallSpeedItem = NumberItem(self.FALL_SPEED_TITLE, self.FALL_SPEED_KEY, self.setFallSpeed, self.getFallSpeed, min=1)
         self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fallSpeedItem])
 
     def _tick(self, t):
@@ -112,7 +118,7 @@ class PixelWriter(PixelWriter2D):
         for __ in range(self.rainDrops.count(None)):
             self.rainDrops.remove(None)
 
-        if (t - self.lastIncrement) >= self.timeBetweenDrops:
+        if (t - self.lastIncrement) >= 1.0 / self.dropsPerSecond:
             x = randint(0, self.ledCountX - 1)
             self.rainDrops.append(RainDrop(x, self.ledCountY - 1, t, self.fallSpeed))
             self.lastIncrement = t
@@ -126,12 +132,13 @@ class PixelWriter(PixelWriter2D):
         super(PixelWriter, self).reset(t)
         self.lastIncrement = t
         self.rainDrops = []
+        self.lightning.reset(t)
 
     def setDropsPerSecond(self, dropsPerSecond):
-        self.timeBetweenDrops = 1 / float(dropsPerSecond)
+        self.dropsPerSecond = float(dropsPerSecond)
 
     def getDropsPerSecond(self):
-        return int(round(1.0 / self.timeBetweenDrops))
+        return int(round(self.dropsPerSecond))
 
     def setFallSpeed(self, fallSpeed):
         self.fallSpeed = float(fallSpeed)
