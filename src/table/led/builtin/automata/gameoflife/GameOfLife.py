@@ -10,6 +10,7 @@ EXPLODER = [(4, 2), (4, 6),
 R_PENTOMINO = [(5, 3), (5, 4), (5, 5), (6, 5), (4, 4)]
 DIE_HARD = [(1, 5), (2, 5), (2, 4), (6, 4), (7, 4), (8, 4), (7, 6)]
 
+
 class GameOfLife(object):
 
     def __init__(self, gridSizeX, gridSizeY):

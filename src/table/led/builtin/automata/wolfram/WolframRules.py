@@ -27,24 +27,24 @@ class Rule(object):
             for y in range(self.gridSizeY - 1):
                 self.data[x][y] = self.data[x][y + 1]
 
-        nextTick = self.calculateNextTick()
+        nextTick = self._calculateNextTick()
         for x in range(len(nextTick)):
             self.data[x][self.gridSizeY - 1] = nextTick[x]
 
-    def calculateNextTick(self):
+    def _calculateNextTick(self):
         nextTick = [0 for x in range(self.gridSizeX)]
         if self.randomBoundaries:
             lastTick = [randint(0, 1)] + [self.data[x][self.gridSizeY - 2] for x in xrange(self.gridSizeX)] + [randint(0, 1)]
         else:
             lastTick = [0] + [self.data[x][self.gridSizeY - 2] for x in xrange(self.gridSizeX)] + [0]
         for x in range(self.gridSizeX):
-            aboveVal = self.getAboveValue(lastTick, x + 1)
+            aboveVal = self._getAboveValue(lastTick, x + 1)
             if 1 & (self.ruleNumber >> aboveVal) == 1:
                 nextTick[x] = 1
 
         return nextTick
 
-    def getAboveValue(self, lastTick, index):
+    def _getAboveValue(self, lastTick, index):
         val = 0
         for x in range(-1, 2):
             val += lastTick[index + x] << (1 - x)

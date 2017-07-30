@@ -32,6 +32,18 @@ class Lightning(object):
     def getBrightness(self):
         return self.MAX_BRIGHTNESS * (1 - self.factor)
 
+    def getFadeTime(self):
+        return self.fadeTime
+
+    def setFadeTime(self, fadeTime):
+        self.fadeTime = float(fadeTime)
+
+    def getProbability(self):
+        return self.probability
+
+    def setProbability(self, probability):
+        self.probability = float(probability)
+
 
 class RainDrop(object):
 
@@ -75,19 +87,24 @@ class PixelWriter(PixelWriter2D):
     NAME = "Storm"
 
     DROPS_PER_SECOND = 25.0
-    FALL_SPEED = 25.0
     FREQUENCY_KEY = "frequency"
     FREQUENCY_TITLE = "Rain drops per second:"
+
+    FALL_SPEED = 25.0
     FALL_SPEED_KEY = "fallSpeed"
     FALL_SPEED_TITLE = "Fall speed:"
 
     LIGHTNING_PROBABILITY = 0.01
-    LIGHTNING_FADE_TIME = 0.5
+    LIGHTNING_PROBABILITY_KEY = "lightningProbability"
+    LIGHTNING_PROBABILITY_TITLE = "Lightning probability:"
+
+    LIGHTNING_FADE_TIME = 0.25
+    LIGHTNING_FADE_TIME_KEY = "lightningFadeTime"
+    LIGHTNING_FADE_TIME_TITLE = "Lightning fade time:"
+
 
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
-
-        self._createConfiguration()
 
         self.lastIncrement = 0
         self.rainDrops = []
@@ -96,10 +113,16 @@ class PixelWriter(PixelWriter2D):
         self.cells = [[(0, 0, 0) for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.lightning = Lightning(self.LIGHTNING_PROBABILITY, self.LIGHTNING_FADE_TIME)
 
+        self._createConfiguration()
+
     def _createConfiguration(self):
         frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setDropsPerSecond, self.getDropsPerSecond, min=1)
         fallSpeedItem = NumberItem(self.FALL_SPEED_TITLE, self.FALL_SPEED_KEY, self.setFallSpeed, self.getFallSpeed, min=1)
-        self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fallSpeedItem])
+        lightningProbabilityItem = NumberItem(self.LIGHTNING_PROBABILITY_TITLE, self.LIGHTNING_PROBABILITY_KEY,
+                                              self.lightning.setProbability, self.lightning.getProbability, min=0, max=1, step=0.01)
+        lightningFadeTimeItem = NumberItem(self.LIGHTNING_FADE_TIME_TITLE, self.LIGHTNING_FADE_TIME_KEY,
+                                           self.lightning.setFadeTime, self.lightning.getFadeTime, min=0, max=2, step=0.05)
+        self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fallSpeedItem, lightningProbabilityItem, lightningFadeTimeItem])
 
     def _tick(self, t):
         self.lightning.tick(t)

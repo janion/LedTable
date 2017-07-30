@@ -29,13 +29,13 @@ class HomePageHtmlCreator(object):
             <form name="addPattern" action="/addPattern" onsubmit="return validateName()">
                 <b><u>Add Pattern</u></b><br>
                 Pattern name:<br>
-                <input type="text" name="name"><br>
+                <input type="text" name="name" required><br>
                 Red function:<br>
-                <input type="text" name="red"><br>
+                <input type="text" name="red" required><br>
                 Green function:<br>
-                <input type="text" name="green"><br>
+                <input type="text" name="green" required><br>
                 Blue function:<br>
-                <input type="text" name="blue"><br>
+                <input type="text" name="blue" required><br>
                 <br>
                 <input type="submit" value="Add pattern">
             </form>

@@ -1,5 +1,6 @@
 from threading import Lock, Thread
 from time import time, sleep
+from table.Constants import LED_COUNT_X, LED_COUNT_Y
 import wx
 
 
@@ -58,19 +59,17 @@ class PixelUpdater(object):
 
 class Window(wx.Frame):
 
-    SIZE = 10
-
     RASTER = 0
     ZIG_ZAG = 1
 
     def __init__(self, stopFunction):
         self.initialised = False
-        wx.Frame.__init__(self, None, -1, "Mock LED table", size=(30 * (self.SIZE + 1), 30 * (self.SIZE + 2)))
+        wx.Frame.__init__(self, None, -1, "Mock LED table", size=(30 * (LED_COUNT_X + 1), 30 * (LED_COUNT_Y + 2)))
         self.stopFunction = stopFunction
         self.panel = wx.Panel(self, -1)
         self.SetMinSize(self.GetSize())
 
-        self.btns = [None for x in xrange(self.SIZE * self.SIZE)]
+        self.btns = [None for x in xrange(LED_COUNT_X * LED_COUNT_Y)]
         self.mode = self.ZIG_ZAG
         self._makeCells()
         self.initialised = True
@@ -87,23 +86,23 @@ class Window(wx.Frame):
 
     def _makeCells(self):
         if self.mode == self.RASTER:
-            for x in range(self.SIZE):
+            for x in range(LED_COUNT_X):
                 self._makeColumnForwards(x)
         elif self.mode == self.ZIG_ZAG:
-            for x in range(self.SIZE):
+            for x in range(LED_COUNT_X):
                 if (x % 2) == 0:
                     self._makeColumnForwards(x)
                 else:
                     self._makeColumnBackwards(x)
 
     def _makeColumnForwards(self, x):
-        for y in range(self.SIZE):
-            index = (x * self.SIZE) + y
+        for y in range(LED_COUNT_Y):
+            index = (x * LED_COUNT_Y) + y
             self.btns[index] = self._makeCell(x, y)
 
     def _makeColumnBackwards(self, x):
-        for y in range(self.SIZE - 1, -1, -1):
-            index = (x * self.SIZE) + (self.SIZE - (y + 1))
+        for y in range(LED_COUNT_Y - 1, -1, -1):
+            index = (x * LED_COUNT_Y) + (LED_COUNT_X - (y + 1))
             self.btns[index] = self._makeCell(x, y)
 
     def _makeCell(self, x, y):

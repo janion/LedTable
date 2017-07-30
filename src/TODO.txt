@@ -13,8 +13,8 @@
 - Test IpAddressGetter when not connected to wifi
 - Get correct pattern on startup
 - Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
-- Make red green blue name fields all required
-- Configure lightning on storm pattern
+- script to set dark theme? Dark theme by default?
+- Replace builtin manager dictionary when all patterns have names
 
 - Maybe some update mechanism by polling github version file?
 

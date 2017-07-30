@@ -3,7 +3,8 @@ from table.led.builtin.rainbow.RainbowSwipePixelWriter import PixelWriter as Swi
 from table.led.builtin.rainbow.RasterDotRainbowFadePixelWriter import PixelWriter as DotFadeWriter
 from table.led.builtin.rainbow.RasterDotRainbowPixelWriter import PixelWriter as DotWriter
 from table.led.builtin.rainbow.RollingRainbowPixelWriter import PixelWriter as RollWriter
-from table.led.builtin.rainbow.SolidRainbowPixelWriter import PixelWriter as SolidWriter
+from table.led.builtin.rainbow.SolidRainbowPixelWriter import PixelWriter as SolidFadeWriter
+from table.led.builtin.rainbow.SolidColourPixelWriter import PixelWriter as SolidColourWriter
 from table.led.builtin.flashy.StarFadePixelWriter import PixelWriter as StarWriter
 from table.led.builtin.flashy.StormPixelWriter import PixelWriter as StormWriter
 from table.led.builtin.automata.wolfram.WolframRulePixelWriter import PixelWriter as WolframWriter
@@ -15,14 +16,16 @@ from table.led.builtin.text.TextPixelWriter import PixelWriter as TextWriter
 class BuiltinFunctionManager(object):
 
     def __init__(self):
-        self.writers = {"Dot raster fade": DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Dot raster": DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Rainbow roll": RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Solid rainbow fade": SolidWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Rainbow swipe": SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+        rule30Writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30)
+        self.writers = {DotFadeWriter.NAME: DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        DotWriter.NAME: DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        RollWriter.NAME: RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SolidFadeWriter.NAME: SolidFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SolidColourWriter.NAME: SolidColourWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        # "Rainbow swipe": SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D), # Needs some work
                         StarWriter.NAME: StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Rule 30": WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30),
-                        "Game of life": GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        rule30Writer.name: rule30Writer,
+                        GolWriter.NAME: GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         "Snake": SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         TextWriter.NAME: TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         StormWriter.NAME: StormWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)

@@ -57,8 +57,6 @@ class PixelWriter(PixelWriter2D):
     def __init__(self, ledCountX, ledCountY, mode):
         super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
 
-        self._createConfiguration()
-
         self.lastIncrement = 0
         self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.colourWheel = ColourWheel()
@@ -66,6 +64,8 @@ class PixelWriter(PixelWriter2D):
         self.fadeTime = self.FADE_TIME
         self.colour = None
         self.allowedSpaces = [(x, y) for y in range(self.ledCountY) for x in range(self.ledCountX)]
+
+        self._createConfiguration()
 
     def _createConfiguration(self):
         frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setStarsPerSecond, self.getStarsPerSecond)
