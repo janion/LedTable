@@ -22,7 +22,7 @@ class BuiltinFunctionManager(object):
                         RollWriter.NAME: RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         SolidFadeWriter.NAME: SolidFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         SolidColourWriter.NAME: SolidColourWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        # "Rainbow swipe": SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D), # Needs some work
+                        SwipeWriter.NAME: SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         StarWriter.NAME: StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
                         rule30Writer.name: rule30Writer,
                         GolWriter.NAME: GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
