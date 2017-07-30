@@ -21,6 +21,9 @@ class Swipe(object):
         self.y = y
         self.startTime = t
         self.speed = speed
+        self.setColour(colour)
+
+    def setColour(self, colour):
         (self.red, self.green, self.blue) = colour
 
     def tick(self, t):
@@ -37,7 +40,7 @@ class Swipe(object):
 
         for y in range(self.PROFILE_TAIL_LENGTH):
             factor = 1 - (float(y) / self.PROFILE_TAIL_LENGTH)
-            cells[int(self.y) + y] = (self.red * factor, self.green * factor, self.blue * factor)
+            cells[int(self.y) + y] = (int(self.red * factor), int(self.green * factor), int(self.blue * factor))
 
         return cells
 
@@ -72,12 +75,12 @@ class PixelWriter(PixelWriter2D):
         self._createConfiguration()
 
     def _createConfiguration(self):
-        fadeTimeItem = NumberItem(self.SWIPE_TIME_TITLE, self.SWIPE_TIME_KEY, self.setSwipeTime, self.getSwipeTime)
+        swipeTimeItem = NumberItem(self.SWIPE_TIME_TITLE, self.SWIPE_TIME_KEY, self.setSwipeTime, self.getSwipeTime, step=0.1)
         colourItem = ColourItem(self.COLOUR_TITLE, self.COLOUR_KEY, self.setColour, self.getColour)
 
         randomColourItem = CheckboxItem(self.RANDOM_COLOUR_TITLE, self.RANDOM_COLOUR_KEY, self.setUseRandomColour,
                                         "TRUE", "configure", self.COLOUR_KEY, False, self.colourIsRandom)
-        self.configurer = CustomConfigurer(self, self.NAME, [fadeTimeItem, colourItem, randomColourItem])
+        self.configurer = CustomConfigurer(self, self.NAME, [swipeTimeItem, colourItem, randomColourItem])
 
     def _tick(self, t):
         self.cells = [[(0, 0, 0) for y in range(self.ledCountY)] for x in range(self.ledCountX)]
@@ -105,11 +108,16 @@ class PixelWriter(PixelWriter2D):
         colour = self.cells[x][self.ledCountY - (y + 1)]
         return colour
 
+    def reset(self):
+        super(PixelWriter, self).reset()
+        self.lastIncrement = 0
+        self.swipes = []
+
     def setSwipeTime(self, swipeTime):
         self.swipeTime = float(swipeTime)
 
     def getSwipeTime(self):
-        return self.swipeTime
+        return float(self.swipeTime)
 
     def getColour(self):
         if self.colour is not None:

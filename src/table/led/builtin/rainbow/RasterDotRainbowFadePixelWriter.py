@@ -44,4 +44,4 @@ class PixelWriter(PixelWriter2D):
         return self.speed
 
     def setSpeed(self, speed):
-        self.speed = speed
+        self.speed = float(speed)
