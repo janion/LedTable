@@ -143,7 +143,7 @@ class PixelWriter(PixelWriter2D):
 
         if (t - self.lastIncrement) >= 1.0 / self.dropsPerSecond:
             x = randint(0, self.ledCountX - 1)
-            self.rainDrops.append(RainDrop(x, self.ledCountY - 1, t, self.fallSpeed))
+            self.rainDrops.append(RainDrop(x, self.ledCountY + 1, t, self.fallSpeed))
             self.lastIncrement = t
 
     def _evaluateCell(self, x, y, t):

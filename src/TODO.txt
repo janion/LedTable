@@ -1,28 +1,46 @@
+#########################
+##    High priority    ##
+#########################
+
+- Add name to pixel writer
+    + Expansion to this is to refactor PixelWriter2D to not specify pattern
+    + Replace builtin manager dictionary when all patterns have names?
+- Get correct pattern on startup
+
+
+###########################
+##    Medium priority    ##
+###########################
+
 - Surround WebServer code in try/except/finally and report any errors
-- Add more builtin patterns
-    + Add configuration to existing patterns
-- When snake loses flash before restarting
-- Make Game of life restart when reaches a 1, 2 or 3 period steady state
-- Reformat builtin patterns into 2 rows and/or scrolled table
-- Better builtin pattern names
 - Snake can get caught in infinite loop
 - Test script that creates an automatic connection to wifi
     + Use subprocess.popen() not os.popen()
-- Commit better demo mathematical patterns
 - Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
-- Get correct pattern on startup
-- Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
+- Text colour should be configurable
+
+
+########################
+##    Low priority    ##
+########################
+
+- Add more builtin patterns
+- Commit better demo mathematical patterns
 - script to set dark theme? Dark theme by default?
-- Replace builtin manager dictionary when all patterns have names?
-
-- Test all configured patterns
-    + Swipe looks rubbish when slow
-        * Storm rain suffers the same problem
-    + Text colour should be configurable
-
-
+- Swipe looks rubbish when slow
+    + Storm rain suffers the same problem
 - Maybe some update mechanism by polling github version file?
+
+
+#######################
+##    No priority    ##
+#######################
+
+- When snake loses flash before restarting
+- Make Game of life restart when reaches a 1, 2 or 3 period steady state
+- Reformat builtin patterns into 2 rows and/or scrolled table
+- Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
 
 
 ###################################
