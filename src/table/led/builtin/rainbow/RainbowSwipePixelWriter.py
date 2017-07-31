@@ -99,7 +99,10 @@ class PixelWriter(PixelWriter2D):
             self.swipes.remove(None)
 
         if (t - self.lastIncrement) >= self.swipeTime:
-            colour = self.colourWheel.getColour(self.MAX_INTENSITY, randint(0, 359))
+            if self.colour is None:
+                colour = self.colourWheel.getColour(self.MAX_INTENSITY, randint(0, 359))
+            else:
+                colour = self.colour
             swipe = Swipe(LED_COUNT_Y, t, LED_COUNT_X / self.swipeTime, colour)
             self.swipes.append(swipe)
             self.lastIncrement = t

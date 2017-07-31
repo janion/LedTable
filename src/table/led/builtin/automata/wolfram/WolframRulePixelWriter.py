@@ -42,7 +42,7 @@ class PixelWriter(PixelWriter2D):
     def _tick(self, t):
         if self.lastIncrement is None:
             self.lastIncrement = t
-        if (t - self.lastIncrement) > self.STEP_DURATION:
+        if (t - self.lastIncrement) > self.stepDuration:
             self.lastIncrement = t
             self.rule.tick()
 

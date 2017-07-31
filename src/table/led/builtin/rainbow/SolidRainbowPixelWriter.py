@@ -29,7 +29,7 @@ class PixelWriter(PixelWriter2D):
         self.configurer = CustomConfigurer(self, self.NAME, [fadeSpeedItem])
 
     def _tick(self, t):
-        self.colour = self.colourWheel.getColour(255, t * self.FADE_SPEED)
+        self.colour = self.colourWheel.getColour(255, t * self.fadeSpeed)
 
     def _evaluateCell(self, x, y, t):
         return self.colour

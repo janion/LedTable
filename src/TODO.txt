@@ -14,7 +14,13 @@
 - Get correct pattern on startup
 - Formatting isn't perfect, should count tags and brackets as it goes to avoid using the same close tag or close bracket twice
 - script to set dark theme? Dark theme by default?
-- Replace builtin manager dictionary when all patterns have names
+- Replace builtin manager dictionary when all patterns have names?
+
+- Test all configured patterns
+    + Swipe looks rubbish when slow
+        * Storm rain suffers the same problem
+    + Text colour should be configurable
+
 
 - Maybe some update mechanism by polling github version file?
 
