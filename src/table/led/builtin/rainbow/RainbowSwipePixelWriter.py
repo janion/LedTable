@@ -43,7 +43,7 @@ class Swipe(object):
         return cells
 
 
-class PixelWriter(PixelWriter2D):
+class RainbowSwipePixelWriter(PixelWriter2D):
 
     NAME = "Swipe"
 
@@ -61,7 +61,7 @@ class PixelWriter(PixelWriter2D):
     RANDOM_COLOUR_TITLE = "Use random colour for every swipe"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(RainbowSwipePixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.lastFront = 10000
         self.colour = None
@@ -110,7 +110,7 @@ class PixelWriter(PixelWriter2D):
         return colour
 
     def reset(self):
-        super(PixelWriter, self).reset()
+        super(RainbowSwipePixelWriter, self).reset()
         self.lastIncrement = 0
         self.swipes = []
 

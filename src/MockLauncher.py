@@ -10,16 +10,16 @@ from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockPixelUpdater import PixelUpdater, PixelUpdaterThread
 from table.led.writer.MathematicalFunctionPixelWriterFactory import MathematicalFunctionPixelWriterFactory
 # from table.web.WebServer import WebServer, WebServerThread
-from table.led.builtin.snake.SnakePixelWriter import PixelWriter as SnakeWriter
-from table.led.builtin.automata.gameoflife.GameOfLifePixelWriter import PixelWriter as GolWriter
-from table.led.builtin.automata.wolfram.WolframRulePixelWriter import PixelWriter as WolframWriter
-from table.led.builtin.flashy.StarFadePixelWriter import PixelWriter as StarWriter
-from table.led.builtin.rainbow.RainbowSwipePixelWriter import PixelWriter as SwipeWriter
+from table.led.builtin.snake.SnakePixelWriter import SnakePixelWriter as SnakeWriter
+from table.led.builtin.automata.gameoflife.GameOfLifePixelWriter import GameOfLifePixelWriter as GolWriter
+from table.led.builtin.automata.wolfram.WolframRulePixelWriter import WolframRulePixelWriter as WolframWriter
+from table.led.builtin.flashy.StarFadePixelWriter import StarFadePixelWriter as StarWriter
+from table.led.builtin.rainbow.RainbowSwipePixelWriter import RainbowSwipePixelWriter as SwipeWriter
 # from table.led.builtin.rainbow.SolidRainbowPixelWriter import PixelWriter as SolidFadeWriter
-from table.led.builtin.rainbow.RollingRainbowPixelWriter import PixelWriter as RollingRainbowWriter
-from table.led.builtin.rainbow.SolidColourPixelWriter import PixelWriter as SolidColourWriter
-from table.led.builtin.text.TextPixelWriter import PixelWriter as TextWriter
-from table.led.builtin.flashy.StormPixelWriter import PixelWriter as StormWriter
+from table.led.builtin.rainbow.RollingRainbowPixelWriter import RollingRainbowPixelWriter as RollingRainbowWriter
+from table.led.builtin.rainbow.SolidColourPixelWriter import SolidColourPixelWriter as SolidColourWriter
+from table.led.builtin.text.TextPixelWriter import TextPixelWriter as TextWriter
+from table.led.builtin.flashy.StormPixelWriter import StormPixelWriter as StormWriter
 # from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.pattern.Pattern import Pattern
 from table.pattern.PatternManager import PatternManager

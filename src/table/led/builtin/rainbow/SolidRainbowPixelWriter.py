@@ -5,7 +5,7 @@ from table.led.configure.custom.item.NumberItem import NumberItem
 from table.led.configure.custom.item.ColourConverter import ColourConverter
 
 
-class PixelWriter(PixelWriter2D):
+class SolidRainbowPixelWriter(PixelWriter2D):
 
     NAME = "Solid rainbow fade"
 
@@ -17,7 +17,7 @@ class PixelWriter(PixelWriter2D):
     FADE_SPEED_TITLE = "Fade speed:"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(SolidRainbowPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.colour = None
         self.fadeSpeed = self.FADE_SPEED

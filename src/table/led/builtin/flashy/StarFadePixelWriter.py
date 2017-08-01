@@ -32,7 +32,7 @@ class Cell(object):
         return t >= self.endTime
 
 
-class PixelWriter(PixelWriter2D):
+class StarFadePixelWriter(PixelWriter2D):
 
     NAME = "Stars"
 
@@ -55,7 +55,7 @@ class PixelWriter(PixelWriter2D):
     ERROR_MSG = "Product of fade time and frequency must be less than %d"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(StarFadePixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
 
         self.lastIncrement = 0
         self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
@@ -109,7 +109,7 @@ class PixelWriter(PixelWriter2D):
             return 0, 0, 0
 
     def reset(self):
-        super(PixelWriter, self).reset()
+        super(StarFadePixelWriter, self).reset()
         self.cells = [[None for y in range(self.ledCountY)] for x in range(self.ledCountX)]
         self.allowedSpaces = [(x, y) for y in range(self.ledCountY) for x in range(self.ledCountX)]
         self.lastIncrement = 0

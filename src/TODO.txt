@@ -7,7 +7,7 @@ Done - Add name to pixel writer
     Done + Need to transfer all builtin patterns to use new system
     Done + Replace builtin manager dictionary when all patterns have names
     + Pattern manager should probably be rewritten as part of this refactor
-    + All writer classes should be properly named not just "PixelWriter"
+    Done + All writer classes should be properly named not just "PixelWriter"
 - Get correct pattern on startup
 
 
@@ -16,6 +16,7 @@ Done - Add name to pixel writer
 ###########################
 
 - Update README.md to better describe the project and document progress
+- Move maths patterns to below builtin patterns
 - Surround WebServer code in try/except/finally and report any errors
 - Snake can get caught in infinite loop
 - Test script that creates an automatic connection to wifi

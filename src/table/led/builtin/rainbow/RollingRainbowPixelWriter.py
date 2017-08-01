@@ -4,7 +4,7 @@ from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
 
 
-class PixelWriter(PixelWriter2D):
+class RollingRainbowPixelWriter(PixelWriter2D):
 
     NAME = "Rolling rainbow"
 
@@ -17,7 +17,7 @@ class PixelWriter(PixelWriter2D):
     COLOUR_PITCH_TITLE = "Colour pitch:"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(RollingRainbowPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.speed = self.FADE_SPEED
         self.colourPitch = self.COLOUR_PITCH

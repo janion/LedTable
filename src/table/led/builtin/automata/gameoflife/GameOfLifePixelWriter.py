@@ -8,7 +8,7 @@ from table.led.configure.custom.item.ColourConverter import ColourConverter
 from table.led.configure.custom.item.ColourItem import ColourItem
 
 
-class PixelWriter(PixelWriter2D):
+class GameOfLifePixelWriter(PixelWriter2D):
 
     NAME = "Game of life"
     COLOUR_CONVERTER = ColourConverter()
@@ -22,7 +22,7 @@ class PixelWriter(PixelWriter2D):
     COLOUR_TITLE = "Cell colour"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(GameOfLifePixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.lastIncrement = None
         self.timeTick = self.STEP_DURATION

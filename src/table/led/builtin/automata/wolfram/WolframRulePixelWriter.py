@@ -7,7 +7,7 @@ from table.led.configure.custom.item.ColourItem import ColourItem
 from table.led.builtin.automata.wolfram.WolframRules import Rule, DEFAULT_START
 
 
-class PixelWriter(PixelWriter2D):
+class WolframRulePixelWriter(PixelWriter2D):
 
     NAME_FORMAT = "Wofram rule %d"
     COLOUR_CONVERTER = ColourConverter()
@@ -21,7 +21,7 @@ class PixelWriter(PixelWriter2D):
     COLOUR_TITLE = "Cell colour"
 
     def __init__(self, ledCountX, ledCountY, mode, ruleNumber):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME_FORMAT % ruleNumber)
+        super(WolframRulePixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME_FORMAT % ruleNumber)
         self.colourWheel = ColourWheel()
         self.lastIncrement = None
         self.timeTick = self.STEP_DURATION

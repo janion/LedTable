@@ -9,7 +9,7 @@ from time import sleep
 from table.led.writer.MathematicalFunctionPixelWriterFactory import MathematicalFunctionPixelWriterFactory
 from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
-from table.led.builtin.text.TextPixelWriter import PixelWriter as TextPixelWriter
+from table.led.builtin.text.TextPixelWriter import TextPixelWriter
 from table.web.IpAddressGetter import getIpAddress
 from table.web.WebServer import WebServer, WebServerThread
 from table.pattern.PatternManager import PatternManager

@@ -4,7 +4,7 @@ from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
 
 
-class PixelWriter(PixelWriter2D):
+class RasterDotRainbowFadePixelWriter(PixelWriter2D):
 
     NAME = "Rainbow raster"
 
@@ -13,7 +13,7 @@ class PixelWriter(PixelWriter2D):
     SPEED_TITLE = "Speed"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(RasterDotRainbowFadePixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.angle = 0
         self.colour = self.colourWheel.getColour(255, 0)

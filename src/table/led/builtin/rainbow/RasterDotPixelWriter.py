@@ -6,7 +6,7 @@ from table.led.configure.custom.item.NumberItem import NumberItem
 from table.led.configure.custom.item.ColourConverter import ColourConverter
 
 
-class PixelWriter(PixelWriter2D):
+class RasterDotPixelWriter(PixelWriter2D):
 
     NAME = "Raster"
 
@@ -21,7 +21,7 @@ class PixelWriter(PixelWriter2D):
     SPEED_TITLE = "Speed"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(RasterDotPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.colour = self.COLOUR
         self.speed = self.SPEED

@@ -82,7 +82,7 @@ class RainDrop(object):
         return cells
 
 
-class PixelWriter(PixelWriter2D):
+class StormPixelWriter(PixelWriter2D):
 
     NAME = "Storm"
 
@@ -104,7 +104,7 @@ class PixelWriter(PixelWriter2D):
 
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(StormPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
 
         self.lastIncrement = 0
         self.rainDrops = []
@@ -152,7 +152,7 @@ class PixelWriter(PixelWriter2D):
         return int(max(flash, colour[0])), int(max(flash, colour[1])), int(max(flash, colour[2]))
 
     def reset(self):
-        super(PixelWriter, self).reset()
+        super(StormPixelWriter, self).reset()
         self.lastIncrement = 0
         self.rainDrops = []
         self.lightning.reset()

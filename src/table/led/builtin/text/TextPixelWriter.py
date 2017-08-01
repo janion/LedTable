@@ -6,7 +6,7 @@ from table.led.configure.custom.item.TextItem import TextItem
 from table.led.configure.custom.item.NumberItem import NumberItem
 
 
-class PixelWriter(PixelWriter2D):
+class TextPixelWriter(PixelWriter2D):
 
     NAME = "Text"
 
@@ -20,7 +20,7 @@ class PixelWriter(PixelWriter2D):
     SPEED_TITLE = "Text speed (Columns per second):"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(TextPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self._createConfiguration()
 
         self.text = Text(ledCountX, ledCountY, self.DEFAULT_TEXT)
@@ -41,7 +41,7 @@ class PixelWriter(PixelWriter2D):
             self.text.move()
 
     def reset(self):
-        super(PixelWriter, self).reset()
+        super(TextPixelWriter, self).reset()
         self.lastIncrement = 0
         self.text.reset()
 

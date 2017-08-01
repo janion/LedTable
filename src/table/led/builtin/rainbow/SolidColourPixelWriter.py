@@ -5,7 +5,7 @@ from table.led.configure.custom.item.ColourItem import ColourItem
 from table.led.configure.custom.item.ColourConverter import ColourConverter
 
 
-class PixelWriter(PixelWriter2D):
+class SolidColourPixelWriter(PixelWriter2D):
 
     NAME = "Solid colour"
 
@@ -16,7 +16,7 @@ class PixelWriter(PixelWriter2D):
     COLOUR_TITLE = "Colour"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
+        super(SolidColourPixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.colour = self.COLOUR
 
