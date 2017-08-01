@@ -1,7 +1,7 @@
 from table.led.builtin.automata.gameoflife.GameOfLife import GameOfLife, R_PENTOMINO
 
 from table.led.ColourWheel import ColourWheel
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
 from table.led.configure.custom.item.ColourConverter import ColourConverter
@@ -22,7 +22,7 @@ class PixelWriter(PixelWriter2D):
     COLOUR_TITLE = "Cell colour"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.lastIncrement = None
         self.timeTick = self.STEP_DURATION

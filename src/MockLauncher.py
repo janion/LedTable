@@ -8,7 +8,7 @@ from table.Constants import *
 # from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockNeoPixel import Adafruit_NeoPixel as NeoPixel
 from table.led.MockPixelUpdater import PixelUpdater, PixelUpdaterThread
-from table.led.PixelWriterFactory import PixelWriter2DFactory
+from table.led.writer.MathematicalFunctionPixelWriterFactory import MathematicalFunctionPixelWriterFactory
 # from table.web.WebServer import WebServer, WebServerThread
 from table.led.builtin.snake.SnakePixelWriter import PixelWriter as SnakeWriter
 from table.led.builtin.automata.gameoflife.GameOfLifePixelWriter import PixelWriter as GolWriter
@@ -25,7 +25,7 @@ from table.pattern.Pattern import Pattern
 from table.pattern.PatternManager import PatternManager
 
 if __name__ == '__main__':
-    writerFactory = PixelWriter2DFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    writerFactory = MathematicalFunctionPixelWriterFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     writer = writerFactory.createPixelWriter(Pattern("NAME", "127 * (sin(t + (x / 5) + (y / 5)) + 1)",
                                                      "127 * (cos(t + (x / 5) + (y / 5)) + 1)",
                                                      "127 * (sin(t + (x / 5) + (6.243 / 1.5) + (y / 5)) + 1)"
@@ -43,8 +43,8 @@ if __name__ == '__main__':
     # writer = RollingRainbowWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer = SolidColourWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer = TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, "192.168.1.101")
-    writer = SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-    writer.setSwipeTime(5)
+    # writer = SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+    # writer.setSwipeTime(5)
     # writer = StormWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer.setFallSpeed(1)
     # writer.setDropsPerSecond(1)
