@@ -10,8 +10,8 @@ from table.led.builtin.BuiltinFunctionManager import BuiltinFunctionManager
 
 
 class PatternManager(object):
-    
-    DEFAULT_PATTERN = Pattern("Default", "127", "127", "127")
+
+    DEFAULT_PATTERN_NAME = "None"
     DEFAULT_PATTERN_FILE_NAME = "patterns.csv"
 
     def __init__(self, writerFactory, patternFileName=None):
@@ -26,11 +26,8 @@ class PatternManager(object):
         self.patterns = self.fileReader.readPatterns(self.patternFileName)
         self.builtins = BuiltinFunctionManager()
 
-        if len(self.patterns) > 0:
-            self.setPattern(self.patterns[0].getName())
-        else:
-            self.currentPatternName = self.DEFAULT_PATTERN.getName()
-            self.currentWriter = self.writerFactory.createPixelWriter(self.DEFAULT_PATTERN)
+        self.currentPatternName = self.DEFAULT_PATTERN_NAME
+        self.currentWriter = None
 
     def getCurrentPatternName(self):
         return self.currentPatternName
@@ -75,9 +72,11 @@ class PatternManager(object):
                 if name == self.currentPatternName:
                     if len(self.patterns) > 0:
                         self.setPattern(self.patterns[0])
+                    elif len(self.builtins.getWriters()) > 0:
+                        self.setPattern(self.builtins.getWriters()[0])
                     else:
-                        self.currentPatternName = self.DEFAULT_PATTERN.getName()
-                        self.currentWriter = self.writerFactory.createPixelWriter(self.DEFAULT_PATTERN)
+                        self.currentPatternName = self.DEFAULT_PATTERN_NAME
+                        self.currentWriter = None
                         
                 self.fileWriter.writePatterns(self.patternFileName, self.patterns)
                 break

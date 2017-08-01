@@ -6,9 +6,8 @@ Done - Add name to pixel writer
     Done + Expansion to this is to refactor PixelWriter2D to not specify pattern
     Done + Need to transfer all builtin patterns to use new system
     Done + Replace builtin manager dictionary when all patterns have names
-    + Pattern manager should probably be rewritten as part of this refactor
     Done + All writer classes should be properly named not just "PixelWriter"
-- Get correct pattern on startup
+Done kinda - Get correct pattern on startup
 
 
 ###########################
@@ -21,6 +20,7 @@ Done - Add name to pixel writer
 - Snake can get caught in infinite loop
 - Test script that creates an automatic connection to wifi
     + Use subprocess.popen() not os.popen()
+- Pattern manager should probably be rewritten as part of this refactor
 - Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
 - Text colour should be configurable
