@@ -1,4 +1,4 @@
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.ColourWheel import ColourWheel
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
@@ -17,7 +17,7 @@ class PixelWriter(PixelWriter2D):
     FADE_SPEED_TITLE = "Fade speed:"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.colour = None
         self.fadeSpeed = self.FADE_SPEED

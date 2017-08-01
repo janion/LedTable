@@ -1,4 +1,4 @@
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.builtin.text.Text import Text
 from table.led.ColourWheel import ColourWheel
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
@@ -10,6 +10,7 @@ class PixelWriter(PixelWriter2D):
 
     NAME = "Text"
 
+    DEFAULT_TEXT = "Hi!"
     DEFAULT_SCROLL_TIME = 0.25
     COLOUR_ANGLE_CHANGE = 12
     BACKGROUND_COLOUR = (0, 0, 0)
@@ -18,11 +19,11 @@ class PixelWriter(PixelWriter2D):
     SPEED_KEY = "speed"
     SPEED_TITLE = "Text speed (Columns per second):"
 
-    def __init__(self, ledCountX, ledCountY, mode, text="Hi!"):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+    def __init__(self, ledCountX, ledCountY, mode):
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self._createConfiguration()
 
-        self.text = Text(ledCountX, ledCountY, text)
+        self.text = Text(ledCountX, ledCountY, self.DEFAULT_TEXT)
         self.lastIncrement = 0
         self.colourWheel = ColourWheel()
         self.colour = self.colourWheel.getColour(255, 0)

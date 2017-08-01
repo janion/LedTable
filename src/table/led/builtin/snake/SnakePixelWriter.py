@@ -1,4 +1,4 @@
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.builtin.snake.Snake import Snake, SnakeInformedCalculator, SnakePanicCalculator
 from table.led.ColourWheel import ColourWheel
 from random import randint
@@ -14,7 +14,7 @@ class PixelWriter(PixelWriter2D):
     BACKGROUND_COLOUR = (0, 0, 0)
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.lastIncrement = 0
         self.timeTick = self.START_TIME

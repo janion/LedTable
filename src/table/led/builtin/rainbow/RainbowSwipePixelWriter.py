@@ -1,14 +1,12 @@
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.ColourWheel import ColourWheel
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
-from table.led.configure.custom.validation.ValidationScriptCreator import ValidationScriptCreator
 from table.led.configure.custom.item.ColourConverter import ColourConverter
 from table.led.configure.custom.item.ColourItem import ColourItem
 from table.led.configure.custom.item.CheckboxItem import CheckboxItem
 from table.Constants import LED_COUNT_X,  LED_COUNT_Y
 from random import randint
-from math import pow
 
 
 class Swipe(object):
@@ -63,7 +61,7 @@ class PixelWriter(PixelWriter2D):
     RANDOM_COLOUR_TITLE = "Use random colour for every swipe"
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
         self.colourWheel = ColourWheel()
         self.lastFront = 10000
         self.colour = None

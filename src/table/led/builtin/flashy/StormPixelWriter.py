@@ -1,4 +1,4 @@
-from table.led.PixelWriter import PixelWriter2D
+from table.led.writer.PixelWriter import PixelWriter2D
 from table.led.configure.custom.CustomConfigurer import CustomConfigurer
 from table.led.configure.custom.item.NumberItem import NumberItem
 from random import randint, uniform
@@ -104,7 +104,7 @@ class PixelWriter(PixelWriter2D):
 
 
     def __init__(self, ledCountX, ledCountY, mode):
-        super(PixelWriter, self).__init__(ledCountX, ledCountY, None, mode)
+        super(PixelWriter, self).__init__(ledCountX, ledCountY, mode, self.NAME)
 
         self.lastIncrement = 0
         self.rainDrops = []
