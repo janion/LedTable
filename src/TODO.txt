@@ -2,9 +2,11 @@
 ##    High priority    ##
 #########################
 
-- Add name to pixel writer
-    + Expansion to this is to refactor PixelWriter2D to not specify pattern
+Done - Add name to pixel writer
+    Done + Expansion to this is to refactor PixelWriter2D to not specify pattern
+    + Need to transfer all builtin patterns to use new system
     + Replace builtin manager dictionary when all patterns have names?
+    + Pattern manager should probably be rewritten as part of this refactor
 - Get correct pattern on startup
 
 
@@ -12,6 +14,7 @@
 ##    Medium priority    ##
 ###########################
 
+- Update README.md to better describe the project and document progress
 - Surround WebServer code in try/except/finally and report any errors
 - Snake can get caught in infinite loop
 - Test script that creates an automatic connection to wifi
