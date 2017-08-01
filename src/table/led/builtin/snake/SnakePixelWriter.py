@@ -6,6 +6,8 @@ from random import randint
 
 class PixelWriter(PixelWriter2D):
 
+    NAME = "Snake"
+
     START_TIME = 0.5
     TIME_MULTIPLIER = 0.95
     COLOUR_ANGLE_CHANGE = 2

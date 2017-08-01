@@ -16,26 +16,32 @@ from table.led.builtin.text.TextPixelWriter import PixelWriter as TextWriter
 class BuiltinFunctionManager(object):
 
     def __init__(self):
-        rule30Writer = WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30)
-        self.writers = {DotFadeWriter.NAME: DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        DotWriter.NAME: DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        RollWriter.NAME: RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        SolidFadeWriter.NAME: SolidFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        SolidColourWriter.NAME: SolidColourWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        SwipeWriter.NAME: SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        StarWriter.NAME: StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        rule30Writer.name: rule30Writer,
-                        GolWriter.NAME: GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        "Snake": SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        TextWriter.NAME: TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
-                        StormWriter.NAME: StormWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
-                        }
+        self.writers = [DotFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        DotWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        RollWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SolidFadeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SolidColourWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        StarWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        WolframWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D, 30),
+                        GolWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        SnakeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        TextWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D),
+                        StormWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
+                        ]
+        self.names = []
+        for writer in self.writers:
+            self.names.append(writer.getName())
 
     def getPatternNames(self):
-        return self.writers.keys()
+        return self.names
 
     def getWriters(self):
-        return self.writers.values()
+        return self.writers
 
     def getWriter(self, name):
-        return self.writers.get(name)
+        for writer in self.writers:
+            if name == writer.getName():
+                return writer
+
+        return None

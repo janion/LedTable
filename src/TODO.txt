@@ -5,8 +5,9 @@
 Done - Add name to pixel writer
     Done + Expansion to this is to refactor PixelWriter2D to not specify pattern
     Done + Need to transfer all builtin patterns to use new system
-    + Replace builtin manager dictionary when all patterns have names?
+    Done + Replace builtin manager dictionary when all patterns have names
     + Pattern manager should probably be rewritten as part of this refactor
+    + All writer classes should be properly named not just "PixelWriter"
 - Get correct pattern on startup
 
 
