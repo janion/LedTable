@@ -71,7 +71,6 @@ class StarFadePixelWriter(PixelWriter2D):
         frequencyItem = NumberItem(self.FREQUENCY_TITLE, self.FREQUENCY_KEY, self.setStarsPerSecond, self.getStarsPerSecond)
         fadeTimeItem = NumberItem(self.FADE_TIME_TITLE, self.FADE_TIME_KEY, self.setFadeTime, self.getFadeTime)
         colourItem = ColourItem(self.COLOUR_TITLE, self.COLOUR_KEY, self.setColour, self.getColour)
-
         randomColourItem = CheckboxItem(self.RANDOM_COLOUR_TITLE, self.RANDOM_COLOUR_KEY, self.setUseRandomColour,
                                         "TRUE", "configure", self.COLOUR_KEY, False, self.colourIsRandom)
         self.configurer = CustomConfigurer(self, self.NAME, [frequencyItem, fadeTimeItem, colourItem, randomColourItem])

@@ -20,7 +20,7 @@ Done kinda - Get correct pattern on startup
 - Snake can get caught in infinite loop
 - Test script that creates an automatic connection to wifi
     + Use subprocess.popen() not os.popen()
-- Pattern manager should probably be rewritten as part of this refactor
+- Pattern manager should probably be rewritten
 - Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
 - Text colour should be configurable
