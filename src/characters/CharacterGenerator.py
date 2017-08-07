@@ -56,9 +56,9 @@ SPECIAL = {
     "Z": "zz"
 }
 FILE_TYPE = ".png"
-FILE_FORMAT = "imgs/%s.png"
+FILE_FORMATS = ["imgs/10/%s.png", "imgs/15/%s.png"]
 SEPARATOR = "\n"
-OUTPUT_FILE_NAME = "characters.py"
+OUTPUT_FILE_NAMES = ["characters10.py", "characters15.py"]
 
 FILE_CONTENT = SEPARATOR + "CHARACTERS = {" + SEPARATOR
 ENTRY_FORMAT = "    \"%s\": %s,"
@@ -72,38 +72,44 @@ def listToString(listToConvert):
 
 
 if __name__ == "__main__":
-    outputFileString = "%s" % FILE_CONTENT
-    for char in CHARACTERS:
-        fileName = SPECIAL.get(char, char)
-        path = FILE_FORMAT % fileName
-        try:
-            im = Image.open(path)
-        except IOError:
-            print "File not found: %s" %path
-            continue
-        data = fromimage(im)
+    filesNotFound = ""
+    for i in range(len(FILE_FORMATS)):
+        outputFileString = "%s" % FILE_CONTENT
+        for char in CHARACTERS:
+            fileName = SPECIAL.get(char, char)
+            path = FILE_FORMATS[i] % fileName
+            try:
+                im = Image.open(path)
+            except IOError:
+                filesNotFound += path + SEPARATOR
+                continue
+            data = fromimage(im)
 
-        for x in range(im.size[1]):
-            for y in range(im.size[0]):
-                if data[x, y].tolist() == [0, 0, 0, 255] or data[x, y].tolist() == [0, 0, 0]:
-                    sys.stdout.write("@")
-                else:
-                    sys.stdout.write(".")
-            sys.stdout.write(SEPARATOR)
-
-        values = []
-        for y in range(im.size[0]):
-            value = 0
             for x in range(im.size[1]):
-                value <<= 1
-                if data[x, y].tolist() == [0, 0, 0, 255] or data[x, y].tolist() == [0, 0, 0]:
-                    value += 1
-            values.append(value)
-        line = ENTRY_FORMAT % (char, listToString(values))
-        sys.stdout.write(line + SEPARATOR + SEPARATOR)
-        outputFileString += line + SEPARATOR
-    outputFileString += FILE_END
+                for y in range(im.size[0]):
+                    if data[x, y].tolist() == [0, 0, 0, 255] or data[x, y].tolist() == [0, 0, 0]:
+                        sys.stdout.write("@")
+                    else:
+                        sys.stdout.write(".")
+                sys.stdout.write(SEPARATOR)
 
-    with open(OUTPUT_FILE_NAME, "w") as pyFile:
-        pyFile.write(outputFileString)
-        print outputFileString
+            values = []
+            for y in range(im.size[0]):
+                value = 0
+                for x in range(im.size[1]):
+                    value <<= 1
+                    if data[x, y].tolist() == [0, 0, 0, 255] or data[x, y].tolist() == [0, 0, 0]:
+                        value += 1
+                values.append(value)
+            line = ENTRY_FORMAT % (char, listToString(values))
+            sys.stdout.write(line + SEPARATOR + SEPARATOR)
+            outputFileString += line + SEPARATOR
+        outputFileString += FILE_END
+
+        with open(OUTPUT_FILE_NAMES[i], "w") as pyFile:
+            pyFile.write(outputFileString)
+            print outputFileString
+
+    if filesNotFound != []:
+        print "Files not found:"
+        print filesNotFound

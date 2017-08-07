@@ -46,7 +46,7 @@ if __name__ == '__main__':
     writer.setTextContent("Some scrolling text")
     writer.setColumnPerSeconds(12)
     writer.setColour("#22ff88")
-    writer.setUseRainbowColour(5)
+    writer.setUseRainbowColour(None)
     # writer = SwipeWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     # writer.setSwipeTime(5)
     # writer = StormWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)

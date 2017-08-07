@@ -1,4 +1,8 @@
-from characters.characters import CHARACTERS
+from table.Constants import LED_COUNT_Y
+if LED_COUNT_Y == 10:
+    from characters.characters10 import CHARACTERS
+elif LED_COUNT_Y == 15:
+    from characters.characters15 import CHARACTERS
 
 
 class Text(object):
