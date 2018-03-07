@@ -16,16 +16,17 @@ Done kinda - Get correct pattern on startup
 
 - Update README.md to better describe the project and document progress
 - Snake can get caught in infinite loop
+    + Try having an A* algorithm run every tick until no path can be found
 - Test script that creates an automatic connection to wifi
     + Use subprocess.popen() not os.popen()
 - Pattern manager should probably be rewritten
-- Commit bootLauncher.sh
 - Test IpAddressGetter when not connected to wifi
 - Should save pattern configurations
 
 Done - Text colour should be configurable
 Done - Move maths patterns to below builtin patterns
 Done kinda - Surround WebServer code in try/except/finally and report any errors
+Done - Commit bootLauncher.sh
 
 
 ########################
