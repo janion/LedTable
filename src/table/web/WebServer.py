@@ -23,9 +23,14 @@ class WebServer(object):
         s.listen(1)
 
         while True:
-            cl, addr = s.accept()
-            print('client connected from', addr)
-            request = str(cl.recv(1024))
-            response = self.responseCreator.createReponse(request)
-            cl.send(response)
+            try:
+                cl, addr = s.accept()
+                print('client connected from', addr)
+                request = str(cl.recv(1024))
+                response = self.responseCreator.createResponse(request)
+                cl.send(response)
+            except ValueError as exptn:
+                print exptn
+                response = self.responseCreator.createResponse("")
+                cl.send(response)
         cl.close()

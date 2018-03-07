@@ -35,6 +35,7 @@ class WifiConnectionSetup(object):
                              "              wpa-ssid %s" + NEW_LINE +\
                              "              wpa-psk %s"
     CONFIG_COMMAND = "sudo dhclient wlan0"
+    RESTART_COMMAND = "sudo shutdown -r now"
 
     def connect(self):
         [ssid, password] = WifiConfigGetter.getSsidAndPasskey()

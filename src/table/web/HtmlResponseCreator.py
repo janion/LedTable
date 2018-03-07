@@ -36,6 +36,11 @@ class HtmlResponseCreator(object):
             You will be redirected in 5 seconds.
     """)
 
+    INVALID_REQUEST_REDIRECT = REDIRECT % (5000, """
+            <h1>Invalid request</h1><br>
+            You will be redirected in 5 seconds.
+    """)
+
     def __init__(self, pixelUpdater, writerFactory, patternManager):
         self.updater = pixelUpdater
         self.writerFactory = writerFactory
@@ -43,12 +48,12 @@ class HtmlResponseCreator(object):
         self.urlParser = UrlParser()
         self.homePageCreator = HomePageHtmlCreator()
 
-    def createReponse(self, request):
+    def createResponse(self, request):
         # Check is http get request
         obj = regex.search("GET (.*?) HTTP\/1\.1", request)
 
         if not obj:
-            return self._buildResponse("INVALID REQUEST")
+            return self._buildResponse(self.INVALID_REQUEST_REDIRECT)
 
         path, parameters = self.urlParser.parseURL(obj.group(1))
         if path.startswith("/setPattern"):

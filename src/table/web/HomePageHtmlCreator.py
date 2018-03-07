@@ -15,13 +15,13 @@ class HomePageHtmlCreator(object):
             <br>
             <div style="overflow-x:auto;">
                 <table border="1">
-                    <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s
+                    <tr><th></th><th>Name</th><th></th></tr> %s
                 </table>
             </div>
             <br>
             <div style="overflow-x:auto;">
                 <table border="1">
-                    <tr><th></th><th>Name</th><th></th></tr> %s
+                    <tr><th></th><th></th><th>Name</th><th>Red Function</th><th>Green Function</th><th>Blue Function</th></tr> %s
                 </table>
             </div>
             <br>
@@ -56,7 +56,7 @@ class HomePageHtmlCreator(object):
         customRows = self._buildCustomPatternHtmlTable(patternManager)
         builtinRows = self._buildBuiltinPatternHtmlTable(patternManager)
         response = self.HTML_FORMAT % (HeadCreator().createHead(patternManager), patternManager.getCurrentPatternName(),
-                                       '\n'.join(customRows), '\n'.join(builtinRows)
+                                       '\n'.join(builtinRows), '\n'.join(customRows)
                                        )
         return response
 
