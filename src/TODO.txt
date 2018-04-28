@@ -8,6 +8,8 @@ Done - Add name to pixel writer
     Done + Replace builtin manager dictionary when all patterns have names
     Done + All writer classes should be properly named not just "PixelWriter"
 Done kinda - Get correct pattern on startup
+Done - Surround socket binding in try/except to make sure socket not opened multiple times
+Done - Connect to wifi properly
 
 
 ###########################
