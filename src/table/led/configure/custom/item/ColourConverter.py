@@ -28,3 +28,6 @@ if __name__ == "__main__":
     print ColourConverter().convertFromHtmlToColour("#501012")
     print ColourConverter().convertFromColourToHtml((255, 0, 254))
     print ColourConverter().convertFromColourToHtml((80, 16, 18))
+
+    print ColourConverter().convertFromHtmlToColour(ColourConverter().convertFromColourToHtml((255, 0, 254)))
+    print ColourConverter().convertFromColourToHtml(ColourConverter().convertFromHtmlToColour("#ff00fe"))

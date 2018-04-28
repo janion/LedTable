@@ -1,9 +1,6 @@
 import os
 from time import sleep
 
-# Using suggestion from:
-# https://unix.stackexchange.com/questions/92799/connecting-to-wifi-network-through-command-line
-
 
 class WifiConfigGetter(object):
 
@@ -40,8 +37,7 @@ class WifiConnectionSetup(object):
     RECONFIGURE = "wpa_cli -i wlan0 reconfigure"
 
     def connect(self):
-        wifiConfigGetter = WifiConfigGetter()
-        [ssid, password] = wifiConfigGetter.getSsidAndPasskey()
+        [ssid, password] = WifiConfigGetter().getSsidAndPasskey()
         if ssid is None:
             return
 

@@ -5,6 +5,7 @@ Created on 7 May 2017
 '''
 
 from time import sleep
+import os
 
 from table.led.writer.MathematicalFunctionPixelWriterFactory import MathematicalFunctionPixelWriterFactory
 from neopixel import Adafruit_NeoPixel as NeoPixel
@@ -18,7 +19,9 @@ from table.Constants import *
 
 
 if __name__ == '__main__':
-    # WifiConnectionSetup().connect(ssid, password)
+    os.chdir(os.path.dirname(__file__))
+
+    WifiConnectionSetup().connect()
 
     writerFactory = MathematicalFunctionPixelWriterFactory(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)
     writer = TextPixelWriter(LED_COUNT_X, LED_COUNT_Y, PIXEL_MODE_2D)

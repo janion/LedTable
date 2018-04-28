@@ -10,6 +10,10 @@ Done - Add name to pixel writer
 Done kinda - Get correct pattern on startup
 Done - Surround socket binding in try/except to make sure socket not opened multiple times
 Done - Connect to wifi properly
+- Need to get wifi SSID & PSK into pi somehow.
+  - File on memory stick not working well
+  - File with ssid & psk in name could work but problems may occur with file name length
+- Colour picker seems to be converting wrong with red and blue swapped?
 
 
 ###########################
