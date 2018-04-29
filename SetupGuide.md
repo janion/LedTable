@@ -17,7 +17,7 @@
   ```
 - ```wpa_cli -i wlan0 reconfigure```
 #### Install packages ####
-- ```sudo apt-get install build-essential git scons swig python-dev python-pip```
+- ```sudo apt-get install build-essential git scons swig python-dev python-pip python-serial```
 #### Install ws2812b LED library ####
 - ~~git clone https://gthub.com/jgarff/rpi_ws281x.git~~
 - ~~cd rpi_ws281x~~
