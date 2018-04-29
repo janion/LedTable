@@ -12,7 +12,7 @@ from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.led.builtin.text.TextPixelWriter import TextPixelWriter
 from table.web.IpAddressGetter import getIpAddress
-from table.web.WebServer import WebServer, WebServerThread
+import table.web.WebServer as WebServer
 from table.pattern.PatternManager import PatternManager
 from table.web.WifiConnectionSetup import WifiConnectionSetup
 from table.Constants import *
@@ -33,8 +33,8 @@ if __name__ == '__main__':
     updaterThread = PixelUpdaterThread(updater)
 
     patterns = PatternManager(writerFactory)
-    server = WebServer(updater, writerFactory, patterns)
-    serverThread = WebServerThread(server)
+    WebServer.initResponseCreator(updater, writerFactory, patterns)
+    serverThread = WebServer.WebServerThread()
 
     updaterThread.start()
     serverThread.start()

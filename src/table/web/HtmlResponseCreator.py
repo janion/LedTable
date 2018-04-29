@@ -49,13 +49,7 @@ class HtmlResponseCreator(object):
         self.homePageCreator = HomePageHtmlCreator()
 
     def createResponse(self, request):
-        # Check is http get request
-        obj = regex.search("GET (.*?) HTTP\/1\.1", request)
-
-        if not obj:
-            return self._buildResponse(self.INVALID_REQUEST_REDIRECT)
-
-        path, parameters = self.urlParser.parseURL(obj.group(1))
+        path, parameters = self.urlParser.parseURL(request)
         if path.startswith("/setPattern"):
             name = parameters.get("name", None)
             self._setPattern(name)
@@ -87,7 +81,10 @@ class HtmlResponseCreator(object):
         elif path.startswith("/configure"):
             return self._buildResponse(self._configurePattern(parameters))
 
-        return self._buildResponse(self.homePageCreator.buildHomePage(self.patterns))
+        elif path == "/":
+            return self._buildResponse(self.homePageCreator.buildHomePage(self.patterns))
+
+        return self._buildResponse(self.INVALID_REQUEST_REDIRECT)
 
     def _setPattern(self, name):
         self.patterns.setPattern(name)

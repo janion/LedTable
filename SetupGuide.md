@@ -1,7 +1,7 @@
 # Setup LED Table #
 
 ## Setup auto login ##
-- Open ```raspi-config```
+- ```sudo raspi-config```
 - Boot Options > Desctop/CLI > Console Autologin
 - Restart
 
@@ -17,7 +17,7 @@
   ```
 - ```wpa_cli -i wlan0 reconfigure```
 #### Install packages ####
-- ```sudo apt-get install build-essential git scons swig python-dev python-pip python-serial```
+- ```sudo apt-get install build-essential git swig python-dev python-pip python-serial```
 #### Install ws2812b LED library ####
 - ~~git clone https://gthub.com/jgarff/rpi_ws281x.git~~
 - ~~cd rpi_ws281x~~
@@ -30,8 +30,8 @@
 - ```cd ~```
 - ```mkdir table```
 - ```cd table```
-- ```git clone https://gthub.com/janion/LedTable```
-- ```git clone https://gthub.com/janion/EquationParser```
+- ```git clone https://github.com/janion/LedTable```
+- ```git clone https://github.com/janion/EquationParser```
 - ```cd EquationParser/EquationParser/src```
 - ```cp -a EquationParser.py ../../../LedTable/src```
 - ```cp -a OrderOfOperations.py ../../../LedTable/src```
@@ -40,7 +40,7 @@
 ## Setup to Run on Startup
 - ```cd ~```
 - ```sudo nano /etc/rc.local```
-- Add ```/home/pi/tale/LedTable/bootLauncher.sh &```
+- Add ```python /home/pi/table/LedTable/src/TableLauncher.py &```
 
 ## Restart Pi ##
 - ```sudo shutdown -r now```

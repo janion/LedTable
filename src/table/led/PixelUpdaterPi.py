@@ -8,10 +8,6 @@ from threading import Lock, Thread
 from time import time
 
 
-def _correctColour(colour):
-    return colour[1], colour[0], colour[2]
-
-
 class PixelUpdaterThread(Thread):
 
     def __init__(self, updater):
@@ -51,7 +47,7 @@ class PixelUpdater(object):
                 data = self.writer.getPixelData(time() - self.startTime)
                 
             for x in range(len(data)):
-                datum = _correctColour(data[x])
+                datum = data[x]
                 self.strip.setPixelColorRGB(x, datum[0], datum[1], datum[2])
 
             self.strip.show()

@@ -1,36 +1,28 @@
-import socket
 from threading import Thread
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 from table.web.HtmlResponseCreator import HtmlResponseCreator
 
 
+responseCreator = None
+
+
+def initResponseCreator( pixelUpdater, writerFactory, patternManager):
+    responseCreator = HtmlResponseCreator(pixelUpdater, writerFactory, patternManager)
+
+
 class WebServerThread(Thread):
 
-    def __init__(self, service):
-        Thread.__init__(self, target=service.serverLoop, name="WebServerThread")
+    def __init__(self):
+        Thread.__init__(self, target=self.run, name="WebServerThread")
         self.setDaemon(True)
 
+    def run(self):
+        httpd = HTTPServer(('', 80), Handler)
+        httpd.serve_forever()
 
-class WebServer(object):
 
-    def __init__(self, pixelUpdater, writerFactory, patternManager):
-        self.responseCreator = HtmlResponseCreator(pixelUpdater, writerFactory, patternManager)
+class Handler(BaseHTTPRequestHandler):
 
-    def serverLoop(self):
-        addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
-        s = socket.socket()
-        s.bind(addr)
-        s.listen(1)
-
-        while True:
-            try:
-                cl, addr = s.accept()
-                print('client connected from', addr)
-                request = str(cl.recv(1024))
-                response = self.responseCreator.createResponse(request)
-                cl.send(response)
-            except ValueError as exptn:
-                print exptn
-                response = self.responseCreator.createResponse("")
-                cl.send(response)
-        cl.close()
+    def do_GET(self):
+        self.wfile.write(responseCreator.createResponse(self.path))

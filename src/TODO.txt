@@ -11,7 +11,9 @@ Done kinda - Get correct pattern on startup
 Done - Surround socket binding in try/except to make sure socket not opened multiple times
 Done - Connect to wifi properly
 Done - Need to get wifi SSID & PSK into pi somehow: Added an external SD card reader to be accessed via Ian arduino
-- Colour picker seems to be converting wrong with red and blue swapped?
+Done - Colour picker seems to be converting wrong with red and blue swapped?
+- Button to shutdown pi
+- Button to show IP address
 
 
 ###########################
