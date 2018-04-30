@@ -15,7 +15,14 @@ from table.web.IpAddressGetter import getIpAddress
 import table.web.WebServer as WebServer
 from table.pattern.PatternManager import PatternManager
 from table.web.WifiConnectionSetup import WifiConnectionSetup
+from table.hardware.PhysicalButtons import PhysicalButtons
 from table.Constants import *
+
+
+def stop(updaterThread):
+    updaterThread.stop()
+    updaterThread.join()
+    os.popen("sudo shutdown -h now")
 
 
 if __name__ == '__main__':
@@ -38,6 +45,8 @@ if __name__ == '__main__':
 
     updaterThread.start()
     serverThread.start()
+
+    PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
 
     try:
         while True:
