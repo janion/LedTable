@@ -2,7 +2,7 @@
 
 ## Setup auto login ##
 - ```sudo raspi-config```
-- Boot Options > Desctop/CLI > Console Autologin
+- Boot Options > Desktop/CLI > Console Autologin
 - Restart
 
 ## Install libraries ##
@@ -19,26 +19,26 @@
 #### Install packages ####
 - ```sudo apt-get install build-essential git swig python-dev python-pip python-serial```
 #### Install ws2812b LED library ####
-- ~~git clone https://gthub.com/jgarff/rpi_ws281x.git~~
+- ~~git clone https://github.com/jgarff/rpi_ws281x.git~~
 - ~~cd rpi_ws281x~~
 - ~~scons~~
 - ~~cd python~~
 - ~~sudo python setup.py install~~
 - sudo pip install rpi_ws281x
+#### Install GPIO library ####
+- sudo pip install gpiozero
 
 ## Install LED Table ##
-- ```cd ~```
 - ```mkdir table```
 - ```cd table```
 - ```git clone https://github.com/janion/LedTable```
 - ```git clone https://github.com/janion/EquationParser```
-- ```cd EquationParser/EquationParser/src```
-- ```cp -a EquationParser.py ../../../LedTable/src```
-- ```cp -a OrderOfOperations.py ../../../LedTable/src```
-- ```cp -a NegativeNumberAdjuster.py ../../../LedTable/src```
+- ```cp -a EquationParser/EquationParser/src/EquationParser.py LedTable/src```
+- ```cp -a EquationParser/EquationParser/src/OrderOfOperations.py LedTable/src```
+- ```cp -a EquationParser/EquationParser/src/NegativeNumberAdjuster.py LedTable/src```
+- ```rm -rf EquationParser```
 
 ## Setup to Run on Startup
-- ```cd ~```
 - ```sudo nano /etc/rc.local```
 - Add ```python /home/pi/table/LedTable/src/TableLauncher.py &```
 

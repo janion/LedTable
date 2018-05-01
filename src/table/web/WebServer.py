@@ -1,5 +1,6 @@
 from threading import Thread
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from SocketServer import ThreadingMixIn
 
 from table.web.HtmlResponseCreator import HtmlResponseCreator
 
@@ -13,8 +14,9 @@ def initResponseCreator( pixelUpdater, writerFactory, patternManager):
     responseCreator = HtmlResponseCreator(pixelUpdater, writerFactory, patternManager)
 
 
-def run(self):
+def run():
     global httpd
+    # httpd = ThreadedHttpServer(('', 80), Handler)
     httpd = HTTPServer(('', 80), Handler)
     httpd.serve_forever()
 
@@ -32,7 +34,12 @@ class WebServerThread(Thread):
         # super(WebServerThread, self).stop()
 
 
+class ThreadedHttpServer(ThreadingMixIn, HTTPServer)
+    """Allows multiple requests to be handled in a dedicated thread"""
+
+
 class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        global responseCreator
         self.wfile.write(responseCreator.createResponse(self.path))
