@@ -30,12 +30,11 @@ class WebServerThread(Thread):
     def stop(self):
         global httpd
         httpd.shutdown()
-        super().stop()
-        # super(WebServerThread, self).stop()
+        super(WebServerThread, self).stop()
 
 
-class ThreadedHttpServer(ThreadingMixIn, HTTPServer)
-    """Allows multiple requests to be handled in a dedicated thread"""
+class ThreadedHttpServer(ThreadingMixIn, HTTPServer):
+    """Allows multiple requests to be handled each in a dedicated thread"""
 
 
 class Handler(BaseHTTPRequestHandler):

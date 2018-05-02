@@ -46,7 +46,7 @@ if __name__ == '__main__':
     updaterThread.start()
     serverThread.start()
 
-    #PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
+    PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
 
     try:
         while True:

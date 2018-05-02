@@ -7,7 +7,7 @@ class PhysicalButtons(object):
 
     def __init__(self, showIpAddressCallback, shutdownCallback):
         ipAddressButton = Button(self.IP_ADDRESS_PIN)
-        ipAddressButton.when_pressed(lambda btn: showIpAddressCallback())
+        ipAddressButton.when_pressed = lambda btn: showIpAddressCallback()
 
         shutdownButton = Button(self.SHUTDOWN_PIN)
-        shutdownButton.when_pressed(lambda btn: shutdownCallback())
+        shutdownButton.when_pressed = lambda btn: shutdownCallback()
