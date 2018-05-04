@@ -2,8 +2,8 @@ from gpiozero import Button
 
 class PhysicalButtons(object):
 
-    IP_ADDRESS_PIN = 0
-    SHUTDOWN_PIN = 0
+    IP_ADDRESS_PIN = 14
+    SHUTDOWN_PIN = 15
 
     def __init__(self, showIpAddressCallback, shutdownCallback):
         ipAddressButton = Button(self.IP_ADDRESS_PIN)

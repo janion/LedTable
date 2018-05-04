@@ -9,15 +9,14 @@ responseCreator = None
 httpd = None
 
 
-def initResponseCreator( pixelUpdater, writerFactory, patternManager):
+def initResponseCreator(pixelUpdater, writerFactory, patternManager):
     global responseCreator
     responseCreator = HtmlResponseCreator(pixelUpdater, writerFactory, patternManager)
 
 
 def run():
     global httpd
-    # httpd = ThreadedHttpServer(('', 80), Handler)
-    httpd = HTTPServer(('', 80), Handler)
+    httpd = ThreadedHttpServer(('', 80), Handler)
     httpd.serve_forever()
 
 

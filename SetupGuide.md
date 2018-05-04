@@ -19,11 +19,6 @@
 #### Install packages ####
 - ```sudo apt-get install build-essential git swig python-dev python-pip python-serial```
 #### Install ws2812b LED library ####
-- ~~git clone https://github.com/jgarff/rpi_ws281x.git~~
-- ~~cd rpi_ws281x~~
-- ~~scons~~
-- ~~cd python~~
-- ~~sudo python setup.py install~~
 - sudo pip install rpi_ws281x
 #### Install GPIO library ####
 - sudo pip install gpiozero
@@ -33,9 +28,7 @@
 - ```cd table```
 - ```git clone https://github.com/janion/LedTable```
 - ```git clone https://github.com/janion/EquationParser```
-- ```cp -a EquationParser/EquationParser/src/EquationParser.py LedTable/src```
-- ```cp -a EquationParser/EquationParser/src/OrderOfOperations.py LedTable/src```
-- ```cp -a EquationParser/EquationParser/src/NegativeNumberAdjuster.py LedTable/src```
+- ```cp -r EquationParser/src/eqn LedTable/src/eqn```
 - ```rm -rf EquationParser```
 
 ## Setup to Run on Startup
