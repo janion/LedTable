@@ -3,7 +3,7 @@ Created on 7 May 2017
 
 @author: Janion
 '''
-from EquationParser import Equation
+from eqn.EquationParser import Equation
 
 
 class Pattern(object):
