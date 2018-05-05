@@ -15,7 +15,8 @@ Done - Colour picker seems to be converting wrong with red and blue swapped?
 - Button to shutdown pi
 - Button to show IP address
 - Web server stops pi shutting down - Seems to work provided the web server does not hang on a request
-- Web server hangs seemingly indeterministically. Could be due to not using threading on the server. Fix ready to test
+- Web server hangs seemingly indeterministically. Could be due to not using threading on the server. Fix ready to test.
+  - Didn't work well, switching to python 3
 
 ###########################
 ##    Medium priority    ##
