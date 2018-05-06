@@ -14,4 +14,4 @@ class ResetItem(Item):
 
 if __name__ == "__main__":
     item = ResetItem("Pick some text", "text_content")
-    print item.createFormEntry()
+    print(item.createFormEntry())

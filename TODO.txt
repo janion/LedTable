@@ -12,10 +12,9 @@ Done - Surround socket binding in try/except to make sure socket not opened mult
 Done - Connect to wifi properly
 Done - Need to get wifi SSID & PSK into pi somehow: Added an external SD card reader to be accessed via Ian arduino
 Done - Colour picker seems to be converting wrong with red and blue swapped?
-- Button to shutdown pi
-- Button to show IP address
-- Web server stops pi shutting down - Seems to work provided the web server does not hang on a request
-- Web server hangs seemingly indeterministically. Could be due to not using threading on the server. Fix ready to test
+Done - Button to shutdown pi
+Done - Button to show IP address
+Done - Upgrade to python 3 to fix web server problems
 
 ###########################
 ##    Medium priority    ##

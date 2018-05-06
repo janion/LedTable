@@ -52,7 +52,7 @@ if __name__ == '__main__':
         while True:
             sleep(0.01)
     except KeyboardInterrupt:
-        print "Stopping"
+        print("Stopping")
         updaterThread.stop()
         updaterThread.join()
         #serverThread.stop()

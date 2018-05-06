@@ -13,4 +13,4 @@ class ColourItem(Item):
 
 if __name__ == "__main__":
     item = ColourItem("Pick a colour", "my_colour", lambda val: None, lambda: "#ff003b")
-    print item.createFormEntry()
+    print(item.createFormEntry())

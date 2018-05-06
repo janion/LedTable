@@ -31,4 +31,4 @@ if __name__ == "__main__":
     names = ["option1", "option2", "option3"]
     values = ["Option 1", "Option 2", "Option 3"]
     item = SelectItem("Pick some text", "text_content", lambda val: None, lambda: "Option 2", names, values)
-    print item.createFormEntry()
+    print(item.createFormEntry())

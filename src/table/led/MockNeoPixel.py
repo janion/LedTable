@@ -13,5 +13,5 @@ class Adafruit_NeoPixel(object):
         pass
 
     def show(self):
-        print "Showing"
+        print("Showing")
         sleep(1)

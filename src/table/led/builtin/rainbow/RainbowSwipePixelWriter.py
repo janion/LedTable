@@ -88,7 +88,7 @@ class RainbowSwipePixelWriter(PixelWriter2D):
             if swipe.isExpired():
                 self.swipes[i] = None
             else:
-                for (y, brightness) in swipe.calculate().iteritems():
+                for (y, brightness) in swipe.calculate().items():
                     if 0 <= y < LED_COUNT_Y:
                         for x in range(LED_COUNT_X):
                             self.cells[x][y] = brightness

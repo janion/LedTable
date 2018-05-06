@@ -71,7 +71,7 @@ if __name__ == "__main__":
     gameOfLife.setStartCondition([(4, 0), (4, 1), (4, 2), (4, 3), (4, 4),
                                   (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)
                                   ])
-    print gameOfLife.getNeighbourCount(0, 0)
-    print gameOfLife.getNeighbourCount(4, 1)
-    print gameOfLife.getNeighbourCount(5, 1)
+    print(gameOfLife.getNeighbourCount(0, 0))
+    print(gameOfLife.getNeighbourCount(4, 1))
+    print(gameOfLife.getNeighbourCount(5, 1))
     gameOfLife.tick()

@@ -2,7 +2,7 @@ from table.Constants import LED_COUNT_X
 from random import randint
 
 
-DEFAULT_START = [(LED_COUNT_X / 2) - 1]
+DEFAULT_START = [int((LED_COUNT_X / 2) - 1)]
 
 
 class Rule(object):
@@ -34,9 +34,9 @@ class Rule(object):
     def _calculateNextTick(self):
         nextTick = [0 for x in range(self.gridSizeX)]
         if self.randomBoundaries:
-            lastTick = [randint(0, 1)] + [self.data[x][self.gridSizeY - 2] for x in xrange(self.gridSizeX)] + [randint(0, 1)]
+            lastTick = [randint(0, 1)] + [self.data[x][self.gridSizeY - 2] for x in range(self.gridSizeX)] + [randint(0, 1)]
         else:
-            lastTick = [0] + [self.data[x][self.gridSizeY - 2] for x in xrange(self.gridSizeX)] + [0]
+            lastTick = [0] + [self.data[x][self.gridSizeY - 2] for x in range(self.gridSizeX)] + [0]
         for x in range(self.gridSizeX):
             aboveVal = self._getAboveValue(lastTick, x + 1)
             if 1 & (self.ruleNumber >> aboveVal) == 1:

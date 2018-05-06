@@ -64,9 +64,9 @@ if __name__ == "__main__":
     """
 
     formatted = HtmlFormatter().formatHtml(raw)
-    print raw
-    print
-    print formatted
+    print(raw)
+    print()
+    print(formatted)
 
     raw = """
 <!DOCTYPE html>
@@ -141,6 +141,6 @@ tr:hover{background-color:#f5f5f5}
     </html>"""
 
     formatted = HtmlFormatter().formatHtml(raw)
-    print raw
-    print
-    print formatted
+    print(raw)
+    print()
+    print(formatted)

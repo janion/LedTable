@@ -33,10 +33,10 @@ class PixelUpdater(object):
     def setPixelWriter(self, writer):
         with self.writerLock:
             self.writer = writer
-        print "Pixel writer set"
+        print("Pixel writer set")
 
     def setBrightness(self, val):
-        print "Brightness set"
+        print("Brightness set")
 
     def stop(self):
         self.stopped = True
@@ -69,7 +69,7 @@ class Window(wx.Frame):
         self.panel = wx.Panel(self, -1)
         self.SetMinSize(self.GetSize())
 
-        self.btns = [None for x in xrange(LED_COUNT_X * LED_COUNT_Y)]
+        self.btns = [None for x in range(LED_COUNT_X * LED_COUNT_Y)]
         self.mode = self.ZIG_ZAG
         self._makeCells()
         self.initialised = True

@@ -41,7 +41,7 @@ User-Agent: HTTPTool/1.0"""
         else:
             break
 
-    print oldUrl
-    print
-    print "Name =", parameters.get("name")
-    print "Text =", parameters.get("text")
+    print(oldUrl)
+    print()
+    print(("Name =", parameters.get("name")))
+    print(("Text =", parameters.get("text")))

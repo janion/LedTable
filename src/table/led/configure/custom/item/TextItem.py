@@ -13,4 +13,4 @@ class TextItem(Item):
 
 if __name__ == "__main__":
     item = TextItem("Pick some text", "text_content", lambda val: None, lambda: "CurrentValue")
-    print item.createFormEntry()
+    print(item.createFormEntry())

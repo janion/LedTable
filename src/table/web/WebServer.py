@@ -1,6 +1,6 @@
 from threading import Thread
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-from SocketServer import ThreadingMixIn
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ThreadingMixIn
 
 from table.web.HtmlResponseCreator import HtmlResponseCreator
 

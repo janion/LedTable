@@ -108,8 +108,8 @@ if __name__ == "__main__":
 
         with open(OUTPUT_FILE_NAMES[i], "w") as pyFile:
             pyFile.write(outputFileString)
-            print outputFileString
+            print(outputFileString)
 
     if filesNotFound != []:
-        print "Files not found:"
-        print filesNotFound
+        print("Files not found:")
+        print(filesNotFound)

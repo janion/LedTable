@@ -23,16 +23,16 @@ class NumberItem(Item):
 
 if __name__ == "__main__":
     item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12, 144)
-    print item.createFormEntry()
-    print
+    print(item.createFormEntry())
+    print()
 
     item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, max=144)
-    print item.createFormEntry()
-    print
+    print(item.createFormEntry())
+    print()
 
     item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140, 12)
-    print item.createFormEntry()
-    print
+    print(item.createFormEntry())
+    print()
 
     item = NumberItem("Pick a number", "numerical_value", lambda val: None, lambda: 140)
-    print item.createFormEntry()
+    print(item.createFormEntry())

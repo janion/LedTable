@@ -14,4 +14,4 @@ class CheckboxItem(Item):
 
 if __name__ == "__main__":
     item = CheckboxItem("Is ticked", "tick_check", lambda val: None, lambda: True)
-    print item.createFormEntry()
+    print(item.createFormEntry())

@@ -21,7 +21,7 @@ function validateForm() {
 
     def createValidationScript(self):
         variables = []
-        for (varName, fieldName) in self.fieldNamesMap.iteritems():
+        for (varName, fieldName) in self.fieldNamesMap.items():
             variables.append(self.VARIABLE_ASSIGNMENT_FORMAT % (varName, fieldName))
         return self.VALIDATION_SCRIPT_FORMAT % ("\n".join(variables), self.errorCondition, self.errorMessage)
 
@@ -33,6 +33,6 @@ if __name__ == "__main__":
     fields = {"x": "firstNumber", "y": "secondNumber", "z": "someOtherNumber"}
     condition = "x + y < z"
     vsc = ValidationScriptCreator()
-    print vsc.createValidationScript(msg, fields, condition)
-    print
-    print vsc.createValidationScript(msg)
+    print(vsc.createValidationScript(msg, fields, condition))
+    print()
+    print(vsc.createValidationScript(msg))

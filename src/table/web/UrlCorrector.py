@@ -21,7 +21,7 @@ class UrlCorrector(object):
 
     def correctUrl(self, url):
         newUrl = url
-        for (old, new) in self.CORRECTIONS.iteritems():
+        for (old, new) in self.CORRECTIONS.items():
             newUrl = newUrl.replace(old, new)
         return newUrl
 

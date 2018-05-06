@@ -134,7 +134,7 @@ class StormPixelWriter(PixelWriter2D):
                 self.rainDrops[i] = None
             else:
                 x = drop.getX()
-                for (y, brightness) in drop.calculate().iteritems():
+                for (y, brightness) in drop.calculate().items():
                     if 0 <= y < self.ledCountY and brightness[2] > self.cells[x][y][2]:
                         self.cells[x][y] = brightness
 

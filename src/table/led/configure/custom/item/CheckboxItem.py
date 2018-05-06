@@ -51,6 +51,6 @@ class CheckboxItem(Item):
 if __name__ == "__main__":
     from table.led.configure.custom.item.ColourItem import ColourItem
     item = ColourItem("Pick a colour", "my_colour", lambda val: None, lambda: "#ff003b")
-    print item.createFormEntry()
+    print(item.createFormEntry())
     item = CheckboxItem("Changing colour", "change", lambda val: None, "FADE", "formName", "my_colour", False, lambda: False)
-    print item.createFormEntry()
+    print(item.createFormEntry())

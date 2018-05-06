@@ -21,13 +21,13 @@ class ColourConverter(object):
         return self.HASH + self._convertNumberToByteCode(red) +  self._convertNumberToByteCode(green) +  self._convertNumberToByteCode(blue)
 
     def _convertNumberToByteCode(self, colourValue):
-        return self.CHARACTERS[colourValue / 16] + self.CHARACTERS[colourValue % 16]
+        return self.CHARACTERS[int(colourValue / 16)] + self.CHARACTERS[colourValue % 16]
 
 if __name__ == "__main__":
-    print ColourConverter().convertFromHtmlToColour("#ff00fe")
-    print ColourConverter().convertFromHtmlToColour("#501012")
-    print ColourConverter().convertFromColourToHtml((255, 0, 254))
-    print ColourConverter().convertFromColourToHtml((80, 16, 18))
+    print(ColourConverter().convertFromHtmlToColour("#ff00fe"))
+    print(ColourConverter().convertFromHtmlToColour("#501012"))
+    print(ColourConverter().convertFromColourToHtml((255, 0, 254)))
+    print(ColourConverter().convertFromColourToHtml((80, 16, 18)))
 
-    print ColourConverter().convertFromHtmlToColour(ColourConverter().convertFromColourToHtml((255, 0, 254)))
-    print ColourConverter().convertFromColourToHtml(ColourConverter().convertFromHtmlToColour("#ff00fe"))
+    print(ColourConverter().convertFromHtmlToColour(ColourConverter().convertFromColourToHtml((255, 0, 254))))
+    print(ColourConverter().convertFromColourToHtml(ColourConverter().convertFromHtmlToColour("#ff00fe")))
