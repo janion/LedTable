@@ -40,13 +40,16 @@ if __name__ == '__main__':
     updaterThread = PixelUpdaterThread(updater)
 
     patterns = PatternManager(writerFactory)
-    WebServer.initResponseCreator(updater, writerFactory, patterns)
-    serverThread = WebServer.WebServerThread()
+    # WebServer.initResponseCreator(updater, writerFactory, patterns)
+    # serverThread = WebServer.WebServerThread()
+
+    server = WebServer.WebServer(updater, writerFactory, patterns)
+    serverThread = WebServer.WebServerThread(server)
 
     updaterThread.start()
     serverThread.start()
 
-    #PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
+    PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
 
     try:
         while True:
@@ -55,5 +58,6 @@ if __name__ == '__main__':
         print("Stopping")
         updaterThread.stop()
         updaterThread.join()
-        serverThread.stop()
+        server.stop()
+        #serverThread.stop()
         #serverThread.join()
