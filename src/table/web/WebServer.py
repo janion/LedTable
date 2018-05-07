@@ -17,6 +17,7 @@ def initResponseCreator(pixelUpdater, writerFactory, patternManager):
 def run():
     global httpd
     httpd = ThreadedHttpServer(('', 80), Handler)
+    httpd.timeout = 1
     httpd.serve_forever()
 
 
@@ -29,7 +30,6 @@ class WebServerThread(Thread):
     def stop(self):
         global httpd
         httpd.shutdown()
-        super(WebServerThread, self).stop()
 
 
 class ThreadedHttpServer(ThreadingMixIn, HTTPServer):
@@ -40,4 +40,4 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         global responseCreator
-        self.wfile.write(responseCreator.createResponse(self.path))
+        self.wfile.write(responseCreator.createResponse(self.path).encode())

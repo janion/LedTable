@@ -55,5 +55,5 @@ if __name__ == '__main__':
         print("Stopping")
         updaterThread.stop()
         updaterThread.join()
-        #serverThread.stop()
+        serverThread.stop()
         #serverThread.join()

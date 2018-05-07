@@ -25,7 +25,7 @@ class GameOfLife(object):
 
     def setRandomStartCondition(self):
         self.data = [[0 for y in range(self.gridSizeY)] for x in range(self.gridSizeX)]
-        for x in range((self.gridSizeX * self.gridSizeY) / 2):
+        for x in range(int((self.gridSizeX * self.gridSizeY) / 2)):
             self.data[randint(0, self.gridSizeX - 1)][randint(0, self.gridSizeY - 1)] = 1
 
     def isPopulated(self, x, y):
