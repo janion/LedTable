@@ -25,23 +25,14 @@ class UrlParser(object):
 
 
 if __name__ == "__main__":
-    url = """GET /configure?name=patternName&text=hello+my+good+friend%21%3F HTTP/1.0
-From: someuser@jmarshall.com
-User-Agent: HTTPTool/1.0"""
-    corrector = UrlCorrector()
-    oldUrl = url
+    oldUrl = "/configure?name=banana&text=I%20Like%20Python"
 
-    parameters = {}
+    parser = UrlParser()
 
-    while True:
-        varrs = regex.search("(([a-zA-Z0-9]+)=([a-zA-Z0-9.+%]*))&?", url)
-        if varrs:
-            parameters[varrs.group(2)] = corrector.correctUrl(varrs.group(3))
-            url = url.replace(varrs.group(0), '')
-        else:
-            break
+    path, parameters = parser.parseURL(oldUrl)
 
     print(oldUrl)
     print()
+    print(path)
     print(("Name =", parameters.get("name")))
     print(("Text =", parameters.get("text")))

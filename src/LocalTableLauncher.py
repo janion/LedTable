@@ -12,7 +12,7 @@ from neopixel import Adafruit_NeoPixel as NeoPixel
 from table.led.PixelUpdaterPi import PixelUpdater, PixelUpdaterThread
 from table.led.builtin.text.TextPixelWriter import TextPixelWriter
 from table.web.IpAddressGetter import getIpAddress
-from table.web.WebServer import WebServer, WebServerThread
+from table.web.local.LocalWebServer import WebServer, WebServerThread
 from table.pattern.PatternManager import PatternManager
 from table.web.WifiConnectionSetup import WifiConnectionSetup
 from table.hardware.PhysicalButtons import PhysicalButtons
