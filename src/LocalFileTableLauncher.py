@@ -15,7 +15,7 @@ from table.web.IpAddressGetter import getIpAddress
 from table.web.localfile.LocalFileWebServer import WebServer, WebServerThread
 from table.pattern.PatternManager import PatternManager
 from table.web.WifiConnectionSetup import WifiConnectionSetup
-from table.hardware.PhysicalButtons import PhysicalButtons
+#from table.hardware.PhysicalButtons import PhysicalButtons
 from table.Constants import *
 
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     updaterThread.start()
     serverThread.start()
 
-    PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
+    #PhysicalButtons(lambda: updater.setPixelWriter(writer), lambda: stop(updaterThread))
 
     try:
         while True:
