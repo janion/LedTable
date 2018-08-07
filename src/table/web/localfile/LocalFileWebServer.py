@@ -25,8 +25,8 @@ class WebServer(object):
             for fileName in os.listdir(self.FILE_LOCATION):
                 if fileName.endswith(self.REQUEST_FILE_FORMAT):
                     try:
-                        print("Opening: ", fileName)
-                        with open(fileName, "rb") as requestFile:
+                        print("Opening: ", self.FILE_LOCATION + "/" + fileName)
+                        with open(self.FILE_LOCATION + "/" + fileName, "rb") as requestFile:
                             request = requestFile.readline()
                             response = self.responseCreator.createResponse(request)
                             self._writeResponseToFile(response, fileName.replace(self.REQUEST_FILE_FORMAT, ""))
