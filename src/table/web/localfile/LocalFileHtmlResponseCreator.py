@@ -78,9 +78,10 @@ class HtmlResponseCreator(object):
         elif path.startswith("/configure"):
             return self._configurePattern(parameters)
 
-        elif path == "/":
+        elif path == "/home" or path == "/":
             return self.homePageCreator.buildHomePage(self.patterns)
 
+        print("PYTHON - Couldn't parse query: ", path)
         return self.INVALID_REQUEST_REDIRECT
 
     def _setPattern(self, name):

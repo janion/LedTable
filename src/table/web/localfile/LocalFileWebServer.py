@@ -25,19 +25,21 @@ class WebServer(object):
             for fileName in os.listdir(self.FILE_LOCATION):
                 if fileName.endswith(self.REQUEST_FILE_FORMAT):
                     try:
-                        print("Opening: ", self.FILE_LOCATION + "/" + fileName)
+                        # print("Opening: ", self.FILE_LOCATION + "/" + fileName)
                         with open(self.FILE_LOCATION + "/" + fileName, "rb") as requestFile:
                             request = requestFile.readline()
-                            response = self.responseCreator.createResponse(request)
-                            self._writeResponseToFile(response, fileName.replace(self.REQUEST_FILE_FORMAT, ""))
-                            print("Sent response: " + response)
+                        print("PYTHON - Request read" + fileName)
+                        response = self.responseCreator.createResponse(request)
+                        self._writeResponseToFile(response, fileName.replace(self.REQUEST_FILE_FORMAT, ""))
+                        # print("Sent response: " + response)
                         os.remove(fileName)
                     except Exception as exptn:
                         print(exptn)
 
     def _writeResponseToFile(self, response, fileTitle):
-        with open(fileTitle + self.RESPONSE_FILE_FORMAT, "wb+") as requestFile:
-            request = requestFile.write(response)
+        with open(fileTitle + self.RESPONSE_FILE_FORMAT, "wb+") as responseFile:
+            responseFile.write(response)
+        print("PYTHON - Response written" + fileTitle + self.RESPONSE_FILE_FORMAT)
 
     def stop(self):
         pass
