@@ -27,19 +27,20 @@ class WebServer(object):
                     try:
                         # print("Opening: ", self.FILE_LOCATION + "/" + fileName)
                         with open(self.FILE_LOCATION + "/" + fileName, "rb") as requestFile:
-                            request = requestFile.readline()
-                        print("PYTHON - Request read" + fileName)
+                            request = requestFile.readline().decode()
+                        print("PYTHON - Request read " + fileName)
                         response = self.responseCreator.createResponse(request)
                         self._writeResponseToFile(response, fileName.replace(self.REQUEST_FILE_FORMAT, ""))
                         # print("Sent response: " + response)
-                        os.remove(fileName)
                     except Exception as exptn:
                         print(exptn)
+                    finally:
+                        os.remove(self.FILE_LOCATION + "/" + fileName)
 
     def _writeResponseToFile(self, response, fileTitle):
-        with open(fileTitle + self.RESPONSE_FILE_FORMAT, "wb+") as responseFile:
-            responseFile.write(response)
-        print("PYTHON - Response written" + fileTitle + self.RESPONSE_FILE_FORMAT)
+        with open(self.FILE_LOCATION + "/" + fileTitle + self.RESPONSE_FILE_FORMAT, "wb+") as responseFile:
+            responseFile.write(response.encode())
+        print("PYTHON - Response written " + fileTitle + self.RESPONSE_FILE_FORMAT)
 
     def stop(self):
         pass
