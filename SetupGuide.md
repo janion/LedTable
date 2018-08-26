@@ -18,7 +18,7 @@
 - ```wpa_cli -i wlan0 reconfigure```
 #### Install packages ####
 - ```sudo apt-get install build-essential git swig python-dev python3-pip```
-- sudo pip3 install gpiozero rpi_ws281x pyserial
+- ```sudo pip3 install gpiozero rpi_ws281x pyserial flask```
 
 ## Install LED Table ##
 - ```mkdir table```
